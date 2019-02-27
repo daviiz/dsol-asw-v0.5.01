@@ -1,19 +1,19 @@
 package asw.soa._DEM.coupledModel;
 
-import asw.soa._OM.Fleet_OM;
+import asw.soa._DEM.portType.MoveResult;
 import asw.soa.data.ModelData;
 import asw.soa._DEM.atomicModel.Controller;
 import asw.soa._DEM.atomicModel.Maneuver;
 import asw.soa._DEM.atomicModel.Sensor;
-import asw.soa._DEM.inportPort.In_ENV_INFO;
-import asw.soa._DEM.outportPort.Out_ENT_INFO;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
+import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.InputPort;
+import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 
 public class Fleet extends CoupledModel<Double, Double, SimTimeDouble> {
 
-    public In_ENV_INFO in_ENV_INFO;
-    public Out_ENT_INFO out_ENT_INFO;
+    public InputPort<Double, Double, SimTimeDouble, MoveResult> in_ENV_INFO;
+    public OutputPort<Double, Double, SimTimeDouble, MoveResult> out_ENT_INFO;
 
 
     private Sensor s;
@@ -27,8 +27,8 @@ public class Fleet extends CoupledModel<Double, Double, SimTimeDouble> {
     }
 
     public void initialize(ModelData data) {
-        in_ENV_INFO = new In_ENV_INFO(this);
-        out_ENT_INFO = new Out_ENT_INFO(this);
+        in_ENV_INFO = new InputPort<Double, Double, SimTimeDouble, MoveResult>(this);
+        out_ENT_INFO = new OutputPort<Double, Double, SimTimeDouble, MoveResult>(this);
 
 
         s = new Sensor(data.name + "$sensor", this, data.detectRange);

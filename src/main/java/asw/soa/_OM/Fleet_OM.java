@@ -11,7 +11,7 @@ public class Fleet_OM {
         CartesianPoint nextFrameDestination ;
         //boolean isFollow = moveCmd.cmd.equals("follow");
         nextFrameDestination = SimUtil.nextPoint(data.origin.x, data.origin.y, moveCmd.threat.x,
-                moveCmd.threat.y, data.speed, false);
+                moveCmd.threat.y, data.speed, true);
         return nextFrameDestination;
     }
 }

@@ -25,12 +25,12 @@ public class Environment extends AtomicModel<Double, Double, SimTimeDouble> {
 
     @Override
     public void initialize(Double e) {
-        this.in_MoveResult = new InputPort(this);
-        this.out_MoveResult = new OutputPort(this);
+        this.in_MoveResult = new InputPort<Double, Double, SimTimeDouble, MoveResult>(this);
+        this.out_MoveResult = new OutputPort<Double, Double, SimTimeDouble, MoveResult>(this);
         INFINITY = new Phase("INFINITY");
         INFINITY.setLifeTime(2);
 
-        result = new HashMap();
+        result = new HashMap<String,MoveResult>();
 
         /**
          * 输入输出端口设置
@@ -41,8 +41,10 @@ public class Environment extends AtomicModel<Double, Double, SimTimeDouble> {
         } catch (PortAlreadyDefinedException ex) {
             SimLogger.always().error(ex);
         }
+        /**
+         * 模型状态初始化：
+         */
         this.phase = INFINITY;
-        this.sigma = this.phase.getLifeTime();
         super.initialize(e);
     }
 

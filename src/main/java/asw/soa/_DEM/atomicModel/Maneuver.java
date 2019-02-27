@@ -1,16 +1,12 @@
 package asw.soa._DEM.atomicModel;
 
-import asw.soa._DEM.inportPort.ManeuverIn_MOVE_CMD;
-import asw.soa._DEM.outportPort.ManeuverOut_MOVE_RESULT;
 import asw.soa._DEM.portType.ENT_INFO;
 import asw.soa._DEM.portType.MoveCmd;
 import asw.soa._DEM.portType.MoveResult;
 import asw.soa._OM.Fleet_OM;
 import asw.soa._OM.Submarine_OM;
 import asw.soa.data.ModelData;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.AtomicModel;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
+import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortAlreadyDefinedException;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
@@ -21,11 +17,11 @@ public class Maneuver extends AtomicModel<Double, Double, SimTimeDouble> {
     /**
      * 模型输入端口 - X
      */
-    public ManeuverIn_MOVE_CMD in_MOVE_CMD;
+    public InputPort<Double, Double, SimTimeDouble, MoveCmd> in_MOVE_CMD;
     /**
      * 模型输出端口 - Y
      */
-    public ManeuverOut_MOVE_RESULT out_MOVE_RESULT;
+    public OutputPort<Double, Double, SimTimeDouble, MoveResult> out_MOVE_RESULT;
 
     /**
      * 模型状态集合 - States
@@ -51,8 +47,8 @@ public class Maneuver extends AtomicModel<Double, Double, SimTimeDouble> {
          */
         this.target = new ENT_INFO();
         this.moveCmd = new MoveCmd();
-        in_MOVE_CMD = new ManeuverIn_MOVE_CMD(this);
-        out_MOVE_RESULT = new ManeuverOut_MOVE_RESULT(this);
+        in_MOVE_CMD = new InputPort<Double, Double, SimTimeDouble, MoveCmd>(this);
+        out_MOVE_RESULT = new OutputPort<Double, Double, SimTimeDouble, MoveResult>(this);
         IDLE = new Phase("IDLE");
         IDLE.setLifeTime(Double.POSITIVE_INFINITY);
         MOVE = new Phase("MOVE");

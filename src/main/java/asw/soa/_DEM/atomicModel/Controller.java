@@ -1,15 +1,10 @@
 package asw.soa._DEM.atomicModel;
 
-import asw.soa._DEM.inportPort.ControllerIn_MOVE_RESULT;
-import asw.soa._DEM.inportPort.ControllerIn_THREAT_INFO;
-import asw.soa._DEM.outportPort.ControllerOut_MOVE_CMD;
 import asw.soa._DEM.portType.ENT_INFO;
 import asw.soa._DEM.portType.MoveCmd;
 import asw.soa._DEM.portType.MoveResult;
 import asw.soa._DEM.portType.ThreatInfo;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.AtomicModel;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
+import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortAlreadyDefinedException;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
@@ -19,12 +14,12 @@ public class Controller extends AtomicModel<Double, Double, SimTimeDouble> {
     /**
      * X
      */
-    public ControllerIn_MOVE_RESULT in_MOVE_RESULT;
-    public ControllerIn_THREAT_INFO in_THREAT_INFO;
+    public InputPort<Double, Double, SimTimeDouble, MoveResult> in_MOVE_RESULT;
+    public InputPort<Double, Double, SimTimeDouble, ENT_INFO> in_THREAT_INFO;
     /**
      * Y
      */
-    public ControllerOut_MOVE_CMD out_MOVE_CMD;
+    public OutputPort<Double, Double, SimTimeDouble, MoveCmd> out_MOVE_CMD;
 
     /**
      * States
@@ -46,9 +41,9 @@ public class Controller extends AtomicModel<Double, Double, SimTimeDouble> {
         /**
          * 1. 成员变量实例化
          */
-        in_MOVE_RESULT = new ControllerIn_MOVE_RESULT(this);
-        in_THREAT_INFO = new ControllerIn_THREAT_INFO(this);
-        out_MOVE_CMD = new ControllerOut_MOVE_CMD(this);
+        in_MOVE_RESULT = new InputPort<Double, Double, SimTimeDouble, MoveResult>(this);
+        in_THREAT_INFO = new InputPort<Double, Double, SimTimeDouble, ENT_INFO>(this);
+        out_MOVE_CMD = new OutputPort<Double, Double, SimTimeDouble, MoveCmd>(this);
         WAIT = new Phase("WAIT");
         WAIT.setLifeTime(Double.POSITIVE_INFINITY);
         IDENTIFICATION = new Phase("IDENTIFICATION");
@@ -74,29 +69,6 @@ public class Controller extends AtomicModel<Double, Double, SimTimeDouble> {
         this.phase = IDENTIFICATION;
         super.initialize(e);
     }
-    //    public Controller(String modelName, final DEVSSimulatorInterface<Double,Double, SimTimeDouble> simulator) {
-//        super(modelName, simulator);
-//        in_MOVE_RESULT = new ControllerIn_MOVE_RESULT(this);
-//        in_THREAT_INFO = new ControllerIn_THREAT_INFO(this);
-//        out_MOVE_CMD = new ControllerOut_MOVE_CMD(this);
-//        WAIT = new Phase("WAIT"); WAIT.setLifeTime(Double.POSITIVE_INFINITY);
-//        IDENTIFICATION = new Phase("IDENTIFICATION");IDENTIFICATION.setLifeTime(7.0);
-//
-//        currentPos = new MoveResult();
-//        target = new ThreatInfo();
-//
-//        try {
-//            this.addInputPort("MOVE_RESULT",in_MOVE_RESULT);
-//            this.addInputPort("THREAT_INFO",in_THREAT_INFO);
-//            this.addOutputPort("MOVE_CMD",out_MOVE_CMD);
-//        } catch (PortAlreadyDefinedException e) {
-//            SimLogger.always().error(e);
-//        }
-//
-//        this.phase = WAIT;
-//        initialize(this.elapsedTime);
-//
-//    }
 
     @Override
     protected void deltaInternal() {

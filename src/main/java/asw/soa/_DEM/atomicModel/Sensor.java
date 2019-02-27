@@ -1,14 +1,9 @@
 package asw.soa._DEM.atomicModel;
 
-import asw.soa._DEM.inportPort.SensorIn_MOVE_RESULT;
-import asw.soa._DEM.inportPort.SensorIn_THREAT_ENT_INFO;
-import asw.soa._DEM.outportPort.SensorOut_THREAT_INFO;
 import asw.soa._DEM.portType.ENT_INFO;
 import asw.soa._DEM.portType.MoveResult;
 import asw.soa.util.SimUtil;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.AtomicModel;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
+import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortAlreadyDefinedException;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
@@ -18,13 +13,13 @@ public class Sensor extends AtomicModel<Double, Double, SimTimeDouble> {
     /**
      * X
      */
-    public SensorIn_MOVE_RESULT in_MOVE_RESULT;
-    public SensorIn_THREAT_ENT_INFO in_THREAT_ENT_INFO;
+    public InputPort<Double, Double, SimTimeDouble, MoveResult> in_MOVE_RESULT;
+    public InputPort<Double, Double, SimTimeDouble, MoveResult> in_THREAT_ENT_INFO;
 
     /**
      * Y
      */
-    public SensorOut_THREAT_INFO out_THREAT_INFO;
+    public OutputPort<Double, Double, SimTimeDouble, ENT_INFO> out_THREAT_INFO;
 
     /**
      * States
@@ -50,9 +45,9 @@ public class Sensor extends AtomicModel<Double, Double, SimTimeDouble> {
         /**
          * 1. 模型成员变量实例化
          */
-        in_MOVE_RESULT = new SensorIn_MOVE_RESULT(this);
-        in_THREAT_ENT_INFO = new SensorIn_THREAT_ENT_INFO(this);
-        out_THREAT_INFO = new SensorOut_THREAT_INFO(this);
+        in_MOVE_RESULT = new InputPort<Double, Double, SimTimeDouble, MoveResult>(this);
+        in_THREAT_ENT_INFO = new InputPort<Double, Double, SimTimeDouble, MoveResult>(this);
+        out_THREAT_INFO = new OutputPort<Double, Double, SimTimeDouble, ENT_INFO>(this);
         IDLE = new Phase("IDLE");
         DETECT = new Phase("DETECT");
         currentPos = new MoveResult();
