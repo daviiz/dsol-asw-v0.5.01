@@ -1,4 +1,4 @@
-package asw.soa._deprecated;
+package asw.soa.__deprecated;
 
 import asw.soa._DEM.inportPort.SensorIn_MOVE_RESULT;
 import asw.soa._DEM.inportPort.SensorIn_THREAT_ENT_INFO;

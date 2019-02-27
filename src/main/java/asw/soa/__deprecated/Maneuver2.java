@@ -1,4 +1,4 @@
-package asw.soa._deprecated;
+package asw.soa.__deprecated;
 
 import asw.soa.data.ModelData;
 import asw.soa._DEM.inportPort.ManeuverIn_MOVE_CMD;

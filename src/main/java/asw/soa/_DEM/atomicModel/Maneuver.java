@@ -1,14 +1,13 @@
 package asw.soa._DEM.atomicModel;
 
-import asw.soa._OM.Fleet_OM;
-import asw.soa._OM.Submarine_OM;
-import asw.soa.data.ModelData;
 import asw.soa._DEM.inportPort.ManeuverIn_MOVE_CMD;
 import asw.soa._DEM.outportPort.ManeuverOut_MOVE_RESULT;
 import asw.soa._DEM.portType.ENT_INFO;
 import asw.soa._DEM.portType.MoveCmd;
 import asw.soa._DEM.portType.MoveResult;
-import asw.soa.util.SimUtil;
+import asw.soa._OM.Fleet_OM;
+import asw.soa._OM.Submarine_OM;
+import asw.soa.data.ModelData;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.AtomicModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
