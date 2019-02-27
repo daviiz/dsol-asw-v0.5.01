@@ -1,22 +1,21 @@
 package asw.soa._DEM.atomicModel;
 
-import asw.soa._DEM.inportPort.EnvIn_MOVE_RESULT;
-import asw.soa._DEM.outportPort.EnvOut_ENT_INFO;
-import asw.soa._DEM.portType.ENT_INFO;
 import asw.soa._DEM.portType.MoveResult;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.AtomicModel;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
+import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortAlreadyDefinedException;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 public class Environment extends AtomicModel<Double, Double, SimTimeDouble> {
 
-    public EnvIn_MOVE_RESULT in_move_result;
-    public EnvOut_ENT_INFO out_ent_info;
+    public InputPort<Double, Double, SimTimeDouble, MoveResult> in_MoveResult;
+    public OutputPort<Double, Double, SimTimeDouble, MoveResult> out_MoveResult;
 
-    MoveResult result;
+    private HashMap<String,MoveResult> result;
 
     private Phase INFINITY;
 
@@ -26,19 +25,19 @@ public class Environment extends AtomicModel<Double, Double, SimTimeDouble> {
 
     @Override
     public void initialize(Double e) {
-        this.in_move_result = new EnvIn_MOVE_RESULT(this);
-        this.out_ent_info = new EnvOut_ENT_INFO(this);
+        this.in_MoveResult = new InputPort(this);
+        this.out_MoveResult = new OutputPort(this);
         INFINITY = new Phase("INFINITY");
-        INFINITY.setLifeTime(1.0);
+        INFINITY.setLifeTime(2);
 
-        result = new MoveResult();
+        result = new HashMap();
 
         /**
          * 输入输出端口设置
          */
         try {
-            this.addInputPort("in_move_result", in_move_result);
-            this.addOutputPort("out_ent_info", out_ent_info);
+            this.addInputPort("in_MoveResult", in_MoveResult);
+            this.addOutputPort("out_MoveResult", out_MoveResult);
         } catch (PortAlreadyDefinedException ex) {
             SimLogger.always().error(ex);
         }
@@ -46,29 +45,6 @@ public class Environment extends AtomicModel<Double, Double, SimTimeDouble> {
         this.sigma = this.phase.getLifeTime();
         super.initialize(e);
     }
-    //    public Environment(String modelName, DEVSSimulatorInterface<Double, Double, SimTimeDouble> simulator) {
-//        super(modelName, simulator);
-//        this.in_move_result = new EnvIn_MOVE_RESULT(this);
-//        this.out_ent_info = new EnvOut_ENT_INFO(this);
-//        INFINITY = new Phase("INFINITY");INFINITY.setLifeTime(1.0);
-//
-//        result = new MoveResult();
-//
-//        /**
-//         * 输入输出端口设置
-//         */
-//        try {
-//            this.addInputPort("in_move_result",in_move_result);
-//            this.addOutputPort("out_ent_info",out_ent_info);
-//        } catch (PortAlreadyDefinedException e) {
-//            SimLogger.always().error(e);
-//        }
-//        /**
-//         * 模型状态初始化：
-//         */
-//        this.phase = INFINITY;
-//        initialize(this.elapsedTime);
-//    }
 
     @Override
     protected void deltaInternal() {
@@ -76,28 +52,50 @@ public class Environment extends AtomicModel<Double, Double, SimTimeDouble> {
     }
 
     @Override
-    protected void deltaExternal(Double e, Object value) {
+    protected synchronized void deltaExternal(Double e, Object value) {
         this.elapsedTime = e;
 
 
         if (this.phase.getName().equals("INFINITY")) {
-            this.result = (MoveResult) value;
+            MoveResult tmp = (MoveResult)value;
+            if(result.containsKey(tmp.senderId)){
+                result.remove(tmp.senderId);
+                result.put(tmp.senderId,tmp);
+            }else{
+                result.put(tmp.senderId,tmp);
+            }
         }
     }
 
     @Override
     protected void lambda() {
-        //System.out.println(this.modelName+" output......." + this.sigma +"---");
-        if (this.phase.getName().equals("INFINITY") && result != null) {
-            ENT_INFO s = new ENT_INFO(result);
-            result.senderId = super.modelName;
-            if (result.name.equals("0")) return;
-            out_ent_info.send(s);
+        if (this.phase.getName().equals("INFINITY") && result.size()>0) {
+
+            Iterator iter = result.entrySet().iterator();
+            while(iter.hasNext()) {
+                Map.Entry entry = (Map.Entry)iter.next();
+                // 获取key
+                String key = (String)entry.getKey();
+                // 获取value
+                MoveResult value = (MoveResult)entry.getValue();
+
+                Iterator iter2 = result.keySet().iterator();
+                while (iter2.hasNext()) {
+                    String tmp = (String)iter2.next();
+                    if(tmp.equals(key)){
+                        continue;
+                    }
+                    else{
+                        out_MoveResult.send(value);
+                    }
+                }
+
+            }
         }
     }
 
     @Override
     protected Double timeAdvance() {
-        return this.phase.getLifeTime();
+        return this.phase.getLifeTime()+this.elapsedTime;
     }
 }
