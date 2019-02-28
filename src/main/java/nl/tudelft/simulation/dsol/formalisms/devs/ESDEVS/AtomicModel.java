@@ -251,6 +251,10 @@ public abstract class AtomicModel<A extends Comparable<A>, R extends Number & Co
     protected void deltaExternalEventHandler(final R e, final Object value)
     {
         this.deltaExternal(e, value);
+        /**
+         * 这不是（STAR,T）,(DONE,tN)的问题，即不是仿真事件调度的问题；
+         * 而是(X,t),(Y,t),输入和输出的问题，仿真时钟不应该被推进；
+         */
         //this.schedule();
         this.fireUpdatedState();
     }
