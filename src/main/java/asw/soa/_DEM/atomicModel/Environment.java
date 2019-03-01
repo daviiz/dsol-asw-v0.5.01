@@ -21,6 +21,7 @@ public class Environment extends AtomicModel<Double, Double, SimTimeDouble> {
 
     public Environment(String modelName, CoupledModel<Double, Double, SimTimeDouble> parentModel) {
         super(modelName, parentModel);
+        //this.conflictStrategy = false;
     }
 
     @Override
@@ -50,13 +51,13 @@ public class Environment extends AtomicModel<Double, Double, SimTimeDouble> {
 
     @Override
     protected void deltaInternal() {
-
+        this.elapsedTime = 0.0;
     }
 
     @Override
     protected synchronized void deltaExternal(Double e, Object value) {
-        this.elapsedTime = e;
-
+        this.elapsedTime = this.elapsedTime + e;
+        System.out.println("---" + this.modelName+" --Receive MSG"+", SimTime: " + this.simulator.getSimulatorTime());
 
         if (this.phase.getName().equals("INFINITY")) {
             MoveResult tmp = (MoveResult)value;
@@ -71,6 +72,8 @@ public class Environment extends AtomicModel<Double, Double, SimTimeDouble> {
 
     @Override
     protected void lambda() {
+
+        System.out.println("---" + this.modelName+" --Send MSG"+", SimTime: " + this.simulator.getSimulatorTime());
         if (this.phase.getName().equals("INFINITY") && result.size()>0) {
 
             Iterator iter = result.entrySet().iterator();
@@ -98,6 +101,6 @@ public class Environment extends AtomicModel<Double, Double, SimTimeDouble> {
 
     @Override
     protected Double timeAdvance() {
-        return this.phase.getLifeTime()+this.elapsedTime;
+        return this.phase.getLifeTime();
     }
 }

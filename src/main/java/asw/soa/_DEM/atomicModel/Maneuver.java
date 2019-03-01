@@ -38,6 +38,7 @@ public class Maneuver extends AtomicModel<Double, Double, SimTimeDouble> {
     public Maneuver(String modelName, CoupledModel<Double, Double, SimTimeDouble> parentModel, ModelData data) {
         super(modelName, parentModel);
         this.data = data;
+        //this.conflictStrategy = false;
     }
 
     @Override
@@ -79,6 +80,7 @@ public class Maneuver extends AtomicModel<Double, Double, SimTimeDouble> {
      */
     @Override
     protected void deltaInternal() {
+        this.elapsedTime = 0.0;
         if (super.phase.getName().equals("IDLE")) {
             this.phase = MOVE;
         }
@@ -116,7 +118,7 @@ public class Maneuver extends AtomicModel<Double, Double, SimTimeDouble> {
     @Override
     protected synchronized void deltaExternal(Double e, Object value) {
         System.out.println("---" + this.modelName+" --Receive MSG"+", SimTime: " + this.simulator.getSimulatorTime());
-        this.elapsedTime =   e;
+        this.elapsedTime = this.elapsedTime +  e;
         if (this.phase.getName().equals("MOVE")) {
             this.moveCmd = (MoveCmd) value;
             this.target = new ENT_INFO(this.moveCmd.threat);
@@ -128,6 +130,7 @@ public class Maneuver extends AtomicModel<Double, Double, SimTimeDouble> {
      */
     @Override
     protected void lambda() {
+
         System.out.println("---" + this.modelName+" --Send MSG"+", SimTime: " + this.simulator.getSimulatorTime());
         if (this.phase.getName().equals("MOVE")) {
             MoveResult result = new MoveResult(data);
@@ -145,6 +148,6 @@ public class Maneuver extends AtomicModel<Double, Double, SimTimeDouble> {
     @Override
     protected Double timeAdvance()
     {
-        return this.phase.getLifeTime()+this.elapsedTime;
+        return this.phase.getLifeTime();
     }
 }

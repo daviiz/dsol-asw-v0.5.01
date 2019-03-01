@@ -34,6 +34,7 @@ public class Controller extends AtomicModel<Double, Double, SimTimeDouble> {
 
     public Controller(String modelName, CoupledModel<Double, Double, SimTimeDouble> parentModel) {
         super(modelName, parentModel);
+        //this.conflictStrategy = false;
     }
 
     @Override
@@ -72,6 +73,7 @@ public class Controller extends AtomicModel<Double, Double, SimTimeDouble> {
 
     @Override
     protected void deltaInternal() {
+        this.elapsedTime = 0.0;
         if (this.phase.getName().equals("WAIT")) {
             this.phase = IDENTIFICATION;
         }
@@ -83,7 +85,7 @@ public class Controller extends AtomicModel<Double, Double, SimTimeDouble> {
     @Override
     protected void deltaExternal(Double e, Object value) {
         System.out.println("---" + this.modelName+" --Receive MSG"+", SimTime: " + this.simulator.getSimulatorTime());
-        this.elapsedTime = e;
+        this.elapsedTime =this.elapsedTime + e;
         if (this.phase.getName().equals("WAIT")) {
             this.phase = IDENTIFICATION;
         }
@@ -100,6 +102,7 @@ public class Controller extends AtomicModel<Double, Double, SimTimeDouble> {
 
     @Override
     protected void lambda() {
+
         System.out.println("---" + this.modelName+" --Send MSG"+", SimTime: " + this.simulator.getSimulatorTime());
         if (this.phase.getName().equals("IDENTIFICATION")) {
             if (target.name.equals("0") || currentPos.name.equals("0")) {
@@ -114,6 +117,6 @@ public class Controller extends AtomicModel<Double, Double, SimTimeDouble> {
 
     @Override
     protected Double timeAdvance() {
-        return this.phase.getLifeTime()+this.elapsedTime;
+        return this.phase.getLifeTime();
     }
 }

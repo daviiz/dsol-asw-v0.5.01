@@ -36,6 +36,7 @@ public class Sensor extends AtomicModel<Double, Double, SimTimeDouble> {
     public Sensor(String modelName, CoupledModel<Double, Double, SimTimeDouble> parentModel, double detectRange) {
         super(modelName, parentModel);
         this.detectRange = detectRange;
+        //this.conflictStrategy = false;
     }
 
 
@@ -75,12 +76,13 @@ public class Sensor extends AtomicModel<Double, Double, SimTimeDouble> {
 
     @Override
     protected void deltaInternal() {
+        this.elapsedTime = 0.0;
     }
 
     @Override
     protected void deltaExternal(Double e, Object value) {
         System.out.println("---" + this.modelName+" --Receive MSG, SimTime: " + this.simulator.getSimulatorTime());
-        this.elapsedTime =   e;
+        this.elapsedTime = this.elapsedTime +  e;
         if (this.phase.getName().equals("IDLE")) {
             this.phase = DETECT;
         }
@@ -106,6 +108,7 @@ public class Sensor extends AtomicModel<Double, Double, SimTimeDouble> {
 
     @Override
     protected void lambda() {
+
         System.out.println("---" + this.modelName+" --Send MSG, SimTime: " + this.simulator.getSimulatorTime());
         if (this.phase.getName().equals("DETECT")) {
             ENT_INFO result = new ENT_INFO(target);
@@ -122,6 +125,6 @@ public class Sensor extends AtomicModel<Double, Double, SimTimeDouble> {
 
     @Override
     protected Double timeAdvance() {
-        return this.phase.getLifeTime()+this.elapsedTime;
+        return this.phase.getLifeTime();
     }
 }

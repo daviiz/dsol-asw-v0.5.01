@@ -23,7 +23,6 @@ public class Fleet extends CoupledModel<Double, Double, SimTimeDouble> {
 
     public Fleet(String modelName, CoupledModel<Double, Double, SimTimeDouble> parentModel) {
         super(modelName, parentModel);
-
     }
 
     public void initialize(ModelData data) {

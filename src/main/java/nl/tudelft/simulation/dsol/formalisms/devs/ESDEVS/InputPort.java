@@ -135,7 +135,7 @@ public class InputPort<A extends Comparable<A>, R extends Number & Comparable<R>
                 }
                 if (!passivity)
                 {
-                    //this.model.getSimulator().cancelEvent(nextEventCopy);
+                    this.model.getSimulator().cancelEvent(nextEventCopy);
                 }
             }
             atomicModel.activePort = null;
