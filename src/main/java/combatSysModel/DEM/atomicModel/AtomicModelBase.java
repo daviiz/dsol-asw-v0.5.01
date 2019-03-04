@@ -1,5 +1,6 @@
 package combatSysModel.DEM.atomicModel;
 
+import combatSysModel.OM.ObjectModelBase;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.AtomicModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
@@ -10,11 +11,13 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
  */
 public abstract class AtomicModelBase  extends AtomicModel<Double,Double, SimTimeDouble> {
 
+    ObjectModelBase om;
 
-    public void constructModel(){
+    public void constructModel(ObjectModelBase om){
         constructPhase();
         constructPort();
         constructModelData();
+        this.om = om;
         super.initialize(0.0);
     }
 
