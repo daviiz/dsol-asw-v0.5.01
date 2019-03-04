@@ -48,10 +48,16 @@ public class Controller_Updater extends AtomicModelBase<OM_Controller> {
 
     @Override
     void deltaExternalFunc(Object value) {
-        if (this.phase.getName().equals("IDENTIFICATION")) {
+        if (this.phase.getName().equals("WAIT")) {
             if (this.activePort == in_scen_info) {
                 threat_info = (threat_info) value;
             } else if (this.activePort == in_threat_info) {
+                scen_info = (scen_info)value;
+                this.phase = IDENTIFICATION;
+            }
+        }
+        else if (this.phase.getName().equals("IDENTIFICATION")) {
+            if (this.activePort == in_threat_info) {
                 scen_info = (scen_info)value;
             }
         }
