@@ -1,6 +1,5 @@
 package combatSysModel.DEM;
 
-import combatSysModel.BasedCoupledModel;
 import combatSysModel.portType.fuel_exhausted;
 import combatSysModel.portType.threat_info;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
@@ -9,7 +8,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-class Sensor extends BasedCoupledModel {
+class Sensor extends CoupledModelBase {
 
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.scen_info> in_scen_info;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.engage_result> in_engage_result;
@@ -33,7 +32,7 @@ class Sensor extends BasedCoupledModel {
     }
 
     @Override
-    public void constructModel() {
+    public void constructPort() {
         /**
          * X
          */
@@ -46,5 +45,10 @@ class Sensor extends BasedCoupledModel {
          * Y
          */
         out_threat_info = new OutputPort<Double, Double, SimTimeDouble, threat_info>(this);
+    }
+
+    @Override
+    public void couplingComponent() {
+
     }
 }

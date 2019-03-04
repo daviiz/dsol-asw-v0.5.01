@@ -1,6 +1,5 @@
 package combatSysModel.DEM;
 
-import combatSysModel.BasedCoupledModel;
 import combatSysModel.portType.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.InputPort;
@@ -8,7 +7,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public class Controller extends BasedCoupledModel {
+public class Controller extends CoupledModelBase {
 
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.engage_result> in_engage_result;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.env_info> in_env_info;
@@ -32,7 +31,7 @@ public class Controller extends BasedCoupledModel {
     }
 
     @Override
-    public void constructModel() {
+    public void constructPort() {
         /**
          * X
          */
@@ -46,7 +45,12 @@ public class Controller extends BasedCoupledModel {
          */
         out_wp_launch = new OutputPort<Double, Double, SimTimeDouble, wp_launch>(this);
         out_move_cmd = new OutputPort<Double, Double, SimTimeDouble, move_cmd>(this);
+    }
+
+    @Override
+    public void couplingComponent() {
 
     }
+
 
 }

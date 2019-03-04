@@ -1,6 +1,5 @@
 package combatSysModel.DEM;
 
-import combatSysModel.BasedCoupledModel;
 import combatSysModel.portType.move_result;
 import combatSysModel.portType.wp_guidance;
 import combatSysModel.portType.wp_launch;
@@ -10,7 +9,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public class CM_Platform extends BasedCoupledModel {
+public class CM_Platform extends CoupledModelBase {
 
     /**
      * X:
@@ -35,9 +34,7 @@ public class CM_Platform extends BasedCoupledModel {
     private Sensor s;
     private Controller c;
 
-    public CM_Platform(String modelName) {
-        super(modelName);
-    }
+    public CM_Platform(String modelName) { super(modelName); }
 
     public CM_Platform(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
@@ -48,7 +45,7 @@ public class CM_Platform extends BasedCoupledModel {
     }
 
     @Override
-    public void constructModel() {
+    public void constructPort() {
         /**
          * X
          */
@@ -64,7 +61,10 @@ public class CM_Platform extends BasedCoupledModel {
         out_move_result = new OutputPort<Double, Double, SimTimeDouble, move_result>(this);
         out_wp_launch = new OutputPort<Double, Double, SimTimeDouble, wp_launch>(this);
         out_wp_guidance = new OutputPort<Double, Double, SimTimeDouble, wp_guidance>(this);
+    }
 
+    @Override
+    public void couplingComponent() {
         /**
          *  { Mi }
          */

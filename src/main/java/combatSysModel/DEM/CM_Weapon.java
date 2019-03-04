@@ -1,6 +1,5 @@
 package combatSysModel.DEM;
 
-import combatSysModel.BasedCoupledModel;
 import combatSysModel.portType.entity_info;
 import combatSysModel.portType.guidance_info;
 import combatSysModel.portType.move_result;
@@ -9,7 +8,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public class CM_Weapon extends BasedCoupledModel {
+public class CM_Weapon extends CoupledModelBase {
 
     /**
      * X:
@@ -46,7 +45,7 @@ public class CM_Weapon extends BasedCoupledModel {
     }
 
     @Override
-    public void constructModel() {
+    public void constructPort() {
         /**
          * X
          */
@@ -61,7 +60,10 @@ public class CM_Weapon extends BasedCoupledModel {
          */
         out_move_result = new OutputPort<Double, Double, SimTimeDouble, move_result>(this);
         out_guidance_info = new OutputPort<Double, Double, SimTimeDouble, guidance_info>(this);
+    }
 
+    @Override
+    public void couplingComponent() {
         /**
          *  { Mi }
          */
@@ -81,7 +83,5 @@ public class CM_Weapon extends BasedCoupledModel {
         /**
          * IC
          */
-
-
     }
 }
