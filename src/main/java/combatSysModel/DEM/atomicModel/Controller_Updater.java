@@ -1,9 +1,10 @@
 package combatSysModel.DEM.atomicModel;
 
+import combatSysModel.OM.OM_Controller;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Controller_Updater extends AtomicModelBase {
+public class Controller_Updater extends AtomicModelBase<OM_Controller> {
 
 
 

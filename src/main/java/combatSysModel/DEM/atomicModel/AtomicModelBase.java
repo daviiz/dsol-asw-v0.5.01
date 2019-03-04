@@ -9,11 +9,11 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 /**
  *
  */
-public abstract class AtomicModelBase  extends AtomicModel<Double,Double, SimTimeDouble> {
+public abstract class AtomicModelBase<OM extends ObjectModelBase>  extends AtomicModel<Double,Double, SimTimeDouble> {
 
-    ObjectModelBase om;
+    OM om;
 
-    public void constructModel(ObjectModelBase om){
+    public void constructModel(OM om){
         constructPhase();
         constructPort();
         constructModelData();

@@ -1,4 +1,4 @@
 package combatSysModel.OM;
 
-public class ObjectModelBase {
+public class ObjectModelBase implements java.io.Serializable{
 }
