@@ -33,8 +33,10 @@ public class Controller_Updater extends AtomicModelBase<OM_Controller> {
 
     @Override
     void constructPhase() {
-        WAIT = new Phase("WAIT"); WAIT.setLifeTime(Double.POSITIVE_INFINITY);
-        IDENTIFICATION = new Phase("IDENTIFICATION"); IDENTIFICATION.setLifeTime(15.0);
+        WAIT = new Phase("WAIT");
+        WAIT.setLifeTime(Double.POSITIVE_INFINITY);
+        IDENTIFICATION = new Phase("IDENTIFICATION");
+        IDENTIFICATION.setLifeTime(15.0);
         this.phase = WAIT;
     }
 
@@ -59,10 +61,11 @@ public class Controller_Updater extends AtomicModelBase<OM_Controller> {
     void deltaInternalFunc() {
         if(this.phase.getName().equals("WAIT")){
             this.phase = IDENTIFICATION;
+            return;
         }
         if(this.phase.getName().equals("IDENTIFICATION")){
             t = this.om.identification(threat_info,scen_info);
-
+            return;
         }
     }
 
