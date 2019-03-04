@@ -32,7 +32,7 @@ public class CM_Platform extends CoupledModelBase {
      */
     private Maneuver m;
     private Sensor s;
-    private Controller c;
+    private Controller_Platform c;
 
     public CM_Platform(String modelName) { super(modelName); }
 
@@ -70,7 +70,7 @@ public class CM_Platform extends CoupledModelBase {
          */
         m = new Maneuver("Maneuver", this);
         s = new Sensor("Sensor", this);
-        c = new Controller("Controller", this);
+        c = new Controller_Platform("Controller_Platform", this);
         /**
          * EIC
          */

@@ -7,7 +7,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public class Controller extends CoupledModelBase {
+public class Controller_Platform extends CoupledModelBase {
 
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.engage_result> in_engage_result;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.env_info> in_env_info;
@@ -18,15 +18,15 @@ public class Controller extends CoupledModelBase {
     public OutputPort<Double, Double, SimTimeDouble, combatSysModel.portType.wp_launch> out_wp_launch;
     public OutputPort<Double, Double, SimTimeDouble, combatSysModel.portType.move_cmd> out_move_cmd;
 
-    public Controller(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
+    public Controller_Platform(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
         super(modelName, simulator);
     }
 
-    public Controller(String modelName) {
+    public Controller_Platform(String modelName) {
         super(modelName);
     }
 
-    public Controller(String modelName, CoupledModel.TimeDouble parentModel) {
+    public Controller_Platform(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
