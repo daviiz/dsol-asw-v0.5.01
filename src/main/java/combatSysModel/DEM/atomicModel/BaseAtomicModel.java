@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 /**
  *
  */
-public abstract class AtomicModelBase<OM extends ObjectModelBase> extends AtomicModel<Double, Double, SimTimeDouble> implements IDEVSModel {
+public abstract class BaseAtomicModel<OM extends ObjectModelBase> extends AtomicModel<Double, Double, SimTimeDouble> implements IDEVSModel {
 
     OM om;
 
@@ -59,11 +59,11 @@ public abstract class AtomicModelBase<OM extends ObjectModelBase> extends Atomic
      */
     abstract void deltaInternalFunc();
 
-    public AtomicModelBase(String modelName, CoupledModel.TimeDouble parentModel) {
+    public BaseAtomicModel(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
-    public AtomicModelBase(String modelName, DEVSSimulator.TimeDouble simulator) {
+    public BaseAtomicModel(String modelName, DEVSSimulator.TimeDouble simulator) {
         super(modelName, simulator);
     }
 

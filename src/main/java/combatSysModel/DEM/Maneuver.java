@@ -7,7 +7,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public class Maneuver extends CoupledModelBase {
+public class Maneuver extends BaseCoupledModel {
 
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.scen_info> in_scen_info;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.engage_result> in_engage_result;

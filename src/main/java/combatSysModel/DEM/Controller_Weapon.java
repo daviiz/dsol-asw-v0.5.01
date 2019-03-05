@@ -6,7 +6,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public class Controller_Weapon extends CoupledModelBase{
+public class Controller_Weapon extends BaseCoupledModel {
 
     public InputPort<Double, Double, SimTimeDouble, engage_result> in_engage_result;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.scen_info> in_scen_info;

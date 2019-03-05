@@ -3,13 +3,13 @@ package combatSysModel.DEM;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public abstract class CoupledModelBase extends CoupledModel.TimeDouble implements IDEVSModel{
+public abstract class BaseCoupledModel extends CoupledModel.TimeDouble implements IDEVSModel{
 
-    public CoupledModelBase(String modelName) { super(modelName); }
+    public BaseCoupledModel(String modelName) { super(modelName); }
 
-    public CoupledModelBase(String modelName, TimeDouble parentModel) { super(modelName, parentModel); }
+    public BaseCoupledModel(String modelName, TimeDouble parentModel) { super(modelName, parentModel); }
 
-    public CoupledModelBase(String modelName, DEVSSimulatorInterface.TimeDouble simulator) { super(modelName, simulator); }
+    public BaseCoupledModel(String modelName, DEVSSimulatorInterface.TimeDouble simulator) { super(modelName, simulator); }
 
     /**
      * construct input and output port

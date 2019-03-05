@@ -1,6 +1,5 @@
 package combatSysModel.DEM;
 
-import combatSysModel.portType.guidance_info;
 import combatSysModel.portType.move_result;
 import combatSysModel.portType.scen_info;
 import combatSysModel.portType.wp_guidance;
@@ -9,7 +8,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public class CM_Weapon extends CoupledModelBase {
+public class CM_Weapon extends BaseCoupledModel {
 
     /**
      * X:

@@ -4,7 +4,7 @@ import combatSysModel.OM.OM_Controller;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Controller_Actor extends AtomicModelBase<OM_Controller> {
+public class Controller_Actor extends BaseAtomicModel<OM_Controller> {
     @Override
     void constructPort() {
 
