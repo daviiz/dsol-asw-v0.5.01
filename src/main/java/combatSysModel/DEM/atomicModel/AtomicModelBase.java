@@ -1,5 +1,6 @@
 package combatSysModel.DEM.atomicModel;
 
+import combatSysModel.DEM.IDEVSModel;
 import combatSysModel.OM.ObjectModelBase;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.AtomicModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
@@ -9,17 +10,19 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 /**
  *
  */
-public abstract class AtomicModelBase<OM extends ObjectModelBase>  extends AtomicModel<Double,Double, SimTimeDouble> {
+public abstract class AtomicModelBase<OM extends ObjectModelBase> extends AtomicModel<Double, Double, SimTimeDouble> implements IDEVSModel {
+
+
 
     OM om;
 
-    public void constructModel(OM om){
-        constructPhase();
-        constructPort();
-        constructModelData();
-        this.om = om;
-        super.initialize(0.0);
-    }
+//    public void constructModel(OM om){
+//        constructPhase();
+//        constructPort();
+//        constructModelData();
+//        this.om = om;
+//        super.initialize(0.0);
+//    }
 
     @Override
     protected void deltaInternal() {
@@ -51,11 +54,12 @@ public abstract class AtomicModelBase<OM extends ObjectModelBase>  extends Atomi
     /**
      * atomic model's private data initialization
      */
-    abstract  void constructModelData();
+    abstract void constructModelData();
 
     /**
      * 原子模型外部函数实现，
      * 接收外部输入，无需考虑仿真事件时间推进，专注于业务逻辑
+     *
      * @param value
      */
     abstract void deltaExternalFunc(Object value);
@@ -71,5 +75,21 @@ public abstract class AtomicModelBase<OM extends ObjectModelBase>  extends Atomi
 
     public AtomicModelBase(String modelName, DEVSSimulator.TimeDouble simulator) {
         super(modelName, simulator);
+    }
+
+    @Override
+    public void constructModel() {
+        constructPhase();
+        constructPort();
+        constructModelData();
+        //this.om = (OM)om;
+        super.initialize(0.0);
+    }
+    public OM getOm() {
+        return om;
+    }
+
+    public void setOm(OM om) {
+        this.om = om;
     }
 }

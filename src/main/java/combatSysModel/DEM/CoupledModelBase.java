@@ -1,9 +1,10 @@
 package combatSysModel.DEM;
 
+import combatSysModel.OM.ObjectModelBase;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public abstract class CoupledModelBase extends CoupledModel.TimeDouble {
+public abstract class CoupledModelBase<om extends ObjectModelBase> extends CoupledModel.TimeDouble implements IDEVSModel{
 
     public CoupledModelBase(String modelName) { super(modelName); }
 
@@ -11,13 +12,6 @@ public abstract class CoupledModelBase extends CoupledModel.TimeDouble {
 
     public CoupledModelBase(String modelName, DEVSSimulatorInterface.TimeDouble simulator) { super(modelName, simulator); }
 
-    /**
-     * unify the coupling structure's construct code
-     */
-    public void constructModel(){
-        constructPort();
-        couplingComponent();
-    }
     /**
      * construct input and output port
      */
@@ -27,4 +21,12 @@ public abstract class CoupledModelBase extends CoupledModel.TimeDouble {
      */
     abstract void couplingComponent();
 
+    /**
+     * unify the coupling structure's construct code
+     */
+    @Override
+    public void constructModel() {
+        constructPort();
+        couplingComponent();
+    }
 }
