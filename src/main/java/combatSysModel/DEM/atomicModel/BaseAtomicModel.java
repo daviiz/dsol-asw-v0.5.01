@@ -10,9 +10,9 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 /**
  *
  */
-public abstract class BaseAtomicModel<OM extends ObjectModelBase> extends AtomicModel<Double, Double, SimTimeDouble> implements IDEVSModel {
+public abstract class BaseAtomicModel<OMType extends ObjectModelBase> extends AtomicModel<Double, Double, SimTimeDouble> implements IDEVSModel {
 
-    OM om;
+    OMType om;
 
     @Override
     protected void deltaInternal() {
@@ -75,11 +75,11 @@ public abstract class BaseAtomicModel<OM extends ObjectModelBase> extends Atomic
         //this.om = (OM)om;
         super.initialize(0.0);
     }
-    public OM getOm() {
+    public OMType getOm() {
         return om;
     }
 
-    public void setOm(OM om) {
+    public void setOm(OMType om) {
         this.om = om;
     }
 }
