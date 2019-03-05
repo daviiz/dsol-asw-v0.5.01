@@ -1,10 +1,9 @@
 package combatSysModel.DEM;
 
-import combatSysModel.OM.ObjectModelBase;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public abstract class CoupledModelBase<om extends ObjectModelBase> extends CoupledModel.TimeDouble implements IDEVSModel{
+public abstract class CoupledModelBase extends CoupledModel.TimeDouble implements IDEVSModel{
 
     public CoupledModelBase(String modelName) { super(modelName); }
 

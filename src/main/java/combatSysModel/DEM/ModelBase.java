@@ -5,7 +5,7 @@ public abstract class ModelBase {
 
     public ModelBase(IDEVSModel _dem){
         this._dem = _dem;
-        _dem.constructModel();
+        this._dem.constructModel();
     }
 
 }

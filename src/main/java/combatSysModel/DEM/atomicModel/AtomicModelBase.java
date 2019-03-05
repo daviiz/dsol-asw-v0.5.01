@@ -12,17 +12,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
  */
 public abstract class AtomicModelBase<OM extends ObjectModelBase> extends AtomicModel<Double, Double, SimTimeDouble> implements IDEVSModel {
 
-
-
     OM om;
-
-//    public void constructModel(OM om){
-//        constructPhase();
-//        constructPort();
-//        constructModelData();
-//        this.om = om;
-//        super.initialize(0.0);
-//    }
 
     @Override
     protected void deltaInternal() {
