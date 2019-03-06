@@ -34,17 +34,17 @@ public abstract class BaseAtomicModel<OMType extends ObjectModelBase> extends At
     /**
      * construct input and output port
      */
-    abstract void constructPort();
+    protected abstract void constructPort();
 
     /**
      * define atomic model's states
      */
-    abstract void constructPhase();
+    protected abstract void constructPhase();
 
     /**
      * atomic model's private data initialization
      */
-    abstract void constructModelData();
+    protected abstract void constructModelData();
 
     /**
      * 原子模型外部函数实现，
@@ -52,12 +52,12 @@ public abstract class BaseAtomicModel<OMType extends ObjectModelBase> extends At
      *
      * @param value
      */
-    abstract void deltaExternalFunc(Object value);
+    protected abstract void deltaExternalFunc(Object value);
 
     /**
      * 原子模型内部函数实现
      */
-    abstract void deltaInternalFunc();
+    protected abstract void deltaInternalFunc();
 
     public BaseAtomicModel(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);

@@ -14,11 +14,11 @@ public abstract class BaseCoupledModel extends CoupledModel.TimeDouble implement
     /**
      * construct input and output port
      */
-    abstract void constructPort();
+    protected abstract void constructPort();
     /**
      *  coupling relation construction
      */
-    abstract void couplingComponent();
+    protected abstract void couplingComponent();
 
     /**
      * unify the coupling structure's construct code
