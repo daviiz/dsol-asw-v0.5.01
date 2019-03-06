@@ -1,5 +1,6 @@
-package combatSysModel.DEM;
+package combatSysModel.DEM.coupledModel;
 
+import combatSysModel.DEM.CoupledModelBase;
 import combatSysModel.portType.fuel_exhausted;
 import combatSysModel.portType.threat_info;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;

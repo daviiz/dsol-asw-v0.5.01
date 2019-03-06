@@ -1,4 +1,4 @@
-package combatSysModel.DEM.atomicModel;
+package combatSysModel.DEM;
 
 import combatSysModel.DEM.IDEVSModel;
 import combatSysModel.OM.ObjectModelBase;

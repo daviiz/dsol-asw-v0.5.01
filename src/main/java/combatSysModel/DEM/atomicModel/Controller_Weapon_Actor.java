@@ -1,5 +1,6 @@
 package combatSysModel.DEM.atomicModel;
 
+import combatSysModel.DEM.AtomicModelBase;
 import combatSysModel.OM.OM_Controller;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;

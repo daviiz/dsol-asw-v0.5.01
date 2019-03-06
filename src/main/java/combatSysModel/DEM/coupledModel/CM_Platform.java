@@ -1,5 +1,6 @@
-package combatSysModel.DEM;
+package combatSysModel.DEM.coupledModel;
 
+import combatSysModel.DEM.CoupledModelBase;
 import combatSysModel.portType.move_result;
 import combatSysModel.portType.wp_guidance;
 import combatSysModel.portType.wp_launch;

@@ -1,5 +1,6 @@
-package combatSysModel.DEM;
+package combatSysModel.DEM.coupledModel;
 
+import combatSysModel.DEM.CoupledModelBase;
 import combatSysModel.DEM.atomicModel.Controller_Platform_Actor;
 import combatSysModel.DEM.atomicModel.Controller_Platform_Updater;
 import combatSysModel.portType.*;
