@@ -45,7 +45,7 @@ public class CM_Platform extends BaseCoupledModel {
     }
 
     @Override
-    public void constructPort() {
+    protected void constructPort() {
         /**
          * X
          */
@@ -64,7 +64,7 @@ public class CM_Platform extends BaseCoupledModel {
     }
 
     @Override
-    public void couplingComponent() {
+    protected void couplingComponent() {
         /**
          *  { Mi }
          */

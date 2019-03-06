@@ -1,10 +1,10 @@
 package combatSysModel.DEM.atomicModel;
 
-import combatSysModel.OM.OM_Controller;
+import combatSysModel.OM.OM_Maneuver;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Controller_Actor extends BaseAtomicModel<OM_Controller> {
+public class Maneuver_Actor extends BaseAtomicModel<OM_Maneuver> {
     @Override
     protected void constructPort() {
 
@@ -35,13 +35,11 @@ public class Controller_Actor extends BaseAtomicModel<OM_Controller> {
 
     }
 
-    public Controller_Actor(String modelName, CoupledModel.TimeDouble parentModel) {
+    public Maneuver_Actor(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
-    public Controller_Actor(String modelName, DEVSSimulator.TimeDouble simulator) {
+    public Maneuver_Actor(String modelName, DEVSSimulator.TimeDouble simulator) {
         super(modelName, simulator);
     }
-
-
 }

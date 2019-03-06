@@ -32,7 +32,7 @@ class Sensor extends BaseCoupledModel {
     }
 
     @Override
-    public void constructPort() {
+    protected void constructPort() {
         /**
          * X
          */
@@ -48,7 +48,7 @@ class Sensor extends BaseCoupledModel {
     }
 
     @Override
-    public void couplingComponent() {
+    protected void couplingComponent() {
 
     }
 }

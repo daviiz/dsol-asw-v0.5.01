@@ -31,6 +31,11 @@ public abstract class BaseAtomicModel<OMType extends ObjectModelBase> extends At
         return this.phase.getLifeTime();
     }
 
+    @Override
+    protected void lambda() {
+        lambdaFunc();
+    }
+
     /**
      * construct input and output port
      */
@@ -47,7 +52,7 @@ public abstract class BaseAtomicModel<OMType extends ObjectModelBase> extends At
     protected abstract void constructModelData();
 
     /**
-     * 原子模型外部函数实现，
+     * 原子模型外部函数，
      * 接收外部输入，无需考虑仿真事件时间推进，专注于业务逻辑
      *
      * @param value
@@ -55,9 +60,16 @@ public abstract class BaseAtomicModel<OMType extends ObjectModelBase> extends At
     protected abstract void deltaExternalFunc(Object value);
 
     /**
-     * 原子模型内部函数实现
+     * 原子模型内部函数
      */
     protected abstract void deltaInternalFunc();
+
+    /**
+     * 原子模型-输出函数：
+     */
+    protected abstract void lambdaFunc();
+
+
 
     public BaseAtomicModel(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);

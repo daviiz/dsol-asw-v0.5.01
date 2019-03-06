@@ -29,7 +29,7 @@ public class Controller_Weapon extends BaseCoupledModel {
     }
 
     @Override
-    void constructPort() {
+    protected void constructPort() {
         /**
          * X
          */
@@ -45,7 +45,7 @@ public class Controller_Weapon extends BaseCoupledModel {
     }
 
     @Override
-    void couplingComponent() {
+    protected void couplingComponent() {
 
     }
 }

@@ -31,7 +31,7 @@ public class Controller_Platform extends BaseCoupledModel {
     }
 
     @Override
-    public void constructPort() {
+    protected void constructPort() {
         /**
          * X
          */
@@ -48,7 +48,7 @@ public class Controller_Platform extends BaseCoupledModel {
     }
 
     @Override
-    public void couplingComponent() {
+    protected void couplingComponent() {
 
     }
 

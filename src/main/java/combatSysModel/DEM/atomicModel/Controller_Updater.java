@@ -25,14 +25,14 @@ public class Controller_Updater extends BaseAtomicModel<OM_Controller> {
     private target_info t;
 
     @Override
-    void constructPort() {
+    protected void constructPort() {
         in_threat_info = new InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.threat_info>(this);
         in_scen_info = new InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.scen_info>(this);
         out_target_info = new OutputPort<Double, Double, SimTimeDouble, target_info>(this);
     }
 
     @Override
-    void constructPhase() {
+    protected void constructPhase() {
         WAIT = new Phase("WAIT");
         WAIT.setLifeTime(Double.POSITIVE_INFINITY);
         IDENTIFICATION = new Phase("IDENTIFICATION");
@@ -41,13 +41,13 @@ public class Controller_Updater extends BaseAtomicModel<OM_Controller> {
     }
 
     @Override
-    void constructModelData() {
+    protected void constructModelData() {
         threat_info = new threat_info();
         scen_info = new scen_info();
     }
 
     @Override
-    void deltaExternalFunc(Object value) {
+    protected void deltaExternalFunc(Object value) {
         if (this.phase.getName().equals("WAIT")) {
             if (this.activePort == in_scen_info) {
                 threat_info = (threat_info) value;
@@ -64,7 +64,7 @@ public class Controller_Updater extends BaseAtomicModel<OM_Controller> {
     }
 
     @Override
-    void deltaInternalFunc() {
+    protected void deltaInternalFunc() {
         if(this.phase.getName().equals("WAIT")){
             this.phase = IDENTIFICATION;
             return;
@@ -76,7 +76,7 @@ public class Controller_Updater extends BaseAtomicModel<OM_Controller> {
     }
 
     @Override
-    protected void lambda() {
+    protected void lambdaFunc() {
         if(this.phase.getName().equals("IDENTIFICATION")){
             out_target_info.send(t);
         }
