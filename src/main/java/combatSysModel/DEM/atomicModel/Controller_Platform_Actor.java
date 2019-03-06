@@ -9,7 +9,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Controller_Platform_Actor extends BaseAtomicModel<OM_Controller> {
+public class Controller_Platform_Actor extends AtomicModelBase<OM_Controller> {
 
     public InputPort<Double, Double, SimTimeDouble, move_finished> in_move_finished;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.engage_result> in_engage_result;

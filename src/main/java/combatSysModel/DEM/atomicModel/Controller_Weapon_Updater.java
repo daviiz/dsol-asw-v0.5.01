@@ -11,7 +11,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Controller_Weapon_Updater extends BaseAtomicModel<OM_Controller> {
+public class Controller_Weapon_Updater extends AtomicModelBase<OM_Controller> {
 
     public InputPort<Double,Double, SimTimeDouble, threat_info> in_threat_info;
     public InputPort<Double,Double, SimTimeDouble, scen_info> in_scen_info;

@@ -4,7 +4,7 @@ import combatSysModel.OM.OM_Sensor;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Sensor_Actor extends BaseAtomicModel<OM_Sensor> {
+public class Sensor_Actor extends AtomicModelBase<OM_Sensor> {
     @Override
     protected void constructPort() {
 

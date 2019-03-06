@@ -1,4 +1,4 @@
 package combatSysModel.OM;
 
-public class OM_Maneuver extends BaseObjectModel {
+public class OM_Maneuver extends ObjectModelBase {
 }

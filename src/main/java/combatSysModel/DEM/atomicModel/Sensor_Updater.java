@@ -4,7 +4,7 @@ import combatSysModel.OM.OM_Sensor;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Sensor_Updater extends BaseAtomicModel<OM_Sensor> {
+public class Sensor_Updater extends AtomicModelBase<OM_Sensor> {
 
     public Sensor_Updater(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);

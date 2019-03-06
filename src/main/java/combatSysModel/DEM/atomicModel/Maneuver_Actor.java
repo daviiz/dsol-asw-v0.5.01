@@ -4,7 +4,7 @@ import combatSysModel.OM.OM_Maneuver;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Maneuver_Actor extends BaseAtomicModel<OM_Maneuver> {
+public class Maneuver_Actor extends AtomicModelBase<OM_Maneuver> {
     @Override
     protected void constructPort() {
 

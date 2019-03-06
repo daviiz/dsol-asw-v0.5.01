@@ -1,7 +1,7 @@
 package combatSysModel.DEM.atomicModel;
 
 import combatSysModel.DEM.IDEVSModel;
-import combatSysModel.OM.BaseObjectModel;
+import combatSysModel.OM.ObjectModelBase;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.AtomicModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 /**
  *
  */
-public abstract class BaseAtomicModel<OMType extends BaseObjectModel> extends AtomicModel<Double, Double, SimTimeDouble> implements IDEVSModel {
+public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends AtomicModel<Double, Double, SimTimeDouble> implements IDEVSModel {
 
     OMType om;
 
@@ -71,11 +71,11 @@ public abstract class BaseAtomicModel<OMType extends BaseObjectModel> extends At
 
 
 
-    public BaseAtomicModel(String modelName, CoupledModel.TimeDouble parentModel) {
+    public AtomicModelBase(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
-    public BaseAtomicModel(String modelName, DEVSSimulator.TimeDouble simulator) {
+    public AtomicModelBase(String modelName, DEVSSimulator.TimeDouble simulator) {
         super(modelName, simulator);
     }
 
