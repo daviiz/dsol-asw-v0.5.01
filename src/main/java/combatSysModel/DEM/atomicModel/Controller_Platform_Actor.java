@@ -39,14 +39,26 @@ public class Controller_Platform_Actor extends AtomicModelBase<OM_Controller> {
 
     @Override
     protected void constructPhase() {
-        IDLE = new Phase("IDLE");IDLE.setLifeTime(Double.POSITIVE_INFINITY);
-        RECONNAIASSANCE = new Phase("RECONNAIASSANCE"); RECONNAIASSANCE.setLifeTime(10.0);
-        APPROACH = new Phase("APPROACH"); APPROACH.setLifeTime(10.0);
-        COMBAT = new Phase("COMBAT"); COMBAT.setLifeTime(10.0);
-        EVASION = new Phase("EVASION");EVASION.setLifeTime(10.0);
+        IDLE = new Phase("IDLE");
+        IDLE.setLifeTime(Double.POSITIVE_INFINITY);
 
-        CONTROL = new Phase("CONTROL"); CONTROL.setLifeTime(10.0);
-        END = new Phase("END"); END.setLifeTime(Double.POSITIVE_INFINITY);
+        RECONNAIASSANCE = new Phase("RECONNAIASSANCE");
+        RECONNAIASSANCE.setLifeTime(10.0);
+
+        APPROACH = new Phase("APPROACH");
+        APPROACH.setLifeTime(10.0);
+
+        COMBAT = new Phase("COMBAT");
+        COMBAT.setLifeTime(10.0);
+
+        EVASION = new Phase("EVASION");
+        EVASION.setLifeTime(10.0);
+
+        CONTROL = new Phase("CONTROL");
+        CONTROL.setLifeTime(10.0);
+
+        END = new Phase("END");
+        END.setLifeTime(Double.POSITIVE_INFINITY);
 
     }
 

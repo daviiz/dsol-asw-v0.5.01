@@ -2,10 +2,22 @@ package combatSysModel.DEM.atomicModel;
 
 import combatSysModel.DEM.AtomicModelBase;
 import combatSysModel.OM.OM_Sensor;
+import combatSysModel.portType.move_result;
+import combatSysModel.portType.request;
+import combatSysModel.portType.response;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
+import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.InputPort;
+import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
+import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
 public class Sensor_Updater extends AtomicModelBase<OM_Sensor> {
+
+    public InputPort<Double, Double, SimTimeDouble, move_result> in_move_result;
+    public InputPort<Double, Double, SimTimeDouble, request> in_request;
+
+    public OutputPort<Double, Double, SimTimeDouble, response> out_response;
+
 
     public Sensor_Updater(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);

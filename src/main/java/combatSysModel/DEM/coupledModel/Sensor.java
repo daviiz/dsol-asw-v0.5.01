@@ -1,6 +1,9 @@
 package combatSysModel.DEM.coupledModel;
 
 import combatSysModel.DEM.CoupledModelBase;
+import combatSysModel.DEM.atomicModel.Sensor_Actor;
+import combatSysModel.DEM.atomicModel.Sensor_Updater;
+import combatSysModel.portType.engage_result;
 import combatSysModel.portType.fuel_exhausted;
 import combatSysModel.portType.threat_info;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
@@ -12,13 +15,15 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 class Sensor extends CoupledModelBase {
 
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.scen_info> in_scen_info;
-    public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.engage_result> in_engage_result;
+    public InputPort<Double, Double, SimTimeDouble, engage_result> in_engage_result;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.move_result> in_move_result;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.env_info> in_env_info;
     public InputPort<Double, Double, SimTimeDouble, fuel_exhausted> in_fuel_exhausted;
 
     public OutputPort<Double, Double, SimTimeDouble, threat_info> out_threat_info;
 
+    private Sensor_Actor actor;
+    private Sensor_Updater updater;
 
     public Sensor(String modelName) {
         super(modelName);
@@ -50,6 +55,26 @@ class Sensor extends CoupledModelBase {
 
     @Override
     protected void couplingComponent() {
+        updater = new Sensor_Updater("Updater",this);
+        actor = new Sensor_Actor("Actor",this);
+
+        /**
+         * EIC
+         */
+        this.addExternalInputCoupling(this.in_engage_result,actor.in_engage_result);
+        this.addExternalInputCoupling(this.in_env_info,actor.in_env_info);
+        this.addExternalInputCoupling(this.in_scen_info,actor.in_scen_info);
+        this.addExternalInputCoupling(this.in_move_result,updater.in_move_result);
+
+        /**
+         * IC
+         */
+        this.addInternalCoupling(updater.out_response,actor.in_response);
+        this.addInternalCoupling(actor.out_request,updater.in_request);
+        /**
+         * EOC
+         */
+        this.addExternalOutputCoupling(actor.out_threat_info,this.out_threat_info);
 
     }
 }

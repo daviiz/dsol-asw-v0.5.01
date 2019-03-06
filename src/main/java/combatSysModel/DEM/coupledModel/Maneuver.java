@@ -1,6 +1,8 @@
 package combatSysModel.DEM.coupledModel;
 
 import combatSysModel.DEM.CoupledModelBase;
+import combatSysModel.DEM.atomicModel.Maneuver_Actor;
+import combatSysModel.DEM.atomicModel.Maneuver_Updater;
 import combatSysModel.portType.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.InputPort;
@@ -20,6 +22,9 @@ public class Maneuver extends CoupledModelBase {
     public OutputPort<Double, Double, SimTimeDouble, wp_guidance> out_wp_guidance;
     public OutputPort<Double, Double, SimTimeDouble, move_finished> out_move_finished;
     public OutputPort<Double, Double, SimTimeDouble, fuel_exhausted> out_fuel_exhausted;
+
+    private Maneuver_Actor actor;
+    private Maneuver_Updater updater;
 
 
     public Maneuver(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
@@ -55,6 +60,27 @@ public class Maneuver extends CoupledModelBase {
 
     @Override
     protected void couplingComponent() {
+        actor = new Maneuver_Actor("Actor",this);
+        updater = new Maneuver_Updater("Updater",this);
+        /**
+         * EIC
+         */
+        this.addExternalInputCoupling(this.in_engage_result,actor.in_engage_result);
+        this.addExternalInputCoupling(this.in_scen_info,actor.in_scen_info);
+        this.addExternalInputCoupling(this.in_env_info,actor.in_env_info);
+        this.addExternalInputCoupling(this.in_move_cmd,updater.in_move_cmd);
+
+        /**
+         * IC
+         */
+        this.addInternalCoupling(updater.out_cmd_info,actor.in_cmd_info);
+
+        /**
+         * EOC
+         */
+        this.addExternalOutputCoupling(actor.out_move_finished,this.out_move_finished);
+        this.addExternalOutputCoupling(actor.out_fuel_exhausted,this.out_fuel_exhausted);
+        this.addExternalOutputCoupling(actor.out_move_result,this.out_move_result);
 
     }
 }
