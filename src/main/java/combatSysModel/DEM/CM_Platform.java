@@ -70,7 +70,7 @@ public class CM_Platform extends BaseCoupledModel {
          */
         m = new Maneuver("Maneuver", this);
         s = new Sensor("Sensor", this);
-        c = new Controller_Platform("Controller_Platform", this);
+        c = new Controller_Platform("Controller", this);
         /**
          * EIC
          */

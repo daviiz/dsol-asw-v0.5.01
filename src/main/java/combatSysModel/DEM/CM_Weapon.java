@@ -69,7 +69,7 @@ public class CM_Weapon extends BaseCoupledModel {
          */
         m = new Maneuver("Maneuver", this);
         s = new Sensor("Sensor", this);
-        c = new Controller_Weapon("Controller_Weapon", this);
+        c = new Controller_Weapon("Controller", this);
 
         /**
          * EIC
