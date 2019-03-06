@@ -1,6 +1,5 @@
 package combatSysModel.DEM;
 
-import combatSysModel.DEM.IDEVSModel;
 import combatSysModel.OM.ObjectModelBase;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.AtomicModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
@@ -12,7 +11,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
  */
 public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends AtomicModel<Double, Double, SimTimeDouble> implements IDEVSModel {
 
-    OMType om;
+    protected OMType om;
 
     @Override
     protected void deltaInternal() {
