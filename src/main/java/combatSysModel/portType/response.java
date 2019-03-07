@@ -1,6 +1,4 @@
 package combatSysModel.portType;
 
-import combatSysModel.OM.ObjectModelBase;
-
-public class response extends ObjectModelBase {
+public class response implements java.io.Serializable {
 }
