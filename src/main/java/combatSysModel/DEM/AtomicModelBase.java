@@ -6,7 +6,9 @@ import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
 /**
- *
+ *模型开发：命名规范：
+ * 原子模型：按照模型耦合层次由内而外命名，如：Actor_Controller_Platform_am
+ * 耦合模型：按照模型耦合层次由内而外命名，如：Controller_Platform_cm
  */
 public abstract class AtomicModelBase<OMType> extends AtomicModel<Double, Double, SimTimeDouble> implements IDEVSModel {
 

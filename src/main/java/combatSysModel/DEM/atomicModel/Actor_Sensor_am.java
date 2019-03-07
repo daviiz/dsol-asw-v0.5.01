@@ -9,7 +9,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Sensor_Actor extends AtomicModelBase<OM_Sensor> {
+public class Actor_Sensor_am extends AtomicModelBase<OM_Sensor> {
 
     public InputPort<Double, Double, SimTimeDouble, engage_result> in_engage_result;
     public InputPort<Double,Double, SimTimeDouble, env_info> in_env_info;
@@ -50,11 +50,11 @@ public class Sensor_Actor extends AtomicModelBase<OM_Sensor> {
 
     }
 
-    public Sensor_Actor(String modelName, CoupledModel.TimeDouble parentModel) {
+    public Actor_Sensor_am(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
-    public Sensor_Actor(String modelName, DEVSSimulator.TimeDouble simulator) {
+    public Actor_Sensor_am(String modelName, DEVSSimulator.TimeDouble simulator) {
         super(modelName, simulator);
     }
 }

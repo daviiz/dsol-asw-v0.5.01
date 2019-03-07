@@ -1,8 +1,8 @@
 package combatSysModel.DEM.coupledModel;
 
 import combatSysModel.DEM.CoupledModelBase;
-import combatSysModel.DEM.atomicModel.Maneuver_Actor;
-import combatSysModel.DEM.atomicModel.Maneuver_Updater;
+import combatSysModel.DEM.atomicModel.Actor_Maneuver_am;
+import combatSysModel.DEM.atomicModel.Updater_Maneuver_am;
 import combatSysModel.portType.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.InputPort;
@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public class Maneuver extends CoupledModelBase {
+public class Maneuver_cm extends CoupledModelBase {
 
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.scen_info> in_scen_info;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.engage_result> in_engage_result;
@@ -23,19 +23,19 @@ public class Maneuver extends CoupledModelBase {
     public OutputPort<Double, Double, SimTimeDouble, move_finished> out_move_finished;
     public OutputPort<Double, Double, SimTimeDouble, fuel_exhausted> out_fuel_exhausted;
 
-    private Maneuver_Actor actor;
-    private Maneuver_Updater updater;
+    private Actor_Maneuver_am actor;
+    private Updater_Maneuver_am updater;
 
 
-    public Maneuver(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
+    public Maneuver_cm(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
         super(modelName, simulator);
     }
 
-    public Maneuver(String modelName) {
+    public Maneuver_cm(String modelName) {
         super(modelName);
     }
 
-    public Maneuver(String modelName, CoupledModel.TimeDouble parentModel) {
+    public Maneuver_cm(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
@@ -60,8 +60,8 @@ public class Maneuver extends CoupledModelBase {
 
     @Override
     protected void couplingComponent() {
-        actor = new Maneuver_Actor("Actor",this);
-        updater = new Maneuver_Updater("Updater",this);
+        actor = new Actor_Maneuver_am("Actor",this);
+        updater = new Updater_Maneuver_am("Updater",this);
         /**
          * EIC
          */

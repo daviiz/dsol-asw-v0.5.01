@@ -2,7 +2,11 @@ package combatSysModel.DEM;
 
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
-
+/**
+ *模型开发：命名规范：
+ * 原子模型：按照模型耦合层次由内而外命名，如：Actor_Controller_Platform_am
+ * 耦合模型：按照模型耦合层次由内而外命名，如：Controller_Platform_cm
+ */
 public abstract class CoupledModelBase extends CoupledModel.TimeDouble implements IDEVSModel{
 
     public CoupledModelBase(String modelName) { super(modelName); }

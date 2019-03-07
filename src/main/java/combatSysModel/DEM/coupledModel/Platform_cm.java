@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public class CM_Platform extends CoupledModelBase {
+public class Platform_cm extends CoupledModelBase {
 
     /**
      * X:
@@ -31,17 +31,17 @@ public class CM_Platform extends CoupledModelBase {
     /**
      * component models
      */
-    private Maneuver m;
-    private Sensor s;
-    private Controller_Platform c;
+    private Maneuver_cm m;
+    private Sensor_cm s;
+    private Controller_Platform_cm c;
 
-    public CM_Platform(String modelName) { super(modelName); }
+    public Platform_cm(String modelName) { super(modelName); }
 
-    public CM_Platform(String modelName, CoupledModel.TimeDouble parentModel) {
+    public Platform_cm(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
-    public CM_Platform(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
+    public Platform_cm(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
         super(modelName, simulator);
     }
 
@@ -69,9 +69,9 @@ public class CM_Platform extends CoupledModelBase {
         /**
          *  { Mi }
          */
-        m = new Maneuver("Maneuver", this);
-        s = new Sensor("Sensor", this);
-        c = new Controller_Platform("Controller", this);
+        m = new Maneuver_cm("Maneuver_cm", this);
+        s = new Sensor_cm("Sensor_cm", this);
+        c = new Controller_Platform_cm("Controller", this);
         /**
          * EIC
          */

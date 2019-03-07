@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Controller_Platform_Actor extends AtomicModelBase<OM_Platform_Controller> {
+public class Actor_Controller_Platform_am extends AtomicModelBase<OM_Platform_Controller> {
 
     public InputPort<Double, Double, SimTimeDouble, move_finished> in_move_finished;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.engage_result> in_engage_result;
@@ -82,11 +82,11 @@ public class Controller_Platform_Actor extends AtomicModelBase<OM_Platform_Contr
 
     }
 
-    public Controller_Platform_Actor(String modelName, CoupledModel.TimeDouble parentModel) {
+    public Actor_Controller_Platform_am(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
-    public Controller_Platform_Actor(String modelName, DEVSSimulator.TimeDouble simulator) {
+    public Actor_Controller_Platform_am(String modelName, DEVSSimulator.TimeDouble simulator) {
         super(modelName, simulator);
     }
 

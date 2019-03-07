@@ -1,8 +1,8 @@
 package combatSysModel.DEM.atomicModel;
 
 import combatSysModel.DEM.AtomicModelBase;
-import combatSysModel.OM.OM_Weapon_Controller;
-import combatSysModel.portType.scen_info;
+import combatSysModel.OM.OM_Platform_Controller;
+import combatSysModel.portType.env_info;
 import combatSysModel.portType.target_info;
 import combatSysModel.portType.threat_info;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
@@ -12,23 +12,23 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Controller_Weapon_Updater extends AtomicModelBase<OM_Weapon_Controller> {
+public class Updater_Controller_Platform_am extends AtomicModelBase<OM_Platform_Controller> {
 
     public InputPort<Double,Double, SimTimeDouble, threat_info> in_threat_info;
-    public InputPort<Double,Double, SimTimeDouble, scen_info> in_scen_info;
+    public InputPort<Double,Double, SimTimeDouble, env_info> in_env_info;
 
     public OutputPort<Double,Double,SimTimeDouble, target_info> out_target_info;
 
     private Phase WAIT,IDENTIFICATION;
 
     private threat_info threat_info;
-    private scen_info scen_info;
+    private env_info env_info;
     private target_info t;
 
     @Override
     protected void constructPort() {
         in_threat_info = new InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.threat_info>(this);
-        in_scen_info = new InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.scen_info>(this);
+        in_env_info = new InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.env_info>(this);
         out_target_info = new OutputPort<Double, Double, SimTimeDouble, target_info>(this);
     }
 
@@ -44,22 +44,22 @@ public class Controller_Weapon_Updater extends AtomicModelBase<OM_Weapon_Control
     @Override
     protected void constructModelData() {
         threat_info = new threat_info();
-        scen_info = new scen_info();
+        env_info = new env_info();
     }
 
     @Override
     protected void deltaExternalFunc(Object value) {
         if (this.phase.getName().equals("WAIT")) {
-            if (this.activePort == in_scen_info) {
+            if (this.activePort == in_env_info) {
                 threat_info = (threat_info) value;
             } else if (this.activePort == in_threat_info) {
-                scen_info = (scen_info)value;
+                env_info = (env_info)value;
                 this.phase = IDENTIFICATION;
             }
         }
         else if (this.phase.getName().equals("IDENTIFICATION")) {
             if (this.activePort == in_threat_info) {
-                scen_info = (scen_info)value;
+                env_info = (env_info)value;
             }
         }
     }
@@ -71,7 +71,7 @@ public class Controller_Weapon_Updater extends AtomicModelBase<OM_Weapon_Control
             return;
         }
         if(this.phase.getName().equals("IDENTIFICATION")){
-            t = this.om.identification(threat_info,null);
+            t = this.om.identification(threat_info,env_info);
             return;
         }
     }
@@ -83,11 +83,11 @@ public class Controller_Weapon_Updater extends AtomicModelBase<OM_Weapon_Control
         }
     }
 
-    public Controller_Weapon_Updater(String modelName, CoupledModel.TimeDouble parentModel) {
+    public Updater_Controller_Platform_am(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
-    public Controller_Weapon_Updater(String modelName, DEVSSimulator.TimeDouble simulator) {
+    public Updater_Controller_Platform_am(String modelName, DEVSSimulator.TimeDouble simulator) {
         super(modelName, simulator);
     }
 }

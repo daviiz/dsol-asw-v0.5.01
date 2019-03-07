@@ -1,13 +1,15 @@
 package combatSysModel.DEM.coupledModel;
 
 import combatSysModel.DEM.CoupledModelBase;
+import combatSysModel.DEM.atomicModel.Actor_Controller_Weapon_am;
+import combatSysModel.DEM.atomicModel.Updater_Controller_Weapon_am;
 import combatSysModel.portType.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.InputPort;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public class Controller_Weapon extends CoupledModelBase {
+public class Controller_Weapon_cm extends CoupledModelBase {
 
     public InputPort<Double, Double, SimTimeDouble, engage_result> in_engage_result;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.scen_info> in_scen_info;
@@ -17,15 +19,18 @@ public class Controller_Weapon extends CoupledModelBase {
 
     public OutputPort<Double, Double, SimTimeDouble, combatSysModel.portType.move_cmd> out_move_cmd;
 
-    public Controller_Weapon(String modelName) {
+    private Actor_Controller_Weapon_am actor;
+    private Updater_Controller_Weapon_am updater;
+
+    public Controller_Weapon_cm(String modelName) {
         super(modelName);
     }
 
-    public Controller_Weapon(String modelName, TimeDouble parentModel) {
+    public Controller_Weapon_cm(String modelName, TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
-    public Controller_Weapon(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
+    public Controller_Weapon_cm(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
         super(modelName, simulator);
     }
 
@@ -47,6 +52,9 @@ public class Controller_Weapon extends CoupledModelBase {
 
     @Override
     protected void couplingComponent() {
+        actor = new Actor_Controller_Weapon_am("Actor",this);
+        updater = new Updater_Controller_Weapon_am("Updater",this);
+
 
     }
 }

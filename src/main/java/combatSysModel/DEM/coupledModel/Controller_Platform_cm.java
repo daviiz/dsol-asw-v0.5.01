@@ -1,8 +1,8 @@
 package combatSysModel.DEM.coupledModel;
 
 import combatSysModel.DEM.CoupledModelBase;
-import combatSysModel.DEM.atomicModel.Controller_Platform_Actor;
-import combatSysModel.DEM.atomicModel.Controller_Platform_Updater;
+import combatSysModel.DEM.atomicModel.Actor_Controller_Platform_am;
+import combatSysModel.DEM.atomicModel.Updater_Controller_Platform_am;
 import combatSysModel.portType.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.InputPort;
@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public class Controller_Platform extends CoupledModelBase {
+public class Controller_Platform_cm extends CoupledModelBase {
 
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.engage_result> in_engage_result;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.env_info> in_env_info;
@@ -23,18 +23,18 @@ public class Controller_Platform extends CoupledModelBase {
     public OutputPort<Double, Double, SimTimeDouble, combatSysModel.portType.move_cmd> out_move_cmd;
     public OutputPort<Double, Double, SimTimeDouble, combatSysModel.portType.wp_guidance> out_wp_guidance;
 
-    private Controller_Platform_Actor actor;
-    private Controller_Platform_Updater updater;
+    private Actor_Controller_Platform_am actor;
+    private Updater_Controller_Platform_am updater;
 
-    public Controller_Platform(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
+    public Controller_Platform_cm(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
         super(modelName, simulator);
     }
 
-    public Controller_Platform(String modelName) {
+    public Controller_Platform_cm(String modelName) {
         super(modelName);
     }
 
-    public Controller_Platform(String modelName, CoupledModel.TimeDouble parentModel) {
+    public Controller_Platform_cm(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
@@ -59,8 +59,8 @@ public class Controller_Platform extends CoupledModelBase {
 
     @Override
     protected void couplingComponent() {
-        actor = new Controller_Platform_Actor("Actor",this);
-        updater = new Controller_Platform_Updater("Updater",this);
+        actor = new Actor_Controller_Platform_am("Actor",this);
+        updater = new Updater_Controller_Platform_am("Updater",this);
         /**
          * EIC
          */

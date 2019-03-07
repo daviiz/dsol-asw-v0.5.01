@@ -1,8 +1,8 @@
 package combatSysModel.DEM.coupledModel;
 
 import combatSysModel.DEM.CoupledModelBase;
-import combatSysModel.DEM.atomicModel.Sensor_Actor;
-import combatSysModel.DEM.atomicModel.Sensor_Updater;
+import combatSysModel.DEM.atomicModel.Actor_Sensor_am;
+import combatSysModel.DEM.atomicModel.Updater_Sensor_am;
 import combatSysModel.portType.engage_result;
 import combatSysModel.portType.fuel_exhausted;
 import combatSysModel.portType.threat_info;
@@ -12,7 +12,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-class Sensor extends CoupledModelBase {
+class Sensor_cm extends CoupledModelBase {
 
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.scen_info> in_scen_info;
     public InputPort<Double, Double, SimTimeDouble, engage_result> in_engage_result;
@@ -22,18 +22,18 @@ class Sensor extends CoupledModelBase {
 
     public OutputPort<Double, Double, SimTimeDouble, threat_info> out_threat_info;
 
-    private Sensor_Actor actor;
-    private Sensor_Updater updater;
+    private Actor_Sensor_am actor;
+    private Updater_Sensor_am updater;
 
-    public Sensor(String modelName) {
+    public Sensor_cm(String modelName) {
         super(modelName);
     }
 
-    public Sensor(String modelName, CoupledModel.TimeDouble parentModel) {
+    public Sensor_cm(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
-    public Sensor(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
+    public Sensor_cm(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
         super(modelName, simulator);
     }
 
@@ -55,8 +55,8 @@ class Sensor extends CoupledModelBase {
 
     @Override
     protected void couplingComponent() {
-        updater = new Sensor_Updater("Updater",this);
-        actor = new Sensor_Actor("Actor",this);
+        updater = new Updater_Sensor_am("Updater",this);
+        actor = new Actor_Sensor_am("Actor",this);
 
         /**
          * EIC

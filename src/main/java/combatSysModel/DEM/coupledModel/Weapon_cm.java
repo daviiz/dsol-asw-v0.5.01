@@ -9,7 +9,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
-public class CM_Weapon extends CoupledModelBase {
+public class Weapon_cm extends CoupledModelBase {
 
     /**
      * X:
@@ -29,19 +29,19 @@ public class CM_Weapon extends CoupledModelBase {
     /**
      * component models
      */
-    private Maneuver m;
-    private Sensor s;
-    private Controller_Weapon c;
+    private Maneuver_cm m;
+    private Sensor_cm s;
+    private Controller_Weapon_cm c;
 
-    public CM_Weapon(String modelName) {
+    public Weapon_cm(String modelName) {
         super(modelName);
     }
 
-    public CM_Weapon(String modelName, TimeDouble parentModel) {
+    public Weapon_cm(String modelName, TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
-    public CM_Weapon(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
+    public Weapon_cm(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
         super(modelName, simulator);
     }
 
@@ -68,9 +68,9 @@ public class CM_Weapon extends CoupledModelBase {
         /**
          *  { Mi }
          */
-        m = new Maneuver("Maneuver", this);
-        s = new Sensor("Sensor", this);
-        c = new Controller_Weapon("Controller", this);
+        m = new Maneuver_cm("Maneuver_cm", this);
+        s = new Sensor_cm("Sensor_cm", this);
+        c = new Controller_Weapon_cm("Controller", this);
 
         /**
          * EIC

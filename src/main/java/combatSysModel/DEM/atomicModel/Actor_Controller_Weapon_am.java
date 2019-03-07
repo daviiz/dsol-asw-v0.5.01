@@ -1,12 +1,11 @@
 package combatSysModel.DEM.atomicModel;
 
 import combatSysModel.DEM.AtomicModelBase;
-import combatSysModel.OM.OM_Environment;
+import combatSysModel.OM.OM_Weapon_Controller;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Environment extends AtomicModelBase<OM_Environment>{
-
+public class Actor_Controller_Weapon_am extends AtomicModelBase<OM_Weapon_Controller> {
     @Override
     protected void constructPort() {
 
@@ -37,11 +36,13 @@ public class Environment extends AtomicModelBase<OM_Environment>{
 
     }
 
-    public Environment(String modelName, CoupledModel.TimeDouble parentModel) {
+    public Actor_Controller_Weapon_am(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
-    public Environment(String modelName, DEVSSimulator.TimeDouble simulator) {
+    public Actor_Controller_Weapon_am(String modelName, DEVSSimulator.TimeDouble simulator) {
         super(modelName, simulator);
     }
+
+
 }

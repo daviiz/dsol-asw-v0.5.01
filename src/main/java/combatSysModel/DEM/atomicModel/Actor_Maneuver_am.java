@@ -9,7 +9,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Maneuver_Actor extends AtomicModelBase<OM_Maneuver> {
+public class Actor_Maneuver_am extends AtomicModelBase<OM_Maneuver> {
     public InputPort<Double, Double, SimTimeDouble, engage_result> in_engage_result;
     public InputPort<Double, Double, SimTimeDouble, scen_info> in_scen_info;
     public InputPort<Double, Double, SimTimeDouble, env_info> in_env_info;
@@ -57,11 +57,11 @@ public class Maneuver_Actor extends AtomicModelBase<OM_Maneuver> {
 
     }
 
-    public Maneuver_Actor(String modelName, CoupledModel.TimeDouble parentModel) {
+    public Actor_Maneuver_am(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
     }
 
-    public Maneuver_Actor(String modelName, DEVSSimulator.TimeDouble simulator) {
+    public Actor_Maneuver_am(String modelName, DEVSSimulator.TimeDouble simulator) {
         super(modelName, simulator);
     }
 }
