@@ -55,6 +55,27 @@ public class Controller_Weapon_cm extends CoupledModelBase {
         actor = new Actor_Controller_Weapon_am("Actor",this);
         updater = new Updater_Controller_Weapon_am("Updater",this);
 
+        /**
+         * EIC
+         */
+        this.addExternalInputCoupling(this.in_move_finished,actor.in_move_finished);
+        this.addExternalInputCoupling(this.in_engage_result,actor.in_engage_result);
+        this.addExternalInputCoupling(this.in_scen_info,actor.in_scen_info);
+        this.addExternalInputCoupling(this.in_scen_info,updater.in_scen_info);
+        this.addExternalInputCoupling(this.in_threat_info,updater.in_threat_info);
+        this.addExternalInputCoupling(this.in_wp_guidance,actor.in_wp_guidance);
+
+
+        /**
+         * IC
+         */
+        this.addInternalCoupling(updater.out_target_info,actor.in_target_info);
+
+
+        /**
+         * EOC
+         */
+        this.addExternalOutputCoupling(actor.out_move_cmd,this.out_move_cmd);
 
     }
 }
