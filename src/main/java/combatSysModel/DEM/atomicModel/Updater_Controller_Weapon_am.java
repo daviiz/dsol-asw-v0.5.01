@@ -68,7 +68,7 @@ public class Updater_Controller_Weapon_am extends AtomicModelBase<Weapon_Control
 
     @Override
     protected void lambdaFunc() {
-        if(this.phase.getName().equals("IDENTIFICATION")){
+        if(this.om.getTarget_info().status && this.phase.getName().equals("IDENTIFICATION")){
             out_target_info.send(this.om.getTarget_info());
             this.phase = WAIT;
         }

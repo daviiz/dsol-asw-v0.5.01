@@ -6,6 +6,7 @@ import combatSysModel.portType.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.InputPort;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
+import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
@@ -20,6 +21,7 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
     public OutputPort<Double, Double, SimTimeDouble, fuel_exhausted> out_fuel_exhausted;
 
 
+    private Phase IDLE,MOVE,FUEL;
     @Override
     protected void constructPort() {
         in_engage_result = new InputPort<Double, Double, SimTimeDouble, engage_result>(this);
@@ -34,21 +36,86 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
 
     @Override
     protected void constructPhase() {
-
+        IDLE = new Phase("IDLE");   IDLE.setLifeTime(Double.POSITIVE_INFINITY);
+        MOVE = new Phase("MOVE");   MOVE.setLifeTime(10.0);
+        FUEL = new Phase("FUEL");   FUEL.setLifeTime(0.0);
+        this.phase = IDLE;
     }
 
     @Override
     protected void deltaExternalFunc(Object value) {
+        if(this.phase.getName().equals(IDLE.getName())){
+            if(this.activePort == in_scen_info){
+                this.om.setScen_info((scen_info) value);
+                return;
+            }
+            if(this.activePort == in_cmd_info){
+                this.om.setCmd_info((cmd_info) value);
+                this.phase = MOVE;
+                return;
+            }
 
+            return;
+        }
+        if(this.phase.getName().equals(MOVE.getName())){
+            if(this.activePort == in_engage_result){
+                this.om.setEngage_result((engage_result) value);
+                this.phase = IDLE;
+                return;
+            }
+            if(this.activePort == in_env_info){
+                this.om.setScen_info((scen_info) value);
+                return;
+            }
+            if(this.activePort == in_cmd_info){
+                this.om.setCmd_info((cmd_info) value);
+                return;
+            }
+            return;
+        }
     }
 
     @Override
     protected void deltaInternalFunc() {
-
+        if(this.phase.getName().equals(MOVE.getName())){
+            this.om.cmd_Check();
+            if(!this.om.isCmdCheckResult()){
+                this.om.motion_Equation();
+            }
+            return;
+        }
+        if(this.phase.getName().equals(FUEL.getName())){
+            this.om.fuel_Check();
+            return;
+        }
     }
 
     @Override
     protected void lambdaFunc() {
+        if(this.phase.getName().equals(MOVE.getName())){
+           if(this.om.getMove_finished().status && this.om.isCmdCheckResult()){
+                this.out_move_finished.send(this.om.getMove_finished());
+                this.phase = IDLE;
+                return;
+           }
+            if(this.om.getMove_result().status && !this.om.isCmdCheckResult()){
+                this.out_move_result.send(this.om.getMove_result());
+                this.phase = FUEL;
+                return;
+            }
+            return;
+        }
+        if(this.phase.getName().equals(FUEL.getName())){
+            if(this.om.getFuel_exhausted().status && this.om.isFuelCheckResult()){
+                this.out_fuel_exhausted.send(this.om.getFuel_exhausted());
+                this.phase = IDLE;
+                return;
+            }
+            if(!this.om.isFuelCheckResult()){
+                this.phase = MOVE;
+                return;
+            }
+        }
 
     }
 
