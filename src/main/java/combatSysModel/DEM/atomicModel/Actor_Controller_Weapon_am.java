@@ -35,7 +35,7 @@ public class Actor_Controller_Weapon_am extends AtomicModelBase<Weapon_Controlle
         out_move_cmd = new OutputPort<Double, Double, SimTimeDouble, move_cmd>(this);
     }
 
-    private Phase IDLE,SEARCH,APPCH_WAIT,APPROACH,CTRL_WAIT,CTRL,END;
+    private Phase IDLE,SEARCH,APPCH_WAIT,APPROACH,END;
 
     @Override
     protected void constructPhase() {
@@ -43,8 +43,7 @@ public class Actor_Controller_Weapon_am extends AtomicModelBase<Weapon_Controlle
         SEARCH = new Phase("SEARCH");   SEARCH.setLifeTime(0.0);
         APPCH_WAIT = new Phase("APPCH_WAIT");   APPCH_WAIT.setLifeTime(10.0);
         APPROACH = new Phase("APPROACH");   APPROACH.setLifeTime(0.0);
-        CTRL_WAIT = new Phase("CTRL_WAIT");   CTRL_WAIT.setLifeTime(10.0);
-        CTRL = new Phase("CTRL");   CTRL.setLifeTime(0.0);
+
         END = new Phase("END");   END.setLifeTime(Double.POSITIVE_INFINITY);
         this.phase = IDLE;
     }
@@ -52,13 +51,53 @@ public class Actor_Controller_Weapon_am extends AtomicModelBase<Weapon_Controlle
 
     @Override
     protected void deltaExternalFunc(Object value) {
+        if (this.phase.getName().equals(IDLE.getName())) {
+            if (this.activePort == in_scen_info) {
+                this.om.setScen_info((scen_info) value);
+                this.phase = SEARCH;
+                return;
+            }
+            if (this.activePort == in_move_finished) {
+                this.om.setMove_finished((move_finished) value);
+                this.phase = SEARCH;
+                return;
+            }
+            if(this.activePort == in_target_info) {
+                this.om.setTarget_info((target_info)value);
+                this.phase = APPROACH;
+                return;
+            }
+            if(this.activePort == in_engage_result) {
+                this.om.setEngage_result((engage_result)value);
+                this.phase = END;
+                return;
+            }
+            return;
+        }
+        if(this.phase.getName().equals(APPCH_WAIT.getName())){
+            if(this.activePort == in_target_info){
+                this.om.setTarget_info((target_info)value);
+                this.phase = APPROACH;
+                return;
+            }
+            if(this.activePort == in_engage_result) {
+                this.om.setEngage_result((engage_result)value);
+                this.phase = END;
+                return;
+            }
+            return;
+        }
 
     }
 
     @Override
     protected void deltaInternalFunc() {
         if(this.phase.getName().equals(SEARCH.getName())){
-            this.om.tactical_move();
+            this.om.tactical_search();
+            return;
+        }
+        if(this.phase.getName().equals(APPROACH.getName())){
+            this.om.apprch();
             return;
         }
     }
@@ -66,7 +105,15 @@ public class Actor_Controller_Weapon_am extends AtomicModelBase<Weapon_Controlle
     @Override
     protected void lambdaFunc() {
         if(this.phase.getName().equals(SEARCH.getName())){
+            out_move_cmd.send(this.om.getMove_cmd());
+            this.phase = IDLE;
+            return;
+        }
 
+        if(this.phase.getName().equals(APPROACH.getName())){
+            out_move_cmd.send(this.om.getMove_cmd());
+            this.phase = APPCH_WAIT;
+            return;
         }
 
     }

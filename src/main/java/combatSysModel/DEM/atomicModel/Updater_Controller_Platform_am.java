@@ -42,16 +42,21 @@ public class Updater_Controller_Platform_am extends AtomicModelBase<Platform_Con
         if (this.phase.getName().equals("WAIT")) {
             if (this.activePort == in_env_info) {
                 this.om.setEnv_info((env_info)value);
+                return;
             }
-            else if (this.activePort == in_threat_info) {
-                this.om.setThreat_info((threat_info)value);
-                this.phase = IDENTIFICATION;
-            }
-        }
-        else if (this.phase.getName().equals("IDENTIFICATION")) {
             if (this.activePort == in_threat_info) {
                 this.om.setThreat_info((threat_info)value);
+                this.phase = IDENTIFICATION;
+                return;
             }
+            return;
+        }
+        if (this.phase.getName().equals("IDENTIFICATION")) {
+            if (this.activePort == in_threat_info) {
+                this.om.setThreat_info((threat_info)value);
+                return;
+            }
+            return;
         }
     }
 

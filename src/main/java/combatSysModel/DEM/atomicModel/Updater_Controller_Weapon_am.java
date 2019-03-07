@@ -43,14 +43,18 @@ public class Updater_Controller_Weapon_am extends AtomicModelBase<Weapon_Control
         if (this.phase.getName().equals("WAIT")) {
             if (this.activePort == in_scen_info) {
                 this.om.setScen_info((scen_info) value);
+                return;
             } else if (this.activePort == in_threat_info) {
                 this.om.setThreat_info((threat_info)value);
                 this.phase = IDENTIFICATION;
+                return;
             }
+            return;
         }
-        else if (this.phase.getName().equals("IDENTIFICATION")) {
+        if (this.phase.getName().equals("IDENTIFICATION")) {
             if (this.activePort == in_threat_info) {
                 this.om.setThreat_info((threat_info)value);
+                return;
             }
         }
     }
