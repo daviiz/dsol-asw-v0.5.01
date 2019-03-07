@@ -1,7 +1,7 @@
 package combatSysModel.DEM.atomicModel;
 
 import combatSysModel.DEM.AtomicModelBase;
-import combatSysModel.OM.OM_Weapon_Controller;
+import combatSysModel.OM.Weapon_Controller_actor_om;
 import combatSysModel.portType.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.InputPort;
@@ -13,7 +13,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 /**
  *
  */
-public class Actor_Controller_Weapon_am extends AtomicModelBase<OM_Weapon_Controller> {
+public class Actor_Controller_Weapon_am extends AtomicModelBase<Weapon_Controller_actor_om> {
 
     public InputPort<Double,Double, SimTimeDouble, move_finished> in_move_finished;
     public InputPort<Double,Double, SimTimeDouble, engage_result> in_engage_result;
@@ -46,6 +46,7 @@ public class Actor_Controller_Weapon_am extends AtomicModelBase<OM_Weapon_Contro
         CTRL_WAIT = new Phase("CTRL_WAIT");   CTRL_WAIT.setLifeTime(10.0);
         CTRL = new Phase("CTRL");   CTRL.setLifeTime(0.0);
         END = new Phase("END");   END.setLifeTime(Double.POSITIVE_INFINITY);
+        this.phase = IDLE;
     }
 
 
@@ -56,11 +57,17 @@ public class Actor_Controller_Weapon_am extends AtomicModelBase<OM_Weapon_Contro
 
     @Override
     protected void deltaInternalFunc() {
-
+        if(this.phase.getName().equals(SEARCH.getName())){
+            this.om.tactical_move();
+            return;
+        }
     }
 
     @Override
     protected void lambdaFunc() {
+        if(this.phase.getName().equals(SEARCH.getName())){
+
+        }
 
     }
 

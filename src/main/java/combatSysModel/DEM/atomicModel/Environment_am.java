@@ -1,11 +1,11 @@
 package combatSysModel.DEM.atomicModel;
 
 import combatSysModel.DEM.AtomicModelBase;
-import combatSysModel.OM.OM_Environment;
+import combatSysModel.OM.Environment_om;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Environment_am extends AtomicModelBase<OM_Environment>{
+public class Environment_am extends AtomicModelBase<Environment_om>{
 
     @Override
     protected void constructPort() {

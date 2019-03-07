@@ -1,7 +1,7 @@
 package combatSysModel.DEM.atomicModel;
 
 import combatSysModel.DEM.AtomicModelBase;
-import combatSysModel.OM.OM_Platform_Controller;
+import combatSysModel.OM.Platform_Controller_updater_om;
 import combatSysModel.portType.env_info;
 import combatSysModel.portType.target_info;
 import combatSysModel.portType.threat_info;
@@ -12,7 +12,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Updater_Controller_Platform_am extends AtomicModelBase<OM_Platform_Controller> {
+public class Updater_Controller_Platform_am extends AtomicModelBase<Platform_Controller_updater_om> {
 
     public InputPort<Double,Double, SimTimeDouble, threat_info> in_threat_info;
     public InputPort<Double,Double, SimTimeDouble, env_info> in_env_info;
@@ -41,16 +41,16 @@ public class Updater_Controller_Platform_am extends AtomicModelBase<OM_Platform_
     protected void deltaExternalFunc(Object value) {
         if (this.phase.getName().equals("WAIT")) {
             if (this.activePort == in_env_info) {
-                this.om.env_info = (env_info) value;
+                this.om.setEnv_info((env_info)value);
             }
             else if (this.activePort == in_threat_info) {
-                this.om.threat_info = (threat_info)value;
+                this.om.setThreat_info((threat_info)value);
                 this.phase = IDENTIFICATION;
             }
         }
         else if (this.phase.getName().equals("IDENTIFICATION")) {
             if (this.activePort == in_threat_info) {
-                this.om.threat_info = (threat_info)value;
+                this.om.setThreat_info((threat_info)value);
             }
         }
     }
@@ -58,7 +58,7 @@ public class Updater_Controller_Platform_am extends AtomicModelBase<OM_Platform_
     @Override
     protected void deltaInternalFunc() {
         if(this.phase.getName().equals("IDENTIFICATION")){
-            this.om.target_info = this.om.identification();
+            this.om.identification();
             return;
         }
     }
@@ -66,7 +66,7 @@ public class Updater_Controller_Platform_am extends AtomicModelBase<OM_Platform_
     @Override
     protected void lambdaFunc() {
         if(this.phase.getName().equals("IDENTIFICATION")){
-            out_target_info.send(this.om.target_info );
+            out_target_info.send(this.om.getTarget_info());
             this.phase = WAIT;
         }
     }

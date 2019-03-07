@@ -1,7 +1,7 @@
 package combatSysModel.DEM.atomicModel;
 
 import combatSysModel.DEM.AtomicModelBase;
-import combatSysModel.OM.OM_Sensor;
+import combatSysModel.OM.Sensor_updater_om;
 import combatSysModel.portType.move_result;
 import combatSysModel.portType.request;
 import combatSysModel.portType.response;
@@ -11,7 +11,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Updater_Sensor_am extends AtomicModelBase<OM_Sensor> {
+public class Updater_Sensor_am extends AtomicModelBase<Sensor_updater_om> {
 
     public InputPort<Double, Double, SimTimeDouble, move_result> in_move_result;
     public InputPort<Double, Double, SimTimeDouble, request> in_request;

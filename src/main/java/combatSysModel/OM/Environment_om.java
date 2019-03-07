@@ -1,4 +1,4 @@
 package combatSysModel.OM;
 
-public class OM_Maneuver{
+public class Environment_om {
 }
