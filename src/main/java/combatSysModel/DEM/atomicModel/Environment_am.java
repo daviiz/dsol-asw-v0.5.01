@@ -18,11 +18,6 @@ public class Environment_am extends AtomicModelBase<OM_Environment>{
     }
 
     @Override
-    protected void constructModelData() {
-
-    }
-
-    @Override
     protected void deltaExternalFunc(Object value) {
 
     }

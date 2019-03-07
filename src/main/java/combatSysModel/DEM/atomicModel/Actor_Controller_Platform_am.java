@@ -63,11 +63,6 @@ public class Actor_Controller_Platform_am extends AtomicModelBase<OM_Platform_Co
     }
 
     @Override
-    protected void constructModelData() {
-
-    }
-
-    @Override
     protected void deltaExternalFunc(Object value) {
 
     }

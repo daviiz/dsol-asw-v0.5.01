@@ -27,10 +27,6 @@ public class Updater_Maneuver_am extends AtomicModelBase<OM_Maneuver> {
 
     }
 
-    @Override
-    protected void constructModelData() {
-
-    }
 
     @Override
     protected void deltaExternalFunc(Object value) {

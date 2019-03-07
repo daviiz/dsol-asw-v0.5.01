@@ -31,11 +31,6 @@ public class Actor_Sensor_am extends AtomicModelBase<OM_Sensor> {
     }
 
     @Override
-    protected void constructModelData() {
-
-    }
-
-    @Override
     protected void deltaExternalFunc(Object value) {
 
     }

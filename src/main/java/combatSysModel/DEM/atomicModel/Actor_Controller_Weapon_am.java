@@ -6,6 +6,7 @@ import combatSysModel.portType.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.InputPort;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
+import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
@@ -34,15 +35,19 @@ public class Actor_Controller_Weapon_am extends AtomicModelBase<OM_Weapon_Contro
         out_move_cmd = new OutputPort<Double, Double, SimTimeDouble, move_cmd>(this);
     }
 
+    private Phase IDLE,SEARCH,APPCH_WAIT,APPROACH,CTRL_WAIT,CTRL,END;
+
     @Override
     protected void constructPhase() {
-
+        IDLE = new Phase("IDLE");   IDLE.setLifeTime(Double.POSITIVE_INFINITY);
+        SEARCH = new Phase("SEARCH");   SEARCH.setLifeTime(0.0);
+        APPCH_WAIT = new Phase("APPCH_WAIT");   APPCH_WAIT.setLifeTime(10.0);
+        APPROACH = new Phase("APPROACH");   APPROACH.setLifeTime(0.0);
+        CTRL_WAIT = new Phase("CTRL_WAIT");   CTRL_WAIT.setLifeTime(10.0);
+        CTRL = new Phase("CTRL");   CTRL.setLifeTime(0.0);
+        END = new Phase("END");   END.setLifeTime(Double.POSITIVE_INFINITY);
     }
 
-    @Override
-    protected void constructModelData() {
-
-    }
 
     @Override
     protected void deltaExternalFunc(Object value) {

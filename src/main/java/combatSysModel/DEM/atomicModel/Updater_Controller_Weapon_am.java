@@ -21,9 +21,6 @@ public class Updater_Controller_Weapon_am extends AtomicModelBase<OM_Weapon_Cont
 
     private Phase WAIT,IDENTIFICATION;
 
-    private threat_info threat_info;
-    private scen_info scen_info;
-    private target_info t;
 
     @Override
     protected void constructPort() {
@@ -42,44 +39,34 @@ public class Updater_Controller_Weapon_am extends AtomicModelBase<OM_Weapon_Cont
     }
 
     @Override
-    protected void constructModelData() {
-        threat_info = new threat_info();
-        scen_info = new scen_info();
-    }
-
-    @Override
     protected void deltaExternalFunc(Object value) {
         if (this.phase.getName().equals("WAIT")) {
             if (this.activePort == in_scen_info) {
-                threat_info = (threat_info) value;
+                this.om.scen_info = (scen_info) value;
             } else if (this.activePort == in_threat_info) {
-                scen_info = (scen_info)value;
+                this.om.threat_info = (threat_info)value;
                 this.phase = IDENTIFICATION;
             }
         }
         else if (this.phase.getName().equals("IDENTIFICATION")) {
             if (this.activePort == in_threat_info) {
-                scen_info = (scen_info)value;
+                this.om.threat_info = (threat_info)value;
             }
         }
     }
 
     @Override
     protected void deltaInternalFunc() {
-        if(this.phase.getName().equals("WAIT")){
-            this.phase = IDENTIFICATION;
-            return;
-        }
         if(this.phase.getName().equals("IDENTIFICATION")){
-            t = this.om.identification(threat_info,null);
-            return;
+            this.om.target_info = this.om.identification();
         }
     }
 
     @Override
     protected void lambdaFunc() {
         if(this.phase.getName().equals("IDENTIFICATION")){
-            out_target_info.send(t);
+            out_target_info.send(this.om.target_info);
+            this.phase = WAIT;
         }
     }
 

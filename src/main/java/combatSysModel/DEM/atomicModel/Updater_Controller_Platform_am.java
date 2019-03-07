@@ -21,10 +21,6 @@ public class Updater_Controller_Platform_am extends AtomicModelBase<OM_Platform_
 
     private Phase WAIT,IDENTIFICATION;
 
-    private threat_info threat_info;
-    private env_info env_info;
-    private target_info t;
-
     @Override
     protected void constructPort() {
         in_threat_info = new InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.threat_info>(this);
@@ -42,36 +38,27 @@ public class Updater_Controller_Platform_am extends AtomicModelBase<OM_Platform_
     }
 
     @Override
-    protected void constructModelData() {
-        threat_info = new threat_info();
-        env_info = new env_info();
-    }
-
-    @Override
     protected void deltaExternalFunc(Object value) {
         if (this.phase.getName().equals("WAIT")) {
             if (this.activePort == in_env_info) {
-                threat_info = (threat_info) value;
-            } else if (this.activePort == in_threat_info) {
-                env_info = (env_info)value;
+                this.om.env_info = (env_info) value;
+            }
+            else if (this.activePort == in_threat_info) {
+                this.om.threat_info = (threat_info)value;
                 this.phase = IDENTIFICATION;
             }
         }
         else if (this.phase.getName().equals("IDENTIFICATION")) {
             if (this.activePort == in_threat_info) {
-                env_info = (env_info)value;
+                this.om.threat_info = (threat_info)value;
             }
         }
     }
 
     @Override
     protected void deltaInternalFunc() {
-        if(this.phase.getName().equals("WAIT")){
-            this.phase = IDENTIFICATION;
-            return;
-        }
         if(this.phase.getName().equals("IDENTIFICATION")){
-            t = this.om.identification(threat_info,env_info);
+            this.om.target_info = this.om.identification();
             return;
         }
     }
@@ -79,7 +66,8 @@ public class Updater_Controller_Platform_am extends AtomicModelBase<OM_Platform_
     @Override
     protected void lambdaFunc() {
         if(this.phase.getName().equals("IDENTIFICATION")){
-            out_target_info.send(t);
+            out_target_info.send(this.om.target_info );
+            this.phase = WAIT;
         }
     }
 
