@@ -69,8 +69,8 @@ public class Platform_cm extends CoupledModelBase {
         /**
          *  { Mi }
          */
-        m = new Maneuver_cm("Maneuver_cm", this);
-        s = new Sensor_cm("Sensor_cm", this);
+        m = new Maneuver_cm("Maneuver", this);
+        s = new Sensor_cm("Sensor", this);
         c = new Controller_Platform_cm("Controller", this);
         /**
          * EIC
