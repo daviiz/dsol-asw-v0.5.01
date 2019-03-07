@@ -1,7 +1,7 @@
 package combatSysModel.DEM.atomicModel;
 
 import combatSysModel.DEM.AtomicModelBase;
-import combatSysModel.OM.OM_Controller;
+import combatSysModel.OM.OM_Platform_Controller;
 import combatSysModel.portType.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.InputPort;
@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Controller_Platform_Actor extends AtomicModelBase<OM_Controller> {
+public class Controller_Platform_Actor extends AtomicModelBase<OM_Platform_Controller> {
 
     public InputPort<Double, Double, SimTimeDouble, move_finished> in_move_finished;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.engage_result> in_engage_result;

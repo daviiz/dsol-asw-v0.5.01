@@ -1,11 +1,11 @@
 package combatSysModel.DEM.atomicModel;
 
 import combatSysModel.DEM.AtomicModelBase;
-import combatSysModel.OM.OM_Controller;
+import combatSysModel.OM.OM_Weapon_Controller;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-public class Controller_Weapon_Actor extends AtomicModelBase<OM_Controller> {
+public class Controller_Weapon_Actor extends AtomicModelBase<OM_Weapon_Controller> {
     @Override
     protected void constructPort() {
 
