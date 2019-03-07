@@ -60,6 +60,8 @@ public class Actor_Controller_Platform_am extends AtomicModelBase<Platform_Contr
         END = new Phase("END");
         END.setLifeTime(Double.POSITIVE_INFINITY);
 
+        this.phase = IDLE;
+
     }
 
     @Override
