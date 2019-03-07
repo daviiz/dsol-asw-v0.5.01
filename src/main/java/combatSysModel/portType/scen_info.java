@@ -1,4 +1,6 @@
 package combatSysModel.portType;
 
-public class scen_info {
+import combatSysModel.DEM.ObjectModelBase;
+
+public class scen_info extends ObjectModelBase {
 }

@@ -1,4 +1,6 @@
 package combatSysModel.portType;
 
-public class fuel_exhausted {
+import combatSysModel.DEM.ObjectModelBase;
+
+public class fuel_exhausted extends ObjectModelBase {
 }

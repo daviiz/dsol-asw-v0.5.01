@@ -1,4 +1,7 @@
 package combatSysModel.portType;
 
-public class cmd_info implements java.io.Serializable {
+import combatSysModel.DEM.ObjectModelBase;
+
+public class cmd_info extends ObjectModelBase {
+
 }

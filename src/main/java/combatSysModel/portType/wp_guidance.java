@@ -1,4 +1,6 @@
 package combatSysModel.portType;
 
-public class wp_guidance {
+import combatSysModel.DEM.ObjectModelBase;
+
+public class wp_guidance extends ObjectModelBase {
 }

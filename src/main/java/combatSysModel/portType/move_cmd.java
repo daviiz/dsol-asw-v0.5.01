@@ -1,4 +1,6 @@
 package combatSysModel.portType;
 
-public class move_cmd {
+import combatSysModel.DEM.ObjectModelBase;
+
+public class move_cmd extends ObjectModelBase {
 }

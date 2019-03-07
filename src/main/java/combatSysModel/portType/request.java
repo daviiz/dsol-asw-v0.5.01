@@ -1,4 +1,6 @@
 package combatSysModel.portType;
 
-public class request implements java.io.Serializable {
+import combatSysModel.DEM.ObjectModelBase;
+
+public class request  extends ObjectModelBase {
 }
