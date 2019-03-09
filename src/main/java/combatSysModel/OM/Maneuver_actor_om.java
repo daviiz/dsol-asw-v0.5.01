@@ -16,6 +16,10 @@ public class Maneuver_actor_om  extends ObjectModelBase {
     private boolean cmdCheckResult ;
     private boolean fuelCheckResult ;
 
+    public void motion_Equation(){
+
+    }
+
     public boolean cmd_Check(){
         return this.cmdCheckResult;
     }
@@ -23,11 +27,6 @@ public class Maneuver_actor_om  extends ObjectModelBase {
     public boolean fuel_Check(){
         return this.fuelCheckResult;
     }
-
-    public void motion_Equation(){
-
-    }
-
 
     public boolean isCmdCheckResult() {
         return cmdCheckResult;
