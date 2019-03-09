@@ -2,6 +2,7 @@ package combatSysModel.DEM;
 
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.AtomicModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
+import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
@@ -18,6 +19,9 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends AtomicModel<Double, Double, SimTimeDouble> implements IDEVSModel {
 
     protected OMType om;
+
+    /** the current phase (if applicable). */
+    protected Phase lastPhase = new Phase("");
 
     @Override
     protected void deltaInternal() {
