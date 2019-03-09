@@ -1,4 +1,6 @@
 package combatSysModel.portType;
 
-public class engage_result  {
+import combatSysModel.DEM.PortTypeBase;
+
+public class engage_result  extends PortTypeBase {
 }

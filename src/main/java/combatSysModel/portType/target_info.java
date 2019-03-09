@@ -1,4 +1,6 @@
 package combatSysModel.portType;
 
-public class target_info   {
+import combatSysModel.DEM.PortTypeBase;
+
+public class target_info   extends PortTypeBase {
 }

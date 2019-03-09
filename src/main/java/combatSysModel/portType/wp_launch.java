@@ -1,4 +1,6 @@
 package combatSysModel.portType;
 
-public class wp_launch   {
+import combatSysModel.DEM.PortTypeBase;
+
+public class wp_launch   extends PortTypeBase {
 }
