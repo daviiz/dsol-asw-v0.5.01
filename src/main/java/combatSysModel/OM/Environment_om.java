@@ -1,4 +1,6 @@
 package combatSysModel.OM;
 
-public class Environment_om {
+import combatSysModel.DEM.ObjectModelBase;
+
+public class Environment_om extends ObjectModelBase {
 }

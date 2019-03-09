@@ -1,8 +1,9 @@
 package combatSysModel.OM;
 
+import combatSysModel.DEM.ObjectModelBase;
 import combatSysModel.portType.move_cmd;
 
-public class Maneuver_updater_om {
+public class Maneuver_updater_om  extends ObjectModelBase {
 
     private move_cmd move_cmd;
     private combatSysModel.portType.cmd_info cmd_info;

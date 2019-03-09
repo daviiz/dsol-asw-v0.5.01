@@ -1,17 +1,18 @@
 package combatSysModel.OM;
 
+import combatSysModel.DEM.ObjectModelBase;
 import combatSysModel.portType.env_info;
 import combatSysModel.portType.target_info;
 import combatSysModel.portType.threat_info;
 
-public class Platform_Controller_updater_om {
+public class Platform_Controller_updater_om extends ObjectModelBase {
 
     private threat_info threat_info;
     private env_info env_info;
     private target_info target_info;
 
     public void identification(){
-
+        //...
     }
 
     public combatSysModel.portType.threat_info getThreat_info() {

@@ -1,8 +1,9 @@
 package combatSysModel.OM;
 
+import combatSysModel.DEM.ObjectModelBase;
 import combatSysModel.portType.*;
 
-public class Maneuver_actor_om {
+public class Maneuver_actor_om  extends ObjectModelBase {
     private engage_result engage_result;
     private scen_info scen_info;
     private env_info env_info;

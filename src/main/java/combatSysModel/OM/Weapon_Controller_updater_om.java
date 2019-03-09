@@ -1,10 +1,11 @@
 package combatSysModel.OM;
 
+import combatSysModel.DEM.ObjectModelBase;
 import combatSysModel.portType.scen_info;
 import combatSysModel.portType.target_info;
 import combatSysModel.portType.threat_info;
 
-public class Weapon_Controller_updater_om {
+public class Weapon_Controller_updater_om  extends ObjectModelBase {
 
     private threat_info threat_info;
     private scen_info scen_info;

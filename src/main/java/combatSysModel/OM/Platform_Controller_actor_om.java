@@ -1,6 +1,8 @@
 package combatSysModel.OM;
 
-public class Platform_Controller_actor_om {
+import combatSysModel.DEM.ObjectModelBase;
+
+public class Platform_Controller_actor_om  extends ObjectModelBase {
 
 
 }

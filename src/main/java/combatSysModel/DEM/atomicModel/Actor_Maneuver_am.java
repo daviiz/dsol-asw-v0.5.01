@@ -93,12 +93,12 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
     @Override
     protected void lambdaFunc() {
         if(this.phase.getName().equals(MOVE.getName())){
-           if(this.om.getMove_finished().status && this.om.isCmdCheckResult()){
+           if(this.om.isCmdCheckResult()){
                 this.out_move_finished.send(this.om.getMove_finished());
                 this.phase = IDLE;
                 return;
            }
-            if(this.om.getMove_result().status && !this.om.isCmdCheckResult()){
+            if(!this.om.isCmdCheckResult()){
                 this.out_move_result.send(this.om.getMove_result());
                 this.phase = FUEL;
                 return;
@@ -106,7 +106,7 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
             return;
         }
         if(this.phase.getName().equals(FUEL.getName())){
-            if(this.om.getFuel_exhausted().status && this.om.isFuelCheckResult()){
+            if(this.om.isFuelCheckResult()){
                 this.out_fuel_exhausted.send(this.om.getFuel_exhausted());
                 this.phase = IDLE;
                 return;

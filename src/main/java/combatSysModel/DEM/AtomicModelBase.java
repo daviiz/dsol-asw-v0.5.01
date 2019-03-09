@@ -15,7 +15,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
  *   这么做的目的是：实现单一职责原则，DEM只负责原子模型中业务流程的控制，不涉及任何业务计算和数据，OM仅负责模型的具体业务计算；
  * 2.原子模型实例化后必须立即setOM(om)方法，添加OM模型；
  */
-public abstract class AtomicModelBase<OMType> extends AtomicModel<Double, Double, SimTimeDouble> implements IDEVSModel {
+public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends AtomicModel<Double, Double, SimTimeDouble> implements IDEVSModel {
 
     protected OMType om;
 
@@ -23,6 +23,7 @@ public abstract class AtomicModelBase<OMType> extends AtomicModel<Double, Double
     protected void deltaInternal() {
         this.elapsedTime = 0.0;
         deltaInternalFunc();
+        this.om.setStatusValid();
     }
 
     @Override
@@ -38,7 +39,11 @@ public abstract class AtomicModelBase<OMType> extends AtomicModel<Double, Double
 
     @Override
     protected void lambda() {
-        lambdaFunc();
+        //ensure output updated message each simulation frame:
+        if(this.om.status){
+            lambdaFunc();
+        }
+        this.om.setStatusInvalid();
     }
 
     /**
@@ -62,6 +67,7 @@ public abstract class AtomicModelBase<OMType> extends AtomicModel<Double, Double
      * 外部转换函数一般用于：
      * 1.接收输入；
      * 2.模型状态跳转控制
+     * 3.调用OM实现业务模型逻辑
      * @param value
      */
     protected abstract void deltaExternalFunc(Object value);

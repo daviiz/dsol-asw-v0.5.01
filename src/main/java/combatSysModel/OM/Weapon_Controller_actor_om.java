@@ -1,8 +1,9 @@
 package combatSysModel.OM;
 
+import combatSysModel.DEM.ObjectModelBase;
 import combatSysModel.portType.*;
 
-public class Weapon_Controller_actor_om {
+public class Weapon_Controller_actor_om  extends ObjectModelBase {
 
     private move_finished move_finished;
     private engage_result engage_result;

@@ -53,7 +53,7 @@ public class Updater_Maneuver_am extends AtomicModelBase<Maneuver_updater_om> {
 
     @Override
     protected void lambdaFunc() {
-        if(this.om.getCmd_info().status && this.phase.getName().equals(INTERPRETATION.getName())){
+        if(this.phase.getName().equals(INTERPRETATION.getName())){
             this.out_cmd_info.send(this.om.getCmd_info());
             this.phase = WAIT;
             return;
