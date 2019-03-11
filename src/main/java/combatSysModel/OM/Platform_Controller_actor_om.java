@@ -49,6 +49,9 @@ public class Platform_Controller_actor_om  extends ObjectModelBase {
 
     }
 
+    /**
+     * 逃逸
+     */
     public void Evasion(){
 
     }
