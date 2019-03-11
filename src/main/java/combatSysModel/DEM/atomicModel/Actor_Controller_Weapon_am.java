@@ -105,12 +105,14 @@ public class Actor_Controller_Weapon_am extends AtomicModelBase<Weapon_Controlle
     @Override
     protected void lambdaFunc() {
         if(this.phase.getName().equals(SEARCH.getName())){
+            this.om.getMove_cmd().setSenderId(this.fullName);
             out_move_cmd.send(this.om.getMove_cmd());
             this.phase = IDLE;
             return;
         }
 
         if(this.phase.getName().equals(APPROACH.getName())){
+            this.om.getMove_cmd().setSenderId(this.fullName);
             out_move_cmd.send(this.om.getMove_cmd());
             this.phase = APPCH_WAIT;
             return;

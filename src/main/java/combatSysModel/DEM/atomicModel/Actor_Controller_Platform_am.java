@@ -164,12 +164,14 @@ public class Actor_Controller_Platform_am extends AtomicModelBase<Platform_Contr
     @Override
     protected void lambdaFunc() {
         if(this.phase.getName().equals(RECONNAIASSANCE.getName())){
+            this.om.getOut_move_cmd().setSenderId(this.fullName);
             this.out_move_cmd.send(this.om.getOut_move_cmd());
             this.phase = IDLE;
             this.lastPhase = RECONNAIASSANCE;
             return;
         }
         if(this.phase.getName().equals(APPROACH.getName())){
+            this.om.getOut_move_cmd().setSenderId(this.fullName);
             this.out_move_cmd.send(this.om.getOut_move_cmd());
             if(IDLE.getName().equals(this.om.getApprchNextPhase())){
                 this.phase = IDLE;
@@ -180,18 +182,21 @@ public class Actor_Controller_Platform_am extends AtomicModelBase<Platform_Contr
             return;
         }
         if(this.phase.getName().equals(COMBAT.getName())){
+            this.om.getOut_wp_launch().setSenderId(this.fullName);
             this.out_wp_launch.send(this.om.getOut_wp_launch());
             this.phase = IDLE;
             this.lastPhase = COMBAT;
             return;
         }
         if(this.phase.getName().equals(EVASION.getName())){
+            this.om.getOut_move_cmd().setSenderId(this.fullName);
             this.out_move_cmd.send(this.om.getOut_move_cmd());
             this.phase = IDLE;
             this.lastPhase = EVASION;
             return;
         }
         if(this.phase.getName().equals(CONTROL.getName())){
+            this.om.getOut_wp_guidance().setSenderId(this.fullName);
             this.out_wp_guidance.send(this.om.getOut_wp_guidance());
             this.phase = IDLE;
             this.lastPhase = CONTROL;

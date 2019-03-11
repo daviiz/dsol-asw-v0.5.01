@@ -71,6 +71,7 @@ public class Updater_Controller_Platform_am extends AtomicModelBase<Platform_Con
     @Override
     protected void lambdaFunc() {
         if(this.phase.getName().equals("IDENTIFICATION")){
+            this.om.getTarget_info().setSenderId(this.fullName);
             out_target_info.send(this.om.getTarget_info());
             this.phase = WAIT;
         }

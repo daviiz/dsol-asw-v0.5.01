@@ -83,6 +83,7 @@ public class Environment_am extends AtomicModelBase<Environment_om>{
                         continue;
                     }
                     else{
+                        //value.setSenderId(tmp);
                         out_env_info.send(value);
                     }
                 }

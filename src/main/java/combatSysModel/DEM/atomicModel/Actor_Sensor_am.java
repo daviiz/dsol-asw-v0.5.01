@@ -94,11 +94,13 @@ public class Actor_Sensor_am extends AtomicModelBase<Sensor_actor_om> {
     @Override
     protected void lambdaFunc() {
         if(this.phase.getName().equals(DETECT.getName())){
+            this.om.getOut_threat_info().setSenderId(this.fullName);
             this.out_threat_info.send(this.om.getOut_threat_info());
             this.phase = PERIOD;
             return;
         }
         if(this.phase.getName().equals(PERIOD.getName())){
+            this.om.getOut_request().setSenderId(this.fullName);
             this.out_request.send(this.om.getOut_request());
             this.phase = REQUEST;
             return;
