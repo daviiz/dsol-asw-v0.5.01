@@ -8,4 +8,7 @@ public class threat_info   extends PortTypeBase {
     public void setEnv_info(env_info _info){
         this.info = _info;
     }
+    public env_info getEnv_info(){
+        return  info;
+    }
 }
