@@ -12,7 +12,7 @@ public class Platform_Controller_updater_om extends ObjectModelBase {
     private target_info target_info;
 
     public void identification(){
-        //...
+        this.target_info.setEnv_info(threat_info.getEnv_info());
     }
 
     public combatSysModel.portType.threat_info getThreat_info() {
