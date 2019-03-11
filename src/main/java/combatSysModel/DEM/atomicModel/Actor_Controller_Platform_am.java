@@ -69,7 +69,7 @@ public class Actor_Controller_Platform_am extends AtomicModelBase<Platform_Contr
     @Override
     protected void deltaExternalFunc(Object value) {
         if(this.phase.getName().equals(IDLE.getName())){
-            this.lastPhase = IDLE;
+
             if(this.lastPhase.getName().equals(RECONNAIASSANCE.getName())){
                 if(this.activePort == in_move_finished){
                     this.om.setIn_move_finished((move_finished)value);
@@ -109,6 +109,7 @@ public class Actor_Controller_Platform_am extends AtomicModelBase<Platform_Contr
                 return;
             }
 
+            this.lastPhase = IDLE;
             return;
         }
         if(this.phase.getName().equals(CONTROL.getName())){

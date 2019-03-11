@@ -1,29 +1,28 @@
 package combatSysModel.OM;
 
 import combatSysModel.DEM.ObjectModelBase;
-import combatSysModel.portType.entity_info;
 import combatSysModel.portType.move_result;
 import combatSysModel.portType.request;
 import combatSysModel.portType.response;
-
-import java.util.ArrayList;
 
 public class Sensor_updater_om  extends ObjectModelBase {
 
     private move_result in_move_result;
     private request in_request;
+
     private response out_response;
 
-    private ArrayList<entity_info> entitiesData;
+    public Sensor_updater_om(){
+        in_move_result = new move_result();
+        in_request = new request();
+        out_response = new response();
+    }
 
     /**
-     * 更新Sensor探测到的实体列表：
-     * ArrayList<entity_info>
-     * 识别并更新out_response值
+     * 更新out_response值
      */
-    public void data_intgrator(){
-
-        //...
+    public void data_integrator(){
+        out_response.location = in_move_result.location;
     }
 
 

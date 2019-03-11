@@ -20,7 +20,7 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
 
     protected OMType om;
 
-    /** the current phase (if applicable). */
+    /** the last phase (if applicable). */
     protected Phase lastPhase = new Phase("");
 
     @Override
@@ -43,7 +43,7 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
 
     @Override
     protected void lambda() {
-        //ensure output updated message each simulation frame:
+        //ensure updated message output each simulation frame:
         if(this.om.status){
             lambdaFunc();
         }

@@ -49,7 +49,7 @@ public class Updater_Sensor_am extends AtomicModelBase<Sensor_updater_om> {
         if(this.phase.getName().equals(UPDATE.getName())){
             if(this.activePort == in_move_result){
                 this.om.setIn_move_result((move_result)value);
-                this.om.data_intgrator();
+
                 return;
             }
             if(this.activePort == in_request){
@@ -62,7 +62,12 @@ public class Updater_Sensor_am extends AtomicModelBase<Sensor_updater_om> {
     }
 
     @Override
-    protected void deltaInternalFunc() {}
+    protected void deltaInternalFunc() {
+        if(this.phase.getName().equals(REQUEST.getName())){
+            this.om.data_integrator();
+            return;
+        }
+    }
 
     @Override
     protected void lambdaFunc() {

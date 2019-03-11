@@ -1,14 +1,21 @@
 package combatSysModel.OM;
 
+import asw.soa.util.SimUtil;
 import combatSysModel.DEM.ObjectModelBase;
 import combatSysModel.portType.*;
+import nl.tudelft.simulation.language.d3.CartesianPoint;
 
 public class Maneuver_actor_om  extends ObjectModelBase {
+    //获取到的交战结果：
     private engage_result engage_result;
+    //初始化时，加载模型数据：
     private scen_info scen_info;
+    //获取到的探测信息：
     private env_info env_info;
+    //收到的命令信息：
     private cmd_info cmd_info;
 
+    //输出的消息：
     private move_finished move_finished;
     private move_result move_result;
     private fuel_exhausted fuel_exhausted;
@@ -16,16 +23,40 @@ public class Maneuver_actor_om  extends ObjectModelBase {
     private boolean cmdCheckResult ;
     private boolean fuelCheckResult ;
 
+    public Maneuver_actor_om(){
+        engage_result = new engage_result();
+        scen_info = new scen_info();
+        env_info = new env_info();
+        cmd_info = new cmd_info();
+        move_finished = new move_finished();
+        move_result = new move_result();
+        fuel_exhausted = new fuel_exhausted();
+        cmdCheckResult = false;
+        fuelCheckResult = false;
+    }
+
     public void motion_Equation(){
+        this.scen_info.origin = this.scen_info.destination;
+
+        if (!this.scen_info.status) {
+            this.scen_info.destination = new CartesianPoint(scen_info.destination.x, scen_info.destination.y, 0);
+        } else {
+            scen_info.destination = SimUtil.nextPoint(this.scen_info.origin.x,this.scen_info.origin.y,this.scen_info.destination.x,this.scen_info.origin.y,
+                    this.scen_info.speed,(cmd_info.cmd==COMMAND.APPROACH));
+            this.move_result.location = scen_info.destination;
+            this.move_finished.isFinished = true;
+        }
 
     }
 
     public boolean cmd_Check(){
-        return this.cmdCheckResult;
+        this.cmdCheckResult = false;
+        return false;
     }
 
     public boolean fuel_Check(){
-        return this.fuelCheckResult;
+        this.fuelCheckResult = false;
+        return false;
     }
 
     public boolean isCmdCheckResult() {

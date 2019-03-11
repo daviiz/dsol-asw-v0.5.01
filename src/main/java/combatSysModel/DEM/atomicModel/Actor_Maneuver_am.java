@@ -81,6 +81,8 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
             this.om.cmd_Check();
             if(!this.om.isCmdCheckResult()){
                 this.om.motion_Equation();
+                this.om.getScen_info().startTime = this.simulator.getSimulatorTime();
+                this.om.getScen_info().stopTime = this.om.getScen_info().startTime + this.phase.getLifeTime();
             }
             return;
         }

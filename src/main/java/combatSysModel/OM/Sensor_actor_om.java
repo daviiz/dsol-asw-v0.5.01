@@ -1,7 +1,13 @@
 package combatSysModel.OM;
 
+import asw.soa.util.SimUtil;
 import combatSysModel.DEM.ObjectModelBase;
 import combatSysModel.portType.*;
+import nl.tudelft.simulation.language.d3.CartesianPoint;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Sensor_actor_om  extends ObjectModelBase {
     private engage_result in_engage_result;
@@ -12,11 +18,49 @@ public class Sensor_actor_om  extends ObjectModelBase {
     private threat_info out_threat_info;
     private request out_request;
 
+    private Map<String,env_info> env_infoMap = new HashMap<String,env_info>();
+
+
+    public Sensor_actor_om(){
+        in_engage_result = new engage_result();
+        in_env_info = new env_info();
+        in_scen_info = new scen_info();
+        in_response = new response();
+
+        out_threat_info = new threat_info();
+        out_request = new request();
+    }
+
     /**
      * update out threat_info
      */
     public void detection_algrithm(){
+        out_threat_info.setEnv_info(getNearestEnemy(in_response.location));
+    }
 
+    private env_info getNearestEnemy(CartesianPoint location){
+        env_info target = new env_info();
+        if (env_infoMap.size()>0) {
+            double distance = Double.POSITIVE_INFINITY;
+
+            Iterator iter = env_infoMap.entrySet().iterator();
+            while(iter.hasNext()) {
+                Map.Entry entry = (Map.Entry)iter.next();
+                // 获取key
+                String key = (String)entry.getKey();
+                // 获取value
+                env_info value = (env_info)entry.getValue();
+
+                if(in_scen_info.camp != value.camp){
+                    double tmp = SimUtil.calcLength(location.x,location.y,value.location.x,value.location.y);
+                    if(tmp < distance){
+                        distance = tmp;
+                        target = value;
+                    }
+                }
+            }
+        }
+        return target;
     }
 
 
@@ -34,6 +78,13 @@ public class Sensor_actor_om  extends ObjectModelBase {
 
     public void setIn_env_info(env_info in_env_info) {
         this.in_env_info = in_env_info;
+
+        if(env_infoMap.containsKey(in_env_info.getSenderId())){
+            env_infoMap.remove(in_env_info.getSenderId());
+            env_infoMap.put(in_env_info.getSenderId(),in_env_info);
+        }else{
+            env_infoMap.put(in_env_info.getSenderId(),in_env_info);
+        }
     }
 
     public scen_info getIn_scen_info() {
