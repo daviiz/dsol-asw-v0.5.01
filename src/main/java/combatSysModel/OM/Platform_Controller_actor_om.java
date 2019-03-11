@@ -17,14 +17,34 @@ public class Platform_Controller_actor_om  extends ObjectModelBase {
 
     private String apprchNextPhase = "";
 
+    public Platform_Controller_actor_om(){
+        in_move_finished = new move_finished();
+        in_engage_result = new engage_result();
+        in_env_info = new env_info();
+        in_guidance_info = new guidance_info();
+        in_target_info = new target_info();
+        in_scen_info = new scen_info();
+
+        out_move_cmd = new move_cmd();
+        out_wp_launch = new wp_launch();
+        out_wp_guidance = new wp_guidance();
+    }
+
+    /**
+     * 侦查
+     */
     public void Recom(){
 
     }
-
+    /**
+     * 前进
+     */
     public void Apprch(){
 
     }
-
+    /**
+     * 战斗
+     */
     public void Combat(){
 
     }
@@ -32,7 +52,9 @@ public class Platform_Controller_actor_om  extends ObjectModelBase {
     public void Evasion(){
 
     }
-
+    /**
+     * 控制武器
+     */
     public void Ctrl(){
 
     }

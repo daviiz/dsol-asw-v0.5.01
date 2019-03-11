@@ -13,7 +13,7 @@ public class Weapon_Controller_updater_om  extends ObjectModelBase {
 
 
     public void identification(){
-        //TO-DO
+        this.target_info.setEnv_info(threat_info.getEnv_info());
     }
 
 
