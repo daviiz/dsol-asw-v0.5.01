@@ -2,6 +2,7 @@ package asw.soa.view;
 
 import asw.soa.data.ModelData;
 import nl.tudelft.simulation.dsol.animation.Locatable;
+import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 import nl.tudelft.simulation.language.d3.DirectedPoint;
 
@@ -10,12 +11,12 @@ import javax.media.j3d.Bounds;
 import javax.vecmath.Point3d;
 import java.rmi.RemoteException;
 
-class VisualComponent implements Locatable {
+public class VisualComponent implements Locatable {
 
     private ModelData _mdata = new ModelData();
-    private DEVSSimulatorInterface.TimeDouble simulator = null;
+    private DEVSSimulatorInterface<Double,Double, SimTimeDouble> simulator = null;
 
-    VisualComponent(ModelData data, final DEVSSimulatorInterface.TimeDouble simulator) {
+    public VisualComponent(ModelData data, DEVSSimulatorInterface<Double,Double, SimTimeDouble> simulator) {
         this._mdata = data;
         this.simulator = simulator;
     }

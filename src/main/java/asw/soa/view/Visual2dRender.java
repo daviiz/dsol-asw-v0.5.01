@@ -4,6 +4,7 @@ import asw.soa.data.LineData;
 import asw.soa.data.ModelData;
 import nl.tudelft.simulation.dsol.animation.D2.Renderable2D;
 import nl.tudelft.simulation.dsol.animation.Locatable;
+import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
 import javax.naming.NamingException;
@@ -14,7 +15,7 @@ import java.rmi.RemoteException;
 /**
  * @author daiwenzhi
  */
-class Visual2dRender extends Renderable2D<Locatable> {
+public class Visual2dRender extends Renderable2D<Locatable> {
 
     /**
      * 用于渲染所用的所有模型数据
@@ -40,7 +41,7 @@ class Visual2dRender extends Renderable2D<Locatable> {
         this.data.lineData = _target;
     }
 
-    public Visual2dRender(final Locatable source, final SimulatorInterface.TimeDouble simulator, ModelData _data)
+    public Visual2dRender(final Locatable source, final SimulatorInterface<Double,Double, SimTimeDouble> simulator, ModelData _data)
             throws RemoteException, NamingException {
         super(source, simulator);
         this.data = _data;

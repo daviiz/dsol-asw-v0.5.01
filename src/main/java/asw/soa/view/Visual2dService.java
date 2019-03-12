@@ -1,8 +1,12 @@
 package asw.soa.view;
 
 import asw.soa.data.ModelData;
+import combatSysModel.portType.scen_info;
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
+import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
+import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface.TimeDouble;
 
 import javax.naming.NamingException;
@@ -76,7 +80,7 @@ public class Visual2dService {
      * @throws RemoteException
      * @throws NamingException
      */
-    public void register(String name, TimeDouble simulator, ModelData _data) throws RemoteException, NamingException {
+    public void register(String name, DEVSSimulatorInterface<Double,Double, SimTimeDouble> simulator, ModelData _data) throws RemoteException, NamingException {
         if (name == null || name.equals("") || simulator == null || _data == null)
             return;
 
