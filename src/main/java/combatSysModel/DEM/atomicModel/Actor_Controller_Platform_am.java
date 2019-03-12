@@ -19,6 +19,8 @@ public class Actor_Controller_Platform_am extends AtomicModelBase<Platform_Contr
     public InputPort<Double, Double, SimTimeDouble, target_info> in_target_info;
     public InputPort<Double, Double, SimTimeDouble, scen_info> in_scen_info;
 
+    public InputPort<Double, Double, SimTimeDouble, move_result> in_move_result;
+
     public OutputPort<Double, Double, SimTimeDouble, move_cmd> out_move_cmd;
     public OutputPort<Double, Double, SimTimeDouble, wp_launch> out_wp_launch;
     public OutputPort<Double, Double, SimTimeDouble, wp_guidance> out_wp_guidance;
@@ -34,9 +36,16 @@ public class Actor_Controller_Platform_am extends AtomicModelBase<Platform_Contr
         in_target_info = new InputPort<Double, Double, SimTimeDouble, target_info>(this);
         in_scen_info = new InputPort<Double, Double, SimTimeDouble, scen_info>(this);
 
+        in_move_result = new InputPort<Double, Double, SimTimeDouble, move_result>(this);
+
         out_move_cmd = new OutputPort<Double, Double, SimTimeDouble, move_cmd>(this);
         out_wp_launch = new OutputPort<Double, Double, SimTimeDouble, wp_launch>(this);
         out_wp_guidance = new OutputPort<Double, Double, SimTimeDouble, wp_guidance>(this);
+    }
+
+    @Override
+    protected void constructObjectModel() {
+        this.om = new Platform_Controller_actor_om();
     }
 
     @Override
@@ -62,12 +71,19 @@ public class Actor_Controller_Platform_am extends AtomicModelBase<Platform_Contr
         END = new Phase("END");
         END.setLifeTime(Double.POSITIVE_INFINITY);
 
-        this.phase = IDLE;
+        this.phase = APPROACH;
         this.lastPhase = IDLE;
     }
 
     @Override
     protected void deltaExternalFunc(Object value) {
+
+        if(this.activePort == in_move_result){
+            this.om.setIn_move_result((move_result)value);
+            this.phase = APPROACH;
+            return;
+        }
+
         if(this.phase.getName().equals(IDLE.getName())){
 
             if(this.lastPhase.getName().equals(RECONNAIASSANCE.getName())){
@@ -140,7 +156,7 @@ public class Actor_Controller_Platform_am extends AtomicModelBase<Platform_Contr
     @Override
     protected void deltaInternalFunc() {
         if(this.phase.getName().equals(RECONNAIASSANCE.getName())){
-            this.om.Recom();
+            this.om.Reconn();
             return;
         }
         if(this.phase.getName().equals(APPROACH.getName())){

@@ -30,6 +30,11 @@ public class Updater_Controller_Weapon_am extends AtomicModelBase<Weapon_Control
     }
 
     @Override
+    protected void constructObjectModel() {
+        this.om = new Weapon_Controller_updater_om();
+    }
+
+    @Override
     protected void constructPhase() {
         WAIT = new Phase("WAIT");
         WAIT.setLifeTime(Double.POSITIVE_INFINITY);

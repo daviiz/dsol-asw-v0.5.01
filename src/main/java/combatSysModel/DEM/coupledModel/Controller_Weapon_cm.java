@@ -19,8 +19,8 @@ public class Controller_Weapon_cm extends CoupledModelBase {
 
     public OutputPort<Double, Double, SimTimeDouble, combatSysModel.portType.move_cmd> out_move_cmd;
 
-    private Actor_Controller_Weapon_am actor;
-    private Updater_Controller_Weapon_am updater;
+     Actor_Controller_Weapon_am actor;
+     Updater_Controller_Weapon_am updater;
 
     public Controller_Weapon_cm(String modelName) {
         super(modelName);
@@ -54,6 +54,8 @@ public class Controller_Weapon_cm extends CoupledModelBase {
     protected void couplingComponent() {
         actor = new Actor_Controller_Weapon_am("Actor",this);
         updater = new Updater_Controller_Weapon_am("Updater",this);
+        actor.constructModel();
+        updater.constructModel();
 
         /**
          * EIC

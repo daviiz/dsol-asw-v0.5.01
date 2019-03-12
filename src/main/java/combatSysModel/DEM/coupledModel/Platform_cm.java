@@ -31,9 +31,9 @@ public class Platform_cm extends CoupledModelBase {
     /**
      * component models
      */
-    private Maneuver_cm m;
-    private Sensor_cm s;
-    private Controller_Platform_cm c;
+     Maneuver_cm maneuver;
+     Sensor_cm sensor;
+     Controller_Platform_cm controller;
 
     public Platform_cm(String modelName) { super(modelName); }
 
@@ -69,37 +69,42 @@ public class Platform_cm extends CoupledModelBase {
         /**
          *  { Mi }
          */
-        m = new Maneuver_cm("Maneuver", this);
-        s = new Sensor_cm("Sensor", this);
-        c = new Controller_Platform_cm("Controller", this);
+        maneuver = new Maneuver_cm("Maneuver", this);
+        maneuver.constructModel();
+        sensor = new Sensor_cm("Sensor", this);
+        sensor.constructModel();
+        controller = new Controller_Platform_cm("Controller", this);
+        controller.constructModel();
         /**
          * EIC
          */
-        this.addExternalInputCoupling(this.in_scen_info, s.in_scen_info);
-        this.addExternalInputCoupling(this.in_scen_info, m.in_scen_info);
-        this.addExternalInputCoupling(this.in_engage_result, m.in_engage_result);
-        this.addExternalInputCoupling(this.in_engage_result, s.in_engage_result);
-        this.addExternalInputCoupling(this.in_engage_result, c.in_engage_result);
-        this.addExternalInputCoupling(this.in_move_result, s.in_move_result);
-        this.addExternalInputCoupling(this.in_env_info, m.in_env_info);
-        this.addExternalInputCoupling(this.in_env_info, s.in_env_info);
-        this.addExternalInputCoupling(this.in_env_info, c.in_env_info);
-        this.addExternalInputCoupling(this.in_guidance_info, m.in_guidance_info);
+        this.addExternalInputCoupling(this.in_scen_info, sensor.in_scen_info);
+        this.addExternalInputCoupling(this.in_scen_info, maneuver.in_scen_info);
+        this.addExternalInputCoupling(this.in_engage_result, maneuver.in_engage_result);
+        this.addExternalInputCoupling(this.in_engage_result, sensor.in_engage_result);
+        this.addExternalInputCoupling(this.in_engage_result, controller.in_engage_result);
+        this.addExternalInputCoupling(this.in_move_result, sensor.in_move_result);
+        this.addExternalInputCoupling(this.in_env_info, maneuver.in_env_info);
+        this.addExternalInputCoupling(this.in_env_info, sensor.in_env_info);
+        this.addExternalInputCoupling(this.in_env_info, controller.in_env_info);
+        this.addExternalInputCoupling(this.in_guidance_info, maneuver.in_guidance_info);
 
         /**
          * EOC
          */
-        this.addExternalOutputCoupling(m.out_move_result, this.out_move_result);
-        this.addExternalOutputCoupling(c.out_wp_launch, this.out_wp_launch);
-        this.addExternalOutputCoupling(m.out_wp_guidance, this.out_wp_guidance);
+        this.addExternalOutputCoupling(maneuver.out_move_result, this.out_move_result);
+        this.addExternalOutputCoupling(controller.out_wp_launch, this.out_wp_launch);
+        this.addExternalOutputCoupling(maneuver.out_wp_guidance, this.out_wp_guidance);
 
         /**
          * IC
          */
-        this.addInternalCoupling(s.out_threat_info, c.in_threat_info);
-        this.addInternalCoupling(c.out_move_cmd, m.in_move_cmd);
-        this.addInternalCoupling(m.out_move_finished, c.in_move_finished);
-        this.addInternalCoupling(m.out_fuel_exhausted, s.in_fuel_exhausted);
-        this.addInternalCoupling(m.out_fuel_exhausted, c.in_fuel_exhausted);
+        this.addInternalCoupling(sensor.out_threat_info, controller.in_threat_info);
+        this.addInternalCoupling(controller.out_move_cmd, maneuver.in_move_cmd);
+        this.addInternalCoupling(maneuver.out_move_finished, controller.in_move_finished);
+        this.addInternalCoupling(maneuver.out_fuel_exhausted, sensor.in_fuel_exhausted);
+        this.addInternalCoupling(maneuver.out_fuel_exhausted, controller.in_fuel_exhausted);
+
+        this.addInternalCoupling(maneuver.out_move_result, controller.in_move_result);
     }
 }

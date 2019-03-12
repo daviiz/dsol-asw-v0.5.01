@@ -38,12 +38,20 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
 
     @Override
     protected Double timeAdvance() {
+        if(this.phase.getLifeTime() < 0.00000001){
+            this.elapsedTime = 0.0;
+        }
         return this.phase.getLifeTime();
     }
 
     @Override
     protected void lambda() {
+        System.out.println("---" + this.fullName+" -- !!!!!!!!!!!!!! "+", SimTime: " + this.simulator.getSimulatorTime());
         //ensure updated message output each simulation frame:
+        if(this.om == null){
+            System.out.println("!!!!!!!!!!!!!!  "+this.fullName+"'s om is NULL");
+            return;
+        }
         if(this.om.status){
             lambdaFunc();
         }
@@ -54,6 +62,11 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
      * construct input and output port
      */
     protected abstract void constructPort();
+
+    /**
+     * construct om
+     */
+    protected abstract void constructObjectModel();
 
     /**
      * define atomic model's states
@@ -105,8 +118,8 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
     public void constructModel() {
         constructPhase();
         constructPort();
-        //constructModelData();
-        //this.om = (OM)om;
+        constructObjectModel();
+
         super.initialize(0.0);
     }
     public OMType getOm() {

@@ -1,5 +1,6 @@
 package combatSysModel.OM;
 
+import asw.soa.data.ModelData;
 import asw.soa.util.SimUtil;
 import combatSysModel.DEM.ObjectModelBase;
 import combatSysModel.portType.*;
@@ -23,7 +24,10 @@ public class Maneuver_actor_om  extends ObjectModelBase {
     private boolean cmdCheckResult ;
     private boolean fuelCheckResult ;
 
+    private  ModelData modelData;
+
     public Maneuver_actor_om(){
+
         engage_result = new engage_result();
         scen_info = new scen_info();
         env_info = new env_info();
@@ -33,20 +37,37 @@ public class Maneuver_actor_om  extends ObjectModelBase {
         fuel_exhausted = new fuel_exhausted();
         cmdCheckResult = false;
         fuelCheckResult = false;
+
+        //测试用：
+        this.env_info.location = new CartesianPoint(500.0,500.0,0.0);
+
+        //模型初始化：
+        modelData = new ModelData("Fleet");
+        modelData.origin = modelData.destination = new CartesianPoint(-200, -50, 0);
     }
 
-    public void motion_Equation(){
-        this.scen_info.origin = this.scen_info.destination;
 
-        if (!this.scen_info.status) {
-            this.scen_info.destination = new CartesianPoint(scen_info.destination.x, scen_info.destination.y, 0);
+
+    public void motion_Equation(){
+        this.modelData.origin = this.modelData.destination;
+
+        if (!this.modelData.status) {
+            this.modelData.destination = new CartesianPoint(modelData.destination.x, modelData.destination.y, 0);
         } else {
-            scen_info.destination = SimUtil.nextPoint(this.scen_info.origin.x,this.scen_info.origin.y,this.scen_info.destination.x,this.scen_info.origin.y,
-                    this.scen_info.speed,(cmd_info.cmd==COMMAND.APPROACH));
-            this.move_result.location = scen_info.destination;
+            modelData.destination = SimUtil.nextPoint(this.modelData.origin.x,this.modelData.origin.y,this.env_info.location.x,this.env_info.location.y,
+                    this.modelData.speed,(cmd_info.cmd==COMMAND.DEFAULT));
+            //modelData.destination = new CartesianPoint(modelData.origin.x+modelData.speed, modelData.origin.y+modelData.speed, 0);
+            this.move_result.location = modelData.destination;
             this.move_finished.isFinished = true;
         }
+    }
 
+    public ModelData getModelData() {
+        return modelData;
+    }
+
+    public void setModelData(ModelData modelData) {
+        this.modelData = modelData;
     }
 
     public boolean cmd_Check(){

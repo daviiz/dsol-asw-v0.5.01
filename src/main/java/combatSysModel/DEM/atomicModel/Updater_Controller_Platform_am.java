@@ -14,6 +14,11 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
 public class Updater_Controller_Platform_am extends AtomicModelBase<Platform_Controller_updater_om> {
 
+    @Override
+    protected void constructObjectModel() {
+        this.om = new Platform_Controller_updater_om();
+    }
+
     public InputPort<Double,Double, SimTimeDouble, threat_info> in_threat_info;
     public InputPort<Double,Double, SimTimeDouble, env_info> in_env_info;
 
@@ -34,7 +39,7 @@ public class Updater_Controller_Platform_am extends AtomicModelBase<Platform_Con
         WAIT.setLifeTime(Double.POSITIVE_INFINITY);
         IDENTIFICATION = new Phase("IDENTIFICATION");
         IDENTIFICATION.setLifeTime(15.0);
-        this.phase = WAIT;
+        this.phase = IDENTIFICATION;
     }
 
     @Override

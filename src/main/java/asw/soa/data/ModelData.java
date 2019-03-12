@@ -1,5 +1,6 @@
 package asw.soa.data;
 
+import combatSysModel.portType.scen_info;
 import nl.tudelft.simulation.language.d3.CartesianPoint;
 
 import java.awt.*;
@@ -28,11 +29,11 @@ public class ModelData implements java.io.Serializable {
     /**
      * the start time.
      */
-    public double startTime = Double.NaN;
+    public double startTime = 0.0;
     /**
      * the stop time.
      */
-    public double stopTime = Double.NaN;
+    public double stopTime = 0.0;
     /**
      * the angle of the ball.
      */
@@ -47,7 +48,7 @@ public class ModelData implements java.io.Serializable {
 
     public boolean status = true;
 
-    public int speed = 0;
+    public double speed = 0;
 
     /**
      * 通信数据链
@@ -81,29 +82,45 @@ public class ModelData implements java.io.Serializable {
 
     public ModelData(String name) {
         this.name = name;
-        if (this.name.startsWith("Fleet")) {
+        if (this.name.contains("Fleet")) {
             this.color = Color.RED;
             this.detectRange = 200;
             this.belong = 1;
-            this.speed = 4;
-        } else if (this.name.startsWith("Sub")) {
+            this.speed = 0.4;
+        } else if (this.name.contains("Sub")) {
             this.color = Color.BLUE;
             this.detectRange = 1000;
             this.belong = -1;
             this.speed = 2;
 
-        } else if (this.name.startsWith("Decoy")) {
+        } else if (this.name.contains("Decoy")) {
             this.color = Color.PINK;
             this.detectRange = 100;
             this.belong = 1;
             this.speed = 2;
 
-        } else if (this.name.startsWith("Torpedo")) {
+        } else if (this.name.contains("Torpedo")) {
             this.color = Color.CYAN;
             this.detectRange = 150;
             this.belong = -1;
             this.speed = 4;
         }
+    }
+    public ModelData(scen_info info){
+        this.color = info.color;
+        this.detectRange = info.detectRange;
+        this.x1 = info.x1;
+        this.y1 = info.y1;
+
+        this.x2 = info.x2;
+        this.y2 = info.y2;
+
+        this.origin = info.origin;
+        this.destination = info.destination;
+
+        this.startTime = info.startTime;
+        this.stopTime = info.stopTime;
+        this.belong = info.camp;
     }
 
     public String toString() {

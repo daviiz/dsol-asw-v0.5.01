@@ -13,6 +13,11 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
 public class Updater_Maneuver_am extends AtomicModelBase<Maneuver_updater_om> {
 
+    @Override
+    protected void constructObjectModel() {
+        this.om = new Maneuver_updater_om();
+    }
+
     public InputPort<Double, Double, SimTimeDouble, move_cmd> in_move_cmd;
 
     public OutputPort<Double, Double, SimTimeDouble, cmd_info> out_cmd_info;
@@ -28,7 +33,7 @@ public class Updater_Maneuver_am extends AtomicModelBase<Maneuver_updater_om> {
     protected void constructPhase() {
         WAIT = new Phase("WAIT");   WAIT.setLifeTime(Double.POSITIVE_INFINITY);
         INTERPRETATION = new Phase("INTERPRETATION");    INTERPRETATION.setLifeTime(0.0);
-        this.phase = WAIT;
+        this.phase = INTERPRETATION;
     }
 
 

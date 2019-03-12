@@ -103,6 +103,11 @@ public class Actor_Controller_Weapon_am extends AtomicModelBase<Weapon_Controlle
     }
 
     @Override
+    protected void constructObjectModel() {
+        this.om = new Weapon_Controller_actor_om();
+    }
+
+    @Override
     protected void lambdaFunc() {
         if(this.phase.getName().equals(SEARCH.getName())){
             this.om.getMove_cmd().setSenderId(this.fullName);

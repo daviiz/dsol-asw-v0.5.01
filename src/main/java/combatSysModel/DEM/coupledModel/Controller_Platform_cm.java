@@ -18,13 +18,14 @@ public class Controller_Platform_cm extends CoupledModelBase {
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.move_finished> in_move_finished;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.fuel_exhausted> in_fuel_exhausted;
     public InputPort<Double, Double, SimTimeDouble, combatSysModel.portType.guidance_info> in_guidance_info;
+    public InputPort<Double, Double, SimTimeDouble, move_result> in_move_result;
 
     public OutputPort<Double, Double, SimTimeDouble, combatSysModel.portType.wp_launch> out_wp_launch;
     public OutputPort<Double, Double, SimTimeDouble, combatSysModel.portType.move_cmd> out_move_cmd;
     public OutputPort<Double, Double, SimTimeDouble, combatSysModel.portType.wp_guidance> out_wp_guidance;
 
-    private Actor_Controller_Platform_am actor;
-    private Updater_Controller_Platform_am updater;
+     Actor_Controller_Platform_am actor;
+     Updater_Controller_Platform_am updater;
 
     public Controller_Platform_cm(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
         super(modelName, simulator);
@@ -49,6 +50,8 @@ public class Controller_Platform_cm extends CoupledModelBase {
         in_move_finished = new InputPort<Double, Double, SimTimeDouble, move_finished>(this);
         in_fuel_exhausted = new InputPort<Double, Double, SimTimeDouble, fuel_exhausted>(this);
         in_guidance_info = new InputPort<Double, Double, SimTimeDouble, guidance_info>(this);
+
+        in_move_result = new InputPort<Double, Double, SimTimeDouble, move_result>(this);
         /**
          * Y
          */
@@ -60,7 +63,9 @@ public class Controller_Platform_cm extends CoupledModelBase {
     @Override
     protected void couplingComponent() {
         actor = new Actor_Controller_Platform_am("Actor",this);
+        actor.constructModel();
         updater = new Updater_Controller_Platform_am("Updater",this);
+        updater.constructModel();
         /**
          * EIC
          */
@@ -70,6 +75,7 @@ public class Controller_Platform_cm extends CoupledModelBase {
         this.addExternalInputCoupling(this.in_env_info,updater.in_env_info);
         this.addExternalInputCoupling(this.in_threat_info,updater.in_threat_info);
         this.addExternalInputCoupling(this.in_guidance_info,actor.in_guidance_info);
+        this.addExternalInputCoupling(this.in_move_result,actor.in_move_result);
         /**
          * EOC
          */

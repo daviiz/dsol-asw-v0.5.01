@@ -6,10 +6,16 @@ import combatSysModel.portType.*;
 public class Platform_Controller_actor_om  extends ObjectModelBase {
     private move_finished in_move_finished;
     private engage_result in_engage_result;
+
     private env_info in_env_info;
+    //收到武器系统的反馈信息：
     private guidance_info in_guidance_info;
+    //探测到的敌方目标信息
     private target_info in_target_info;
+    //初始化场景信息：
     private scen_info in_scen_info;
+    //平台实体当前位置
+    private move_result in_move_result;
 
     private move_cmd out_move_cmd;
     private wp_launch out_wp_launch;
@@ -24,6 +30,7 @@ public class Platform_Controller_actor_om  extends ObjectModelBase {
         in_guidance_info = new guidance_info();
         in_target_info = new target_info();
         in_scen_info = new scen_info();
+        in_move_result = new move_result();
 
         out_move_cmd = new move_cmd();
         out_wp_launch = new wp_launch();
@@ -33,33 +40,41 @@ public class Platform_Controller_actor_om  extends ObjectModelBase {
     /**
      * 侦查
      */
-    public void Recom(){
-
+    public void Reconn(){
+        this.out_move_cmd.cmd = COMMAND.APPROACH;
     }
     /**
      * 前进
      */
     public void Apprch(){
-
+        this.out_move_cmd.cmd = COMMAND.APPROACH;
     }
     /**
      * 战斗
      */
     public void Combat(){
-
+        this.out_move_cmd.cmd = COMMAND.FIRE;
     }
 
     /**
      * 逃逸
      */
     public void Evasion(){
-
+        this.out_move_cmd.cmd = COMMAND.EVASION;
     }
     /**
      * 控制武器
      */
     public void Ctrl(){
 
+    }
+
+    public move_result getIn_move_result() {
+        return in_move_result;
+    }
+
+    public void setIn_move_result(move_result in_move_result) {
+        this.in_move_result = in_move_result;
     }
 
     public String getApprchNextPhase() {

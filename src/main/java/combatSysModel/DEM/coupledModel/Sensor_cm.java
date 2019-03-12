@@ -22,8 +22,8 @@ class Sensor_cm extends CoupledModelBase {
 
     public OutputPort<Double, Double, SimTimeDouble, threat_info> out_threat_info;
 
-    private Actor_Sensor_am actor;
-    private Updater_Sensor_am updater;
+     Actor_Sensor_am actor;
+     Updater_Sensor_am updater;
 
     public Sensor_cm(String modelName) {
         super(modelName);
@@ -57,6 +57,8 @@ class Sensor_cm extends CoupledModelBase {
     protected void couplingComponent() {
         updater = new Updater_Sensor_am("Updater",this);
         actor = new Actor_Sensor_am("Actor",this);
+        actor.constructModel();
+        updater.constructModel();
 
         /**
          * EIC

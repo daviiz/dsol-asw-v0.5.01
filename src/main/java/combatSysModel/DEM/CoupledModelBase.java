@@ -21,6 +21,7 @@ public abstract class CoupledModelBase extends CoupledModel.TimeDouble implement
     protected abstract void constructPort();
     /**
      *  coupling relation construction
+     *  根耦合模型此方法为空
      */
     protected abstract void couplingComponent();
 
@@ -29,7 +30,13 @@ public abstract class CoupledModelBase extends CoupledModel.TimeDouble implement
      */
     @Override
     public void constructModel() {
-        constructPort();
-        couplingComponent();
+        if(this.parentModel == null){
+            couplingComponent();
+            constructPort();
+        }else{
+            constructPort();
+            couplingComponent();
+        }
+
     }
 }

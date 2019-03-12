@@ -1,5 +1,6 @@
 package combatSysModel.portType;
 
+import asw.soa.data.ModelData;
 import combatSysModel.DEM.PortTypeBase;
 import nl.tudelft.simulation.language.d3.CartesianPoint;
 
@@ -77,6 +78,23 @@ public class scen_info extends PortTypeBase {
 
     public scen_info() {
 
+    }
+
+    public scen_info(ModelData info){
+        this.color = info.color;
+        this.detectRange = info.detectRange;
+        this.x1 = info.x1;
+        this.y1 = info.y1;
+
+        this.x2 = info.x2;
+        this.y2 = info.y2;
+
+        this.origin = info.origin;
+        this.destination = info.destination;
+
+        this.startTime = info.startTime;
+        this.stopTime = info.stopTime;
+        this.camp = info.belong;
     }
 
     public scen_info(String name) {

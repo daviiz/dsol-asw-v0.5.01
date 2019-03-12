@@ -11,6 +11,10 @@ import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
 public class Actor_Sensor_am extends AtomicModelBase<Sensor_actor_om> {
+    @Override
+    protected void constructObjectModel() {
+        this.om = new Sensor_actor_om();
+    }
 
     public InputPort<Double, Double, SimTimeDouble, engage_result> in_engage_result;
     public InputPort<Double,Double, SimTimeDouble, env_info> in_env_info;
@@ -39,6 +43,7 @@ public class Actor_Sensor_am extends AtomicModelBase<Sensor_actor_om> {
         PERIOD = new Phase("PERIOD");   this.PERIOD.setLifeTime(10.0);
         REQUEST = new Phase("REQUEST");   this.REQUEST.setLifeTime(Double.POSITIVE_INFINITY);
         DETECT = new Phase("DETECT");   this.DETECT.setLifeTime(0.0);
+        this.phase = PERIOD;
     }
 
     @Override

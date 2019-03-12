@@ -1,5 +1,6 @@
 package combatSysModel.DEM.atomicModel;
 
+import asw.soa.view.Visual2dService;
 import combatSysModel.DEM.AtomicModelBase;
 import combatSysModel.OM.Maneuver_actor_om;
 import combatSysModel.portType.*;
@@ -9,6 +10,9 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+
+import javax.naming.NamingException;
+import java.rmi.RemoteException;
 
 public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
     public InputPort<Double, Double, SimTimeDouble, engage_result> in_engage_result;
@@ -37,9 +41,22 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
     @Override
     protected void constructPhase() {
         IDLE = new Phase("IDLE");   IDLE.setLifeTime(Double.POSITIVE_INFINITY);
-        MOVE = new Phase("MOVE");   MOVE.setLifeTime(10.0);
+        MOVE = new Phase("MOVE");   MOVE.setLifeTime(1.0);
         FUEL = new Phase("FUEL");   FUEL.setLifeTime(0.0);
-        this.phase = IDLE;
+        this.phase = MOVE;
+    }
+
+    @Override
+    protected void constructObjectModel() {
+        this.om = new Maneuver_actor_om();
+        //视图组件注册：
+        try {
+            Visual2dService.getInstance().register(this.om.getModelData().name, simulator, this.om.getModelData());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -77,12 +94,13 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
 
     @Override
     protected void deltaInternalFunc() {
+        System.out.println("---" + this.modelName+" -- deltaInternalFunc "+", SimTime: " + this.simulator.getSimulatorTime());
         if(this.phase.getName().equals(MOVE.getName())){
             this.om.cmd_Check();
             if(!this.om.isCmdCheckResult()){
                 this.om.motion_Equation();
-                this.om.getScen_info().startTime = this.simulator.getSimulatorTime();
-                this.om.getScen_info().stopTime = this.om.getScen_info().startTime + this.phase.getLifeTime();
+                this.om.getModelData().startTime = this.simulator.getSimulatorTime();
+                this.om.getModelData().stopTime = this.om.getModelData().startTime + this.phase.getLifeTime();
             }
             return;
         }
@@ -94,6 +112,7 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
 
     @Override
     protected void lambdaFunc() {
+        //System.out.println("---" + this.modelName+" --Send MSG"+", SimTime: " + this.simulator.getSimulatorTime());
         if(this.phase.getName().equals(MOVE.getName())){
            if(this.om.isCmdCheckResult()){
                this.om.getMove_finished().setSenderId(this.fullName);
@@ -117,6 +136,7 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
                 return;
             }
             if(!this.om.isFuelCheckResult()){
+                System.out.println("IDLE");
                 this.phase = MOVE;
                 return;
             }

@@ -18,6 +18,11 @@ import java.util.Map;
 
 public class Environment_am extends AtomicModelBase<Environment_om>{
 
+    @Override
+    protected void constructObjectModel() {
+        this.om = new Environment_om();
+    }
+
     public InputPort<Double,Double, SimTimeDouble, scen_info> in_scen_info;
     public InputPort<Double,Double, SimTimeDouble, move_result> in_move_result;
     public OutputPort<Double,Double, SimTimeDouble, env_info> out_env_info;

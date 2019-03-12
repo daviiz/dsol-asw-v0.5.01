@@ -23,8 +23,8 @@ public class Maneuver_cm extends CoupledModelBase {
     public OutputPort<Double, Double, SimTimeDouble, move_finished> out_move_finished;
     public OutputPort<Double, Double, SimTimeDouble, fuel_exhausted> out_fuel_exhausted;
 
-    private Actor_Maneuver_am actor;
-    private Updater_Maneuver_am updater;
+     Actor_Maneuver_am actor;
+     Updater_Maneuver_am updater;
 
 
     public Maneuver_cm(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
@@ -62,6 +62,8 @@ public class Maneuver_cm extends CoupledModelBase {
     protected void couplingComponent() {
         actor = new Actor_Maneuver_am("Actor",this);
         updater = new Updater_Maneuver_am("Updater",this);
+        actor.constructModel();
+        updater.constructModel();
         /**
          * EIC
          */

@@ -14,6 +14,11 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
 public class Updater_Sensor_am extends AtomicModelBase<Sensor_updater_om> {
 
+    @Override
+    protected void constructObjectModel() {
+        this.om = new Sensor_updater_om();
+    }
+
     public InputPort<Double, Double, SimTimeDouble, move_result> in_move_result;
     public InputPort<Double, Double, SimTimeDouble, request> in_request;
 
@@ -65,6 +70,7 @@ public class Updater_Sensor_am extends AtomicModelBase<Sensor_updater_om> {
     protected void deltaInternalFunc() {
         if(this.phase.getName().equals(REQUEST.getName())){
             this.om.data_integrator();
+            this.phase = UPDATE;
             return;
         }
     }

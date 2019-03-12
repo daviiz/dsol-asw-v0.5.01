@@ -11,6 +11,14 @@ public class Platform_Controller_updater_om extends ObjectModelBase {
     private env_info env_info;
     private target_info target_info;
 
+    public Platform_Controller_updater_om(){
+        threat_info = new threat_info();
+        env_info = new env_info();
+        target_info = new target_info();
+
+    }
+
+
     public void identification(){
         this.target_info.setEnv_info(threat_info.getEnv_info());
     }
