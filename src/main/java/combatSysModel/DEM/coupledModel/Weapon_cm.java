@@ -29,9 +29,9 @@ public class Weapon_cm extends CoupledModelBase {
     /**
      * component models
      */
-     Maneuver_cm m;
-     Sensor_cm s;
-     Controller_Weapon_cm c;
+    public Maneuver_cm m;
+    public Sensor_cm s;
+    public Controller_Weapon_cm c;
 
     public Weapon_cm(String modelName) {
         super(modelName);

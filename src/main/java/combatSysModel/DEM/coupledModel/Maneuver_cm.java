@@ -23,8 +23,8 @@ public class Maneuver_cm extends CoupledModelBase {
     public OutputPort<Double, Double, SimTimeDouble, move_finished> out_move_finished;
     public OutputPort<Double, Double, SimTimeDouble, fuel_exhausted> out_fuel_exhausted;
 
-     Actor_Maneuver_am actor;
-     Updater_Maneuver_am updater;
+    public Actor_Maneuver_am actor;
+    public Updater_Maneuver_am updater;
 
 
     public Maneuver_cm(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {

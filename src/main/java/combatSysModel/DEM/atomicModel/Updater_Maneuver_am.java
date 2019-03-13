@@ -33,7 +33,7 @@ public class Updater_Maneuver_am extends AtomicModelBase<Maneuver_updater_om> {
     protected void constructPhase() {
         WAIT = new Phase("WAIT");   WAIT.setLifeTime(Double.POSITIVE_INFINITY);
         INTERPRETATION = new Phase("INTERPRETATION");    INTERPRETATION.setLifeTime(0.0);
-        this.phase = INTERPRETATION;
+        this.phase = WAIT;
     }
 
 

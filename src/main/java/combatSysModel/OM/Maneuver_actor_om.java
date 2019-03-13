@@ -42,8 +42,8 @@ public class Maneuver_actor_om  extends ObjectModelBase {
         this.env_info.location = new CartesianPoint(500.0,500.0,0.0);
 
         //模型初始化：
-        modelData = new ModelData("Fleet");
-        modelData.origin = modelData.destination = new CartesianPoint(-200, -50, 0);
+        //modelData = new ModelData("Fleet");
+        //modelData.origin = modelData.destination = new CartesianPoint(-200, -50, 0);
     }
 
 
@@ -58,6 +58,7 @@ public class Maneuver_actor_om  extends ObjectModelBase {
                     this.modelData.speed,(cmd_info.cmd==COMMAND.DEFAULT));
             //modelData.destination = new CartesianPoint(modelData.origin.x+modelData.speed, modelData.origin.y+modelData.speed, 0);
             this.move_result.location = modelData.destination;
+            this.move_result.camp = modelData.belong;
             this.move_finished.isFinished = true;
         }
     }

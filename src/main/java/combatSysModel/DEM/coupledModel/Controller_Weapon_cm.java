@@ -19,8 +19,8 @@ public class Controller_Weapon_cm extends CoupledModelBase {
 
     public OutputPort<Double, Double, SimTimeDouble, combatSysModel.portType.move_cmd> out_move_cmd;
 
-     Actor_Controller_Weapon_am actor;
-     Updater_Controller_Weapon_am updater;
+    public Actor_Controller_Weapon_am actor;
+    public Updater_Controller_Weapon_am updater;
 
     public Controller_Weapon_cm(String modelName) {
         super(modelName);

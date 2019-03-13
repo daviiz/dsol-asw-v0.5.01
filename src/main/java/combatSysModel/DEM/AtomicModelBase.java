@@ -31,8 +31,12 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
     }
 
     @Override
-    protected void deltaExternal(Double e, Object value) {
-        this.elapsedTime += e;
+    protected synchronized void deltaExternal(Double e, Object value) {
+        if(this.phase.getLifeTime() > 99999999.0){
+            this.elapsedTime = 0.0;
+        }else{
+            this.elapsedTime += e;
+        }
         deltaExternalFunc(value);
     }
 
@@ -45,14 +49,15 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
     }
 
     @Override
-    protected void lambda() {
-        System.out.println("---" + this.fullName+" -- !!!!!!!!!!!!!! "+", SimTime: " + this.simulator.getSimulatorTime());
+    protected synchronized void lambda() {
+
         //ensure updated message output each simulation frame:
         if(this.om == null){
-            System.out.println("!!!!!!!!!!!!!!  "+this.fullName+"'s om is NULL");
+            //System.out.println("!!!!!!!!!!!!!!  "+this.fullName+"'s om is NULL");
             return;
         }
         if(this.om.status){
+            System.out.println("---" + this.fullName+" -- 输出 "+", SimTime: " + this.simulator.getSimulatorTime());
             lambdaFunc();
         }
         this.om.setStatusInvalid();

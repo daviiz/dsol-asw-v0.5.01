@@ -89,21 +89,21 @@ public class ModelData implements java.io.Serializable {
             this.speed = 0.4;
         } else if (this.name.contains("Sub")) {
             this.color = Color.BLUE;
-            this.detectRange = 1000;
+            this.detectRange = 400;
             this.belong = -1;
-            this.speed = 2;
+            this.speed = 0.2;
 
         } else if (this.name.contains("Decoy")) {
             this.color = Color.PINK;
             this.detectRange = 100;
             this.belong = 1;
-            this.speed = 2;
+            this.speed = 0.4;
 
         } else if (this.name.contains("Torpedo")) {
             this.color = Color.CYAN;
             this.detectRange = 150;
             this.belong = -1;
-            this.speed = 4;
+            this.speed = 0.9;
         }
     }
     public ModelData(scen_info info){

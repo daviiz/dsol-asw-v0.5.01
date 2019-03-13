@@ -215,7 +215,7 @@ public abstract class AtomicModel<A extends Comparable<A>, R extends Number & Co
      */
     private void schedule()
     {
-        System.out.println("--------"+(this.timeAdvance().doubleValue())+" is Infinity:" +(this.timeAdvance().doubleValue() == Double.POSITIVE_INFINITY));
+        //System.out.println("--------"+(this.timeAdvance().doubleValue())+" is Infinity:" +(this.timeAdvance().doubleValue() == Double.POSITIVE_INFINITY));
         if (this.timeAdvance().doubleValue() != Double.POSITIVE_INFINITY && !this.conflict)
         {
             try

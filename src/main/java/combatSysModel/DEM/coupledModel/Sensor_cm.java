@@ -22,8 +22,8 @@ class Sensor_cm extends CoupledModelBase {
 
     public OutputPort<Double, Double, SimTimeDouble, threat_info> out_threat_info;
 
-     Actor_Sensor_am actor;
-     Updater_Sensor_am updater;
+    public Actor_Sensor_am actor;
+    public Updater_Sensor_am updater;
 
     public Sensor_cm(String modelName) {
         super(modelName);

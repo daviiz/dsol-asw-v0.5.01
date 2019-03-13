@@ -24,8 +24,8 @@ public class Controller_Platform_cm extends CoupledModelBase {
     public OutputPort<Double, Double, SimTimeDouble, combatSysModel.portType.move_cmd> out_move_cmd;
     public OutputPort<Double, Double, SimTimeDouble, combatSysModel.portType.wp_guidance> out_wp_guidance;
 
-     Actor_Controller_Platform_am actor;
-     Updater_Controller_Platform_am updater;
+    public Actor_Controller_Platform_am actor;
+    public Updater_Controller_Platform_am updater;
 
     public Controller_Platform_cm(String modelName, DEVSSimulatorInterface.TimeDouble simulator) {
         super(modelName, simulator);

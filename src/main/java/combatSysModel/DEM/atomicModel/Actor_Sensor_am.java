@@ -43,7 +43,7 @@ public class Actor_Sensor_am extends AtomicModelBase<Sensor_actor_om> {
         PERIOD = new Phase("PERIOD");   this.PERIOD.setLifeTime(10.0);
         REQUEST = new Phase("REQUEST");   this.REQUEST.setLifeTime(Double.POSITIVE_INFINITY);
         DETECT = new Phase("DETECT");   this.DETECT.setLifeTime(0.0);
-        this.phase = PERIOD;
+        this.phase = IDLE;
     }
 
     @Override

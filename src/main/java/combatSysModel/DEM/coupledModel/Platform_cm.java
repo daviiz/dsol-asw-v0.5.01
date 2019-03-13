@@ -31,9 +31,9 @@ public class Platform_cm extends CoupledModelBase {
     /**
      * component models
      */
-     Maneuver_cm maneuver;
-     Sensor_cm sensor;
-     Controller_Platform_cm controller;
+    public Maneuver_cm maneuver;
+    public Sensor_cm sensor;
+    public Controller_Platform_cm controller;
 
     public Platform_cm(String modelName) { super(modelName); }
 

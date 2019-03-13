@@ -1,8 +1,15 @@
 package combatSysModel.main;
 
+import asw.soa.data.ModelData;
+import asw.soa.view.Visual2dService;
 import combatSysModel.DEM.coupledModel.ASW_CM;
+import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.language.d3.CartesianPoint;
+
+import javax.naming.NamingException;
+import java.rmi.RemoteException;
 
 public class ASWModel6 extends AbstractDSOLModel.TimeDouble<DEVSSimulatorInterface.TimeDouble> {
 
@@ -13,26 +20,39 @@ public class ASWModel6 extends AbstractDSOLModel.TimeDouble<DEVSSimulatorInterfa
     @Override
     public void constructModel() /* throws SimRuntimeException */ {
 
-        //模型初始化：
-        //ModelData f1Data = new ModelData("Fleet");
-        //f1Data.origin = f1Data.destination = new CartesianPoint(-200, -50, 0);
-        //ModelData s1Data = new ModelData("Submarine");
-        //s1Data.origin = s1Data.destination = new CartesianPoint(200, 100, 0);
+        /**
+         * DSOL内置了统计仿真过程和结果的模块，不实现实验帧以及统计模型--DSOL通过xml配置配置结合开发
+         */
 
+        //模型数据准备：
+        ModelData f1Data = new ModelData("Fleet");
+        f1Data.origin = f1Data.destination = new CartesianPoint(-200, -50, 0);
+        ModelData s1Data = new ModelData("Submarine");
+        s1Data.origin = s1Data.destination = new CartesianPoint(200, 100, 0);
+        ModelData[] mData = {f1Data,s1Data};
+
+        /**
+         * 模型初始化及构造
+         */
         ASW_CM root = new ASW_CM("");
         root.setSimulator(this.simulator);
         root.constructModel();
 
 
-//        try {
-//            Visual2dService.getInstance().register(f1Data.name, simulator, f1Data);
-//            //Visual2dService.getInstance().register(s1Data.name, simulator, s1Data);
-//
-//        } catch (NamingException e) {
-//            SimLogger.always().error(e);
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
+        /**
+         *  可视化组件注册：
+         */
+        try {
+            root.fleet.maneuver.actor.getOm().setModelData(mData[0]);
+            root.submarine.maneuver.actor.getOm().setModelData(mData[1]);
+            Visual2dService.getInstance().register(mData[0].name, simulator, mData[0]);
+            Visual2dService.getInstance().register(mData[1].name, simulator, mData[1]);
+
+        } catch (NamingException e) {
+            SimLogger.always().error(e);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
 
     }
 }

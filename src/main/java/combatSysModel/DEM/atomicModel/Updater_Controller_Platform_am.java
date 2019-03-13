@@ -39,7 +39,7 @@ public class Updater_Controller_Platform_am extends AtomicModelBase<Platform_Con
         WAIT.setLifeTime(Double.POSITIVE_INFINITY);
         IDENTIFICATION = new Phase("IDENTIFICATION");
         IDENTIFICATION.setLifeTime(15.0);
-        this.phase = IDENTIFICATION;
+        this.phase = WAIT;
     }
 
     @Override
