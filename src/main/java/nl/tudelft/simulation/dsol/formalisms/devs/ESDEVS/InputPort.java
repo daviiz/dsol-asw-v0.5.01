@@ -97,9 +97,9 @@ public class InputPort<A extends Comparable<A>, R extends Number & Comparable<R>
                 {
                     SimLogger.always().error("{} received: e:{} - ta:{} ",atomicModel.toString(), atomicModel.elapsedTime(time),
                             atomicModel.timeAdvance());
-//                    SimLogger.always().error("receive - IMPOSSIBLE !!! TIME SYNCHRONIZATION PROBLEM {}",
-//                            atomicModel.toString());
-//                    System.err.println("IMPOSSIBLE !!! TIME SYNCHRONIZATION PROBLEM " + atomicModel.toString());
+                    SimLogger.always().error("receive - IMPOSSIBLE !!! TIME SYNCHRONIZATION PROBLEM {}",
+                            atomicModel.toString());
+                    System.err.println("IMPOSSIBLE !!! TIME SYNCHRONIZATION PROBLEM " + atomicModel.toString());
                 }
                 else
                 {
