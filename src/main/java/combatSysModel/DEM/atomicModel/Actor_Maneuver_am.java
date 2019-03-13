@@ -36,7 +36,7 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
 
     @Override
     protected void constructPhase() {
-        IDLE = new Phase("IDLE");   IDLE.setLifeTime(Double.POSITIVE_INFINITY);
+        IDLE = new Phase("IDLE");   IDLE.setLifeTime(1000000);
         MOVE = new Phase("MOVE");   MOVE.setLifeTime(7.0);
         FUEL = new Phase("FUEL");   FUEL.setLifeTime(0.0);
         this.phase = MOVE;
@@ -69,7 +69,10 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
                 return;
             }
             if(this.activePort == in_env_info){
-                //this.om.setEnv_info((env_info) value);
+                env_info e = (env_info) value;
+                if(e.camp != this.om.getModelData().belong){
+                    this.om.setEnv_info((env_info) value);
+                }
                 return;
             }
             if(this.activePort == in_cmd_info){

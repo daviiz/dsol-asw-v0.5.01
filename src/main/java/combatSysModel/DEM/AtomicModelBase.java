@@ -20,7 +20,7 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
 
     protected OMType om;
 
-    /** the last phase (if applicable). */
+    /** the last phase (if needed). */
     protected Phase lastPhase = new Phase("");
 
     @Override
@@ -49,15 +49,12 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
     }
 
     @Override
-    protected synchronized void lambda() {
-
+    protected void lambda() {
         //ensure updated message output each simulation frame:
         if(this.om == null){
-            //System.out.println("!!!!!!!!!!!!!!  "+this.fullName+"'s om is NULL");
             return;
         }
         if(this.om.status){
-            System.out.println("---" + this.fullName+" -- 输出 "+", SimTime: " + this.simulator.getSimulatorTime());
             lambdaFunc();
         }
         this.om.setStatusInvalid();

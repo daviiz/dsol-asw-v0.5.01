@@ -53,6 +53,7 @@ public class SimUtil {
         if (des_y < src_y) {
             _delta_y = _delta_y * (-1);
         }
+        //System.out.println("******************"+src_x);
         if (isFllow)
             return new CartesianPoint(src_x + _delta_x, src_y + _delta_y, 0);
         else

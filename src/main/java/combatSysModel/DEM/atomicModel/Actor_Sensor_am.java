@@ -39,9 +39,9 @@ public class Actor_Sensor_am extends AtomicModelBase<Sensor_actor_om> {
 
     @Override
     protected void constructPhase() {
-        IDLE = new Phase("IDLE");   this.IDLE.setLifeTime(Double.POSITIVE_INFINITY);
+        IDLE = new Phase("IDLE");   this.IDLE.setLifeTime(1000000);
         PERIOD = new Phase("PERIOD");   this.PERIOD.setLifeTime(10.0);
-        REQUEST = new Phase("REQUEST");   this.REQUEST.setLifeTime(Double.POSITIVE_INFINITY);
+        REQUEST = new Phase("REQUEST");   this.REQUEST.setLifeTime(1000000);
         DETECT = new Phase("DETECT");   this.DETECT.setLifeTime(0.0);
         this.phase = IDLE;
     }
@@ -62,7 +62,7 @@ public class Actor_Sensor_am extends AtomicModelBase<Sensor_actor_om> {
                 return;
             }
             if(this.activePort == in_env_info){
-                this.om.setIn_env_info((env_info)value);
+                //this.om.setIn_env_info((env_info)value);
                 return;
             }
             return;

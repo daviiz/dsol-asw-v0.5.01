@@ -39,7 +39,7 @@ public class Maneuver_actor_om  extends ObjectModelBase {
         fuelCheckResult = false;
 
         //测试用：
-        this.env_info.location = new CartesianPoint(500.0,500.0,0.0);
+        //this.env_info.location = new CartesianPoint(500.0,500.0,0.0);
 
         //模型初始化：
         //modelData = new ModelData("Fleet");
@@ -57,6 +57,7 @@ public class Maneuver_actor_om  extends ObjectModelBase {
             modelData.destination = SimUtil.nextPoint(this.modelData.origin.x,this.modelData.origin.y,this.env_info.location.x,this.env_info.location.y,
                     this.modelData.speed,(cmd_info.cmd==COMMAND.DEFAULT));
             //modelData.destination = new CartesianPoint(modelData.origin.x+modelData.speed, modelData.origin.y+modelData.speed, 0);
+            //System.out.println("==============="+this.move_result.location.x);
             this.move_result.location = modelData.destination;
             this.move_result.camp = modelData.belong;
             this.move_finished.isFinished = true;

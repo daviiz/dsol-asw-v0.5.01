@@ -44,7 +44,7 @@ public class Updater_Sensor_am extends AtomicModelBase<Sensor_updater_om> {
 
     @Override
     protected void constructPhase() {
-        UPDATE = new Phase("UPDATE");  UPDATE.setLifeTime(Double.POSITIVE_INFINITY);
+        UPDATE = new Phase("UPDATE");  UPDATE.setLifeTime(1000000);
         REQUEST = new Phase("REQUEST"); REQUEST.setLifeTime(0.0);
         this.phase = UPDATE;
     }

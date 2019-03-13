@@ -9,14 +9,13 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.InputPort;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
+import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class Environment_am extends AtomicModelBase<Environment_om>{
 
@@ -29,11 +28,11 @@ public class Environment_am extends AtomicModelBase<Environment_om>{
     public InputPort<Double,Double, SimTimeDouble, move_result> in_move_result;
     public OutputPort<Double,Double, SimTimeDouble, env_info> out_env_info;
 
-    private Map<String,env_info> result = new ConcurrentHashMap<String,env_info>();
+    private Map<String,env_info> result = new HashMap<String,env_info>();
 
     private Phase INFINITY;
 
-    private env_info env_info;
+//    private env_info env_info;
 
     @Override
     protected void constructPort() {
@@ -50,17 +49,17 @@ public class Environment_am extends AtomicModelBase<Environment_om>{
     }
 
     @Override
-    protected synchronized void deltaExternalFunc(Object value) {
+    protected  void deltaExternalFunc(Object value) {
         if (this.phase.getName().equals("INFINITY")) {
             move_result tmp = (move_result)value;
             // convert move_result to env_info
             // ...
-
-            env_info.location = tmp.location;
-            env_info.entityName = (tmp.getSenderId());
-            env_info.camp = tmp.camp;
-
             if(tmp.camp !=0){
+                env_info env_info = new env_info();
+                env_info.location = tmp.location;
+                env_info.entityName = (tmp.getSenderId());
+                env_info.camp = tmp.camp;
+                //SimLogger.always().error("===================From {} - to {} ,: x:{} - y:{} ",tmp.getSenderId(),this.fullName, tmp.location.x,tmp.location.y);
                 if(result.containsKey(tmp.getSenderId())){
                     result.remove(tmp.getSenderId());
                     result.put(tmp.getSenderId(),env_info);
@@ -77,7 +76,7 @@ public class Environment_am extends AtomicModelBase<Environment_om>{
     }
 
     @Override
-    protected synchronized void lambdaFunc() {
+    protected  void lambdaFunc() {
         if (this.phase.getName().equals("INFINITY") && result.size()>0) {
 
             Iterator iter = result.entrySet().iterator();
@@ -109,7 +108,6 @@ public class Environment_am extends AtomicModelBase<Environment_om>{
 
     public Environment_am(String modelName, CoupledModel.TimeDouble parentModel) {
         super(modelName, parentModel);
-        env_info = new env_info();
     }
 
     public Environment_am(String modelName, DEVSSimulator.TimeDouble simulator) {

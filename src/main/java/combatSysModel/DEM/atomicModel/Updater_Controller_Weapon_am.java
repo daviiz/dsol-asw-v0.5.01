@@ -37,7 +37,7 @@ public class Updater_Controller_Weapon_am extends AtomicModelBase<Weapon_Control
     @Override
     protected void constructPhase() {
         WAIT = new Phase("WAIT");
-        WAIT.setLifeTime(Double.POSITIVE_INFINITY);
+        WAIT.setLifeTime(1000000);
         IDENTIFICATION = new Phase("IDENTIFICATION");
         IDENTIFICATION.setLifeTime(15.0);
         this.phase = WAIT;

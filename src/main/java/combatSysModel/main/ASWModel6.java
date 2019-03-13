@@ -21,7 +21,7 @@ public class ASWModel6 extends AbstractDSOLModel.TimeDouble<DEVSSimulatorInterfa
     public void constructModel() /* throws SimRuntimeException */ {
 
         /**
-         * DSOL内置了统计仿真过程和结果的模块，不实现实验帧以及统计模型--DSOL通过xml配置配置结合开发
+         * DSOL内置了统计仿真过程和结果的模块，暂不实现实验帧以及统计模型--DSOL通过xml配置配置结合开发
          */
 
         //模型数据准备：
