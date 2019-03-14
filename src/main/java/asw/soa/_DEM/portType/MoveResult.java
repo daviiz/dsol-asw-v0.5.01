@@ -1,6 +1,6 @@
 package asw.soa._DEM.portType;
 
-import asw.soa.data.ModelData;
+import asw.soa.data.ViewData;
 
 public class MoveResult implements java.io.Serializable {
     /**
@@ -40,7 +40,7 @@ public class MoveResult implements java.io.Serializable {
         this.z = z;
     }
 
-    public MoveResult(ModelData data) {
+    public MoveResult(ViewData data) {
         this.name = data.name;
         this.belong = data.belong;
         this.x = data.origin.x;

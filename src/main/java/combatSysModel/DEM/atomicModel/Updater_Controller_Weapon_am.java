@@ -1,6 +1,6 @@
 package combatSysModel.DEM.atomicModel;
 
-import combatSysModel.DEM.AtomicModelBase;
+import devs.core.AtomicModelBase;
 import combatSysModel.OM.Weapon_Controller_updater_om;
 import combatSysModel.portType.scen_info;
 import combatSysModel.portType.target_info;

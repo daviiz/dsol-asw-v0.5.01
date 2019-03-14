@@ -5,7 +5,7 @@ import asw.soa._DEM.portType.MoveCmd;
 import asw.soa._DEM.portType.MoveResult;
 import asw.soa._OM.Fleet_OM;
 import asw.soa._OM.Submarine_OM;
-import asw.soa.data.ModelData;
+import asw.soa.data.ViewData;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortAlreadyDefinedException;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
@@ -31,11 +31,11 @@ public class Maneuver extends AtomicModel<Double, Double, SimTimeDouble> {
     /**
      * 模型私有数据
      */
-    private ModelData data;
+    private ViewData data;
     private ENT_INFO target;
     private MoveCmd moveCmd;
 
-    public Maneuver(String modelName, CoupledModel<Double, Double, SimTimeDouble> parentModel, ModelData data) {
+    public Maneuver(String modelName, CoupledModel<Double, Double, SimTimeDouble> parentModel, ViewData data) {
         super(modelName, parentModel);
         this.data = data;
         //this.conflictStrategy = false;

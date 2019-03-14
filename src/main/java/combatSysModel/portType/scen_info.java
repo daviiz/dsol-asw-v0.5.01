@@ -1,7 +1,7 @@
 package combatSysModel.portType;
 
-import asw.soa.data.ModelData;
-import combatSysModel.DEM.PortTypeBase;
+import asw.soa.data.ViewData;
+import devs.core.PortTypeBase;
 import nl.tudelft.simulation.language.d3.CartesianPoint;
 
 import java.awt.*;
@@ -80,7 +80,7 @@ public class scen_info extends PortTypeBase {
 
     }
 
-    public scen_info(ModelData info){
+    public scen_info(ViewData info){
         this.color = info.color;
         this.detectRange = info.detectRange;
         this.x1 = info.x1;

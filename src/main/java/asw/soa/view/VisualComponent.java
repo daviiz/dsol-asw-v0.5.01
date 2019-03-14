@@ -1,6 +1,6 @@
 package asw.soa.view;
 
-import asw.soa.data.ModelData;
+import asw.soa.data.ViewData;
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
@@ -13,10 +13,10 @@ import java.rmi.RemoteException;
 
 public class VisualComponent implements Locatable {
 
-    private ModelData _mdata = new ModelData();
+    private ViewData _mdata = new ViewData();
     private DEVSSimulatorInterface<Double,Double, SimTimeDouble> simulator = null;
 
-    public VisualComponent(ModelData data, DEVSSimulatorInterface<Double,Double, SimTimeDouble> simulator) {
+    public VisualComponent(ViewData data, DEVSSimulatorInterface<Double,Double, SimTimeDouble> simulator) {
         this._mdata = data;
         this.simulator = simulator;
     }
@@ -31,7 +31,7 @@ public class VisualComponent implements Locatable {
 
     @Override
     public Bounds getBounds() throws RemoteException {
-        return new BoundingSphere(new Point3d(0, 0, 0), ModelData.RADIUS);
+        return new BoundingSphere(new Point3d(0, 0, 0), ViewData.RADIUS);
     }
 
 }

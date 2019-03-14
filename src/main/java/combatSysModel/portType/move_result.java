@@ -1,6 +1,6 @@
 package combatSysModel.portType;
 
-import combatSysModel.DEM.PortTypeBase;
+import devs.core.PortTypeBase;
 import nl.tudelft.simulation.language.d3.CartesianPoint;
 
 public class move_result extends PortTypeBase {

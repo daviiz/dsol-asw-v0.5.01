@@ -1,6 +1,6 @@
 package combatSysModel.DEM.coupledModel;
 
-import combatSysModel.DEM.CoupledModelBase;
+import devs.core.CoupledModelBase;
 import combatSysModel.DEM.atomicModel.Environment_am;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 

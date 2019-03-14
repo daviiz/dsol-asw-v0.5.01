@@ -1,6 +1,6 @@
 package combatSysModel.OM;
 
-import combatSysModel.DEM.ObjectModelBase;
+import devs.core.ObjectModelBase;
 import combatSysModel.portType.*;
 
 public class Weapon_Controller_actor_om  extends ObjectModelBase {

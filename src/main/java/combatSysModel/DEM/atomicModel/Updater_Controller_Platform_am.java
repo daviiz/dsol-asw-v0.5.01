@@ -1,6 +1,6 @@
 package combatSysModel.DEM.atomicModel;
 
-import combatSysModel.DEM.AtomicModelBase;
+import devs.core.AtomicModelBase;
 import combatSysModel.OM.Platform_Controller_updater_om;
 import combatSysModel.portType.env_info;
 import combatSysModel.portType.target_info;

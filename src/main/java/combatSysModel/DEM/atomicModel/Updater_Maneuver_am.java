@@ -1,6 +1,6 @@
 package combatSysModel.DEM.atomicModel;
 
-import combatSysModel.DEM.AtomicModelBase;
+import devs.core.AtomicModelBase;
 import combatSysModel.OM.Maneuver_updater_om;
 import combatSysModel.portType.cmd_info;
 import combatSysModel.portType.move_cmd;

@@ -1,4 +1,4 @@
-package combatSysModel.DEM;
+package devs.core;
 
 public interface IDEVSModel {
     void constructModel();

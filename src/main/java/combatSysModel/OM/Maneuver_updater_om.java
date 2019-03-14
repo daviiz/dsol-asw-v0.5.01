@@ -1,6 +1,6 @@
 package combatSysModel.OM;
 
-import combatSysModel.DEM.ObjectModelBase;
+import devs.core.ObjectModelBase;
 import combatSysModel.portType.cmd_info;
 import combatSysModel.portType.move_cmd;
 

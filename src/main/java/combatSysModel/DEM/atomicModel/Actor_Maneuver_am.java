@@ -1,6 +1,6 @@
 package combatSysModel.DEM.atomicModel;
 
-import combatSysModel.DEM.AtomicModelBase;
+import devs.core.AtomicModelBase;
 import combatSysModel.OM.Maneuver_actor_om;
 import combatSysModel.portType.*;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
@@ -70,7 +70,7 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
             }
             if(this.activePort == in_env_info){
                 env_info e = (env_info) value;
-                if(e.camp != this.om.getModelData().belong){
+                if(e.camp != this.om.getViewData().belong){
                     this.om.setEnv_info((env_info) value);
                 }
                 return;
@@ -90,8 +90,8 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
             this.om.cmd_Check();
             if(!this.om.isCmdCheckResult()){
                 this.om.motion_Equation();
-                this.om.getModelData().startTime = this.simulator.getSimulatorTime();
-                this.om.getModelData().stopTime = this.om.getModelData().startTime + this.phase.getLifeTime();
+                this.om.getViewData().startTime = this.simulator.getSimulatorTime();
+                this.om.getViewData().stopTime = this.om.getViewData().startTime + this.phase.getLifeTime();
             }
             return;
         }

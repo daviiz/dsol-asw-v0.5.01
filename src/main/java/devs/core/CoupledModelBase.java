@@ -1,4 +1,4 @@
-package combatSysModel.DEM;
+package devs.core;
 
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
@@ -21,7 +21,6 @@ public abstract class CoupledModelBase extends CoupledModel.TimeDouble implement
     protected abstract void constructPort();
     /**
      *  coupling relation construction
-     *  根耦合模型此方法为空
      */
     protected abstract void couplingComponent();
 
@@ -29,14 +28,8 @@ public abstract class CoupledModelBase extends CoupledModel.TimeDouble implement
      * unify the coupling structure's construct code
      */
     @Override
-    public void constructModel() {
-        if(this.parentModel == null){
-            couplingComponent();
-            constructPort();
-        }else{
-            constructPort();
-            couplingComponent();
-        }
-
+    public final void constructModel() {
+        constructPort();
+        couplingComponent();
     }
 }

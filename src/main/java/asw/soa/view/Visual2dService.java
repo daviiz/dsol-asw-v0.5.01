@@ -1,11 +1,9 @@
 package asw.soa.view;
 
-import asw.soa.data.ModelData;
-import combatSysModel.portType.scen_info;
+import asw.soa.data.ViewData;
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface.TimeDouble;
 
@@ -38,7 +36,7 @@ public class Visual2dService {
         components.put(name, c);
     }
 
-    public synchronized void update(ModelData data) {
+    public synchronized void update(ViewData data) {
         for (HashMap.Entry<String, Visual2dRender> entry : components.entrySet()) {
             if (entry.getKey().equals(data.name)) {
                 Visual2dRender v = entry.getValue();
@@ -57,7 +55,7 @@ public class Visual2dService {
      * @throws RemoteException
      * @throws NamingException
      */
-    public void register(String name, Locatable loc, TimeDouble simulator, ModelData _data) throws RemoteException, NamingException {
+    public void register(String name, Locatable loc, TimeDouble simulator, ViewData _data) throws RemoteException, NamingException {
         if (loc == null || name == null || name.equals("") || simulator == null || _data == null)
             return;
 
@@ -80,7 +78,7 @@ public class Visual2dService {
      * @throws RemoteException
      * @throws NamingException
      */
-    public void register(String name, DEVSSimulatorInterface<Double,Double, SimTimeDouble> simulator, ModelData _data) throws RemoteException, NamingException {
+    public void register(String name, DEVSSimulatorInterface<Double,Double, SimTimeDouble> simulator, ViewData _data) throws RemoteException, NamingException {
         if (name == null || name.equals("") || simulator == null || _data == null)
             return;
 

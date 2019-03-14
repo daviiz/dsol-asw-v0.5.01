@@ -1,7 +1,7 @@
 package asw.soa.view;
 
 import asw.soa.data.LineData;
-import asw.soa.data.ModelData;
+import asw.soa.data.ViewData;
 import nl.tudelft.simulation.dsol.animation.D2.Renderable2D;
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
@@ -20,7 +20,7 @@ public class Visual2dRender extends Renderable2D<Locatable> {
     /**
      * 用于渲染所用的所有模型数据
      */
-    private ModelData data = new ModelData();
+    private ViewData data = new ViewData();
 
     private Graphics2D graphics;
     private ImageObserver observer;
@@ -41,7 +41,7 @@ public class Visual2dRender extends Renderable2D<Locatable> {
         this.data.lineData = _target;
     }
 
-    public Visual2dRender(final Locatable source, final SimulatorInterface<Double,Double, SimTimeDouble> simulator, ModelData _data)
+    public Visual2dRender(final Locatable source, final SimulatorInterface<Double,Double, SimTimeDouble> simulator, ViewData _data)
             throws RemoteException, NamingException {
         super(source, simulator);
         this.data = _data;
@@ -105,15 +105,15 @@ public class Visual2dRender extends Renderable2D<Locatable> {
      *
      * @param data2
      */
-    public void update(ModelData data2) {
+    public void update(ViewData data2) {
         this.data = data2;
     }
 
-    public ModelData getData() {
+    public ViewData getData() {
         return data;
     }
 
-    public void setData(ModelData data) {
+    public void setData(ViewData data) {
         this.data = data;
     }
 }

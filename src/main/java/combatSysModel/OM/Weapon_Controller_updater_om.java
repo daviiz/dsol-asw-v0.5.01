@@ -1,6 +1,6 @@
 package combatSysModel.OM;
 
-import combatSysModel.DEM.ObjectModelBase;
+import devs.core.ObjectModelBase;
 import combatSysModel.portType.scen_info;
 import combatSysModel.portType.target_info;
 import combatSysModel.portType.threat_info;

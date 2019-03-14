@@ -1,7 +1,7 @@
 package asw.soa._DEM.coupledModel;
 
 import asw.soa._DEM.portType.MoveResult;
-import asw.soa.data.ModelData;
+import asw.soa.data.ViewData;
 import asw.soa._DEM.atomicModel.Controller;
 import asw.soa._DEM.atomicModel.Maneuver;
 import asw.soa._DEM.atomicModel.Sensor;
@@ -25,7 +25,7 @@ public class Fleet extends CoupledModel<Double, Double, SimTimeDouble> {
         super(modelName, parentModel);
     }
 
-    public void initialize(ModelData data) {
+    public void initialize(ViewData data) {
         in_ENV_INFO = new InputPort<Double, Double, SimTimeDouble, MoveResult>(this);
         out_ENT_INFO = new OutputPort<Double, Double, SimTimeDouble, MoveResult>(this);
 

@@ -1,6 +1,6 @@
 package combatSysModel.DEM.atomicModel;
 
-import combatSysModel.DEM.AtomicModelBase;
+import devs.core.AtomicModelBase;
 import combatSysModel.OM.Environment_om;
 import combatSysModel.portType.env_info;
 import combatSysModel.portType.move_result;
@@ -9,7 +9,6 @@ import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.InputPort;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.OutputPort;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.Phase;
-import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 

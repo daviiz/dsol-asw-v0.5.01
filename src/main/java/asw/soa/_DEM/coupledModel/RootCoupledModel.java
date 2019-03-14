@@ -1,6 +1,6 @@
 package asw.soa._DEM.coupledModel;
 
-import asw.soa.data.ModelData;
+import asw.soa.data.ViewData;
 import asw.soa._DEM.atomicModel.Environment;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
 import nl.tudelft.simulation.dsol.simtime.SimTimeDouble;
@@ -15,7 +15,7 @@ public class RootCoupledModel extends CoupledModel<Double, Double, SimTimeDouble
         super(modelName);
     }
 
-    public void initialize(ModelData f1Data, ModelData s1Data) {
+    public void initialize(ViewData f1Data, ViewData s1Data) {
         sub = new Submarine("Submarine", this);
         sub.initialize(s1Data);
         fleet = new Fleet("Fleet", this);

@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * @author daiwenzhi
  */
-public class ModelData implements java.io.Serializable {
+public class ViewData implements java.io.Serializable {
 
     /**
      * the radius of the ball.
@@ -29,11 +29,11 @@ public class ModelData implements java.io.Serializable {
     /**
      * the start time.
      */
-    public double startTime = 0.0;
+    public double startTime = Double.NaN;
     /**
      * the stop time.
      */
-    public double stopTime = 0.0;
+    public double stopTime = Double.NaN;
     /**
      * the angle of the ball.
      */
@@ -50,6 +50,10 @@ public class ModelData implements java.io.Serializable {
 
     public double speed = 0;
 
+    public int detectRange = 100;
+
+    public LineData lineData = new LineData(0, 0, 0, 0);
+
     /**
      * 通信数据链
      */
@@ -60,13 +64,8 @@ public class ModelData implements java.io.Serializable {
 
     public Color color = Color.RED;
 
-    public int detectRange = 100;
 
-    public LineData lineData = new LineData(0, 0, 0, 0);
-
-    private Integer id;
-
-    public ModelData(Color color, int detectRange, int x1, int y1, int x2, int y2) {
+    public ViewData(Color color, int detectRange, int x1, int y1, int x2, int y2) {
         this.color = color;
         this.detectRange = detectRange;
         this.x1 = x1;
@@ -76,18 +75,18 @@ public class ModelData implements java.io.Serializable {
         this.y2 = y2;
     }
 
-    public ModelData() {
+    public ViewData() {
 
     }
 
-    public ModelData(String name) {
+    public ViewData(String name) {
         this.name = name;
         if (this.name.contains("Fleet")) {
             this.color = Color.RED;
             this.detectRange = 200;
             this.belong = 1;
             this.speed = 0.4;
-        } else if (this.name.contains("Sub")) {
+        } else if (this.name.contains("Submarine")) {
             this.color = Color.BLUE;
             this.detectRange = 400;
             this.belong = -1;
@@ -106,7 +105,7 @@ public class ModelData implements java.io.Serializable {
             this.speed = 0.9;
         }
     }
-    public ModelData(scen_info info){
+    public ViewData(scen_info info){
         this.color = info.color;
         this.detectRange = info.detectRange;
         this.x1 = info.x1;
@@ -126,13 +125,4 @@ public class ModelData implements java.io.Serializable {
     public String toString() {
         return this.name;
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
 }

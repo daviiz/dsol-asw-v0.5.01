@@ -1,6 +1,6 @@
 package combatSysModel.DEM.atomicModel;
 
-import combatSysModel.DEM.AtomicModelBase;
+import devs.core.AtomicModelBase;
 import combatSysModel.OM.Sensor_updater_om;
 import combatSysModel.portType.move_result;
 import combatSysModel.portType.request;

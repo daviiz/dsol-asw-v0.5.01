@@ -1,6 +1,6 @@
 package asw.soa._DEM.portType;
 
-import asw.soa.data.ModelData;
+import asw.soa.data.ViewData;
 
 /**
  * @author daiwenzhi
@@ -61,7 +61,7 @@ public class ENT_INFO implements java.io.Serializable {
         this.y = tmp.y;
     }
 
-    public ENT_INFO(ModelData tmp) {
+    public ENT_INFO(ViewData tmp) {
         this.name = tmp.name;
         this.belong = tmp.belong;
         this.status = tmp.status;

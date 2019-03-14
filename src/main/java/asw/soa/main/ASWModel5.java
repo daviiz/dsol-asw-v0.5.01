@@ -1,6 +1,6 @@
 package asw.soa.main;
 
-import asw.soa.data.ModelData;
+import asw.soa.data.ViewData;
 import asw.soa._DEM.coupledModel.RootCoupledModel;
 import asw.soa.view.Visual2dService;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -26,9 +26,9 @@ public class ASWModel5 extends AbstractDSOLModel.TimeDouble<DEVSSimulatorInterfa
     public void constructModel() throws SimRuntimeException {
 
         //模型初始化：
-        ModelData f1Data = new ModelData("Fleet");
+        ViewData f1Data = new ViewData("Fleet");
         f1Data.origin = f1Data.destination = new CartesianPoint(-200, -50, 0);
-        ModelData s1Data = new ModelData("Submarine");
+        ViewData s1Data = new ViewData("Submarine");
         s1Data.origin = s1Data.destination = new CartesianPoint(200, 100, 0);
 
         RootCoupledModel root = new RootCoupledModel("root");

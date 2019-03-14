@@ -1,6 +1,6 @@
 package combatSysModel.DEM.coupledModel;
 
-import combatSysModel.DEM.CoupledModelBase;
+import devs.core.CoupledModelBase;
 import combatSysModel.DEM.atomicModel.Actor_Controller_Weapon_am;
 import combatSysModel.DEM.atomicModel.Updater_Controller_Weapon_am;
 import combatSysModel.portType.*;

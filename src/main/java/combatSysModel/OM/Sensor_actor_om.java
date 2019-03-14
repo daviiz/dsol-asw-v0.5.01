@@ -1,7 +1,7 @@
 package combatSysModel.OM;
 
 import asw.soa.util.SimUtil;
-import combatSysModel.DEM.ObjectModelBase;
+import devs.core.ObjectModelBase;
 import combatSysModel.portType.*;
 import nl.tudelft.simulation.language.d3.CartesianPoint;
 

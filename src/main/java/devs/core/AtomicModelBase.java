@@ -1,4 +1,4 @@
-package combatSysModel.DEM;
+package devs.core;
 
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.AtomicModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.CoupledModel;
@@ -23,15 +23,17 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
     /** the last phase (if needed). */
     protected Phase lastPhase = new Phase("");
 
+    protected String nextPhaseName = "";
+
     @Override
-    protected void deltaInternal() {
+    protected final void deltaInternal() {
         this.elapsedTime = 0.0;
         deltaInternalFunc();
         this.om.setStatusValid();
     }
 
     @Override
-    protected synchronized void deltaExternal(Double e, Object value) {
+    protected final void deltaExternal(Double e, Object value) {
         if(this.phase.getLifeTime() > 99999999.0){
             this.elapsedTime = 0.0;
         }else{
@@ -41,7 +43,7 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
     }
 
     @Override
-    protected Double timeAdvance() {
+    protected final Double timeAdvance() {
         double ta = this.phase.getLifeTime();
         if(this.phase.getLifeTime() < 0.00000001){
             this.elapsedTime = 0.0;
@@ -54,7 +56,7 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
     }
 
     @Override
-    protected void lambda() {
+    protected final void lambda() {
         //ensure updated message output each simulation frame:
         if(this.om == null){
             return;
@@ -89,8 +91,8 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
      * 原子模型外部函数，
      * 接收外部输入，无需考虑仿真事件时间推进，专注于业务逻辑
      * 外部转换函数一般用于：
-     * 1.接收输入；
-     * 2.模型状态跳转控制
+     * 1.接收输入
+     * 2.外部状态转换
      * 3.调用OM实现业务模型逻辑
      * @param value
      */
@@ -99,7 +101,8 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
     /**
      * 原子模型内部函数
      * 一般用于：
-     * 调用OM实现业务模型逻辑
+     * 1.调用OM实现业务模型逻辑
+     * 2.内部状态转换
      */
     protected abstract void deltaInternalFunc();
 
@@ -107,7 +110,6 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
      * 原子模型-输出函数：
      * 一般用于实现
      * 1.模型输出；
-     * 2.模型状态跳转控制
      */
     protected abstract void lambdaFunc();
 
@@ -121,19 +123,22 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
         super(modelName, simulator);
     }
 
+    /**
+     * 构造模型的顺序不能变！
+     */
     @Override
-    public void constructModel() {
+    public final void constructModel() {
+        constructObjectModel();
         constructPhase();
         constructPort();
-        constructObjectModel();
 
         super.initialize(0.0);
     }
-    public OMType getOm() {
+    public final OMType getOm() {
         return om;
     }
 
-    public void setOm(OMType om) {
+    public final void setOm(OMType om) {
         this.om = om;
     }
 }

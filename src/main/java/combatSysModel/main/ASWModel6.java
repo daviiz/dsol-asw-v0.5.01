@@ -1,6 +1,6 @@
 package combatSysModel.main;
 
-import asw.soa.data.ModelData;
+import asw.soa.data.ViewData;
 import asw.soa.view.Visual2dService;
 import combatSysModel.DEM.coupledModel.ASW_CM;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
@@ -25,11 +25,11 @@ public class ASWModel6 extends AbstractDSOLModel.TimeDouble<DEVSSimulatorInterfa
          */
 
         //模型数据准备：
-        ModelData f1Data = new ModelData("Fleet");
+        ViewData f1Data = new ViewData("Fleet");
         f1Data.origin = f1Data.destination = new CartesianPoint(-200, -50, 0);
-        ModelData s1Data = new ModelData("Submarine");
+        ViewData s1Data = new ViewData("Submarine");
         s1Data.origin = s1Data.destination = new CartesianPoint(200, 100, 0);
-        ModelData[] mData = {f1Data,s1Data};
+        ViewData[] mData = {f1Data,s1Data};
 
         /**
          * 模型初始化及构造
@@ -43,8 +43,8 @@ public class ASWModel6 extends AbstractDSOLModel.TimeDouble<DEVSSimulatorInterfa
          *  可视化组件注册：
          */
         try {
-            root.fleet.maneuver.actor.getOm().setModelData(mData[0]);
-            root.submarine.maneuver.actor.getOm().setModelData(mData[1]);
+            root.fleet.maneuver.actor.getOm().setViewData(mData[0]);
+            root.submarine.maneuver.actor.getOm().setViewData(mData[1]);
             Visual2dService.getInstance().register(mData[0].name, simulator, mData[0]);
             Visual2dService.getInstance().register(mData[1].name, simulator, mData[1]);
 

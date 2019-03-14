@@ -1,8 +1,8 @@
 package combatSysModel.OM;
 
-import asw.soa.data.ModelData;
+import asw.soa.data.ViewData;
 import asw.soa.util.SimUtil;
-import combatSysModel.DEM.ObjectModelBase;
+import devs.core.ObjectModelBase;
 import combatSysModel.portType.*;
 import nl.tudelft.simulation.language.d3.CartesianPoint;
 
@@ -24,7 +24,7 @@ public class Maneuver_actor_om  extends ObjectModelBase {
     private boolean cmdCheckResult ;
     private boolean fuelCheckResult ;
 
-    private  ModelData modelData;
+    private ViewData viewData;
 
     public Maneuver_actor_om(){
 
@@ -42,34 +42,34 @@ public class Maneuver_actor_om  extends ObjectModelBase {
         //this.env_info.location = new CartesianPoint(500.0,500.0,0.0);
 
         //模型初始化：
-        //modelData = new ModelData("Fleet");
-        //modelData.origin = modelData.destination = new CartesianPoint(-200, -50, 0);
+        //viewData = new ViewData("Fleet");
+        //viewData.origin = viewData.destination = new CartesianPoint(-200, -50, 0);
     }
 
 
 
     public void motion_Equation(){
-        this.modelData.origin = this.modelData.destination;
+        this.viewData.origin = this.viewData.destination;
 
-        if (!this.modelData.status) {
-            this.modelData.destination = new CartesianPoint(modelData.destination.x, modelData.destination.y, 0);
+        if (!this.viewData.status) {
+            this.viewData.destination = new CartesianPoint(viewData.destination.x, viewData.destination.y, 0);
         } else {
-            modelData.destination = SimUtil.nextPoint(this.modelData.origin.x,this.modelData.origin.y,this.env_info.location.x,this.env_info.location.y,
-                    this.modelData.speed,(cmd_info.cmd==COMMAND.DEFAULT));
-            //modelData.destination = new CartesianPoint(modelData.origin.x+modelData.speed, modelData.origin.y+modelData.speed, 0);
+            viewData.destination = SimUtil.nextPoint(this.viewData.origin.x,this.viewData.origin.y,this.env_info.location.x,this.env_info.location.y,
+                    this.viewData.speed,(cmd_info.cmd==COMMAND.DEFAULT));
+            //viewData.destination = new CartesianPoint(viewData.origin.x+viewData.speed, viewData.origin.y+viewData.speed, 0);
             //System.out.println("==============="+this.move_result.location.x);
-            this.move_result.location = modelData.destination;
-            this.move_result.camp = modelData.belong;
+            this.move_result.location = viewData.destination;
+            this.move_result.camp = viewData.belong;
             this.move_finished.isFinished = true;
         }
     }
 
-    public ModelData getModelData() {
-        return modelData;
+    public ViewData getViewData() {
+        return viewData;
     }
 
-    public void setModelData(ModelData modelData) {
-        this.modelData = modelData;
+    public void setViewData(ViewData viewData) {
+        this.viewData = viewData;
     }
 
     public boolean cmd_Check(){
