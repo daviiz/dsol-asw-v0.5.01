@@ -36,7 +36,7 @@ public class Actor_Maneuver_am extends AtomicModelBase<Maneuver_actor_om> {
 
     @Override
     protected void constructPhase() {
-        IDLE = new Phase("IDLE");   IDLE.setLifeTime(1000000);
+        IDLE = new Phase("IDLE");   IDLE.setLifeTime(Double.POSITIVE_INFINITY);
         MOVE = new Phase("MOVE");   MOVE.setLifeTime(7.0);
         FUEL = new Phase("FUEL");   FUEL.setLifeTime(0.0);
         this.phase = MOVE;

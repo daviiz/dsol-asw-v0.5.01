@@ -51,7 +51,7 @@ public class Actor_Controller_Platform_am extends AtomicModelBase<Platform_Contr
     @Override
     protected void constructPhase() {
         IDLE = new Phase("IDLE");
-        IDLE.setLifeTime(1000000);
+        IDLE.setLifeTime(Double.POSITIVE_INFINITY);
 
         RECONNAIASSANCE = new Phase("RECONNAIASSANCE");
         RECONNAIASSANCE.setLifeTime(10.0);
@@ -69,7 +69,7 @@ public class Actor_Controller_Platform_am extends AtomicModelBase<Platform_Contr
         CONTROL.setLifeTime(10.0);
 
         END = new Phase("END");
-        END.setLifeTime(1000000);
+        END.setLifeTime(Double.POSITIVE_INFINITY);
 
         this.phase = APPROACH;
         this.lastPhase = IDLE;

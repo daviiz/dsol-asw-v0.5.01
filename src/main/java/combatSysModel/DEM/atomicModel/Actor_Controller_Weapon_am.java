@@ -39,12 +39,12 @@ public class Actor_Controller_Weapon_am extends AtomicModelBase<Weapon_Controlle
 
     @Override
     protected void constructPhase() {
-        IDLE = new Phase("IDLE");   IDLE.setLifeTime(1000000);
+        IDLE = new Phase("IDLE");   IDLE.setLifeTime(Double.POSITIVE_INFINITY);
         SEARCH = new Phase("SEARCH");   SEARCH.setLifeTime(0.0);
         APPCH_WAIT = new Phase("APPCH_WAIT");   APPCH_WAIT.setLifeTime(10.0);
         APPROACH = new Phase("APPROACH");   APPROACH.setLifeTime(0.0);
 
-        END = new Phase("END");   END.setLifeTime(1000000);
+        END = new Phase("END");   END.setLifeTime(Double.POSITIVE_INFINITY);
         this.phase = IDLE;
     }
 

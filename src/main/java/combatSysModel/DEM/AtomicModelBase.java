@@ -42,10 +42,15 @@ public abstract class AtomicModelBase<OMType extends ObjectModelBase> extends At
 
     @Override
     protected Double timeAdvance() {
+        double ta = this.phase.getLifeTime();
         if(this.phase.getLifeTime() < 0.00000001){
             this.elapsedTime = 0.0;
         }
-        return this.phase.getLifeTime();
+        if(this.phase.getLifeTime() == Double.POSITIVE_INFINITY){
+            this.elapsedTime = 0.0;
+            ta = 10000000000.0;
+        }
+        return ta;
     }
 
     @Override
